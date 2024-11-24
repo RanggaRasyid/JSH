@@ -21,7 +21,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('la
 Route::middleware('auth')->group(function () {
     Route::prefix('/super-admin')->middleware('can:read.only.superadmin')->group(function () {
     Route::get('/', [App\Http\Controllers\Auth\SuperAdminController::class, 'index'])->name('admin.dashboard');
-    
+
         Route::prefix('master-mahasiswa')->group(function () {
             Route::get('/', [App\Http\Controllers\MasterMahasiswaiController::class, 'index'])->name('master.index');
             Route::get('/show', [App\Http\Controllers\MasterMahasiswaiController::class, 'show'])->name('master.show');
@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {
     Route::get('/', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('dashboard.mahasiswa.index');
-    
+
     Route::prefix('/profile')->group(function () {
         Route::get('/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'profile'])->name('profile.mahasiswa.index');
         Route::post('/update/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'update'])->name('update.mahasiswa');
