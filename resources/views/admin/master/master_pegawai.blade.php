@@ -19,13 +19,13 @@
 <div class="row">
     <div class="col-md-8 col-12">
         <h4 class="fw-bold text-sm"><span class="text-muted fw-light text-xs"></span>
-            Master Mahasiswa
+            Master pegawai
         </h4>
     </div>
     <div class="col-md-2 col-12 mb-3 ps-5 d-flex justify-content-between">
     </div>
     <div class="col-md-2 col-12 text-end">
-        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-master-mahasiswa">Add Mahasiswa</button>
+        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-master-pegawai">Add Pegawai</button>
     </div>
 </div>
 <div class="col-xl-12">
@@ -33,14 +33,12 @@
         <div class="tab-content mt-4">
             <div class="tab-pane fade show active" id="navs-pills-justified-users" role="tabpanel">
                 <div class="card-datatable table-responsive">
-                    <table class="table" id="table-master-mahasiswa">
+                    <table class="table" id="table-master-pegawai">
                         <thead>
                             <tr>
                                 <th>NOMOR</th>
-                                <th style="min-width: 125px;">Nama Mahasiswa</th>
+                                <th style="min-width: 125px;">Nama pegawai</th>
                                 <th>Email</th>
-                                {{-- <th>Universitas</th> --}}
-                                {{-- <th>Jurusan</th> --}}
                                 <th>Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
@@ -52,14 +50,14 @@
     </div>
 </div>
 {{-- modal edit --}}
-<div class="modal fade" id="modal-master-mahasiswa" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modal-master-pegawai" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header text-center d-block">
-                <h5 class="modal-title" id="modal-title">Tambah Mahasiswa</h5>
+                <h5 class="modal-title" id="modal-title">Tambah pegawai</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="default-form" method="POST" enctype="multipart/form-data" action="{{ route('master.store') }}">
+            <form class="default-form" method="POST" enctype="multipart/form-data" action="{{ route('pegawai.store') }}">
                 @csrf
                 <div class="modal-body">
 
@@ -68,15 +66,6 @@
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" id="nama" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="nama" class="form-control" placeholder="Masukkan Nama" />
                             <div class="invalid-feedback"></div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-2 form-input">
-                            <label for="nim" class="form-label">NIM</label>
-                            <input type="text" id="nim" onkeyup="this.value = this.value.replace(/[^0-9]+/g, '');" name="nim" class="form-control" placeholder="Masukkan NIM" />
-                            <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -89,16 +78,8 @@
                     </div>
                     <div class="row">
                         <div class="col mb-2 form-input">
-                            <label for="jurusan" class="form-label">Jurusan</label>
-                            <input type="text" id="jurusan" name="jurusan" class="form-control" placeholder="Masukkan Jurusan" />
-                            <div class="invalid-feedback"></div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-2 form-input">
-                            <label for="univ" class="form-label">Universitas</label>
-                            <input type="text" id="univ" name="univ" class="form-control" placeholder="Masukkan Universitas" />
+                            <label for="pangkat" class="form-label">Jabatan</label>
+                            <input type="text" id="pangkat" name="pangkat" class="form-control" placeholder="Masukkan Jabatan" />
                             <div class="invalid-feedback"></div>
 
                         </div>
@@ -137,7 +118,7 @@
             </div>
             <div class="modal-body text-center">
                 <img src="../../app-assets/img/alert.png" alt="">
-                <h5 class="modal-title" id="modal-title">Apakah anda yakin ingin menonaktifkan Mahasiswa</h5>
+                <h5 class="modal-title" id="modal-title">Apakah anda yakin ingin menonaktifkan pegawai</h5>
                 <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
                     Data yang dipilih akan non-aktif</div>
             </div>
@@ -156,9 +137,9 @@
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
 <script>
 
-    var table = $('#table-master-mahasiswa').DataTable({
+    var table = $('#table-master-pegawai').DataTable({
         // "data": jsonData,
-        ajax: '{{ route("master.show")}}',
+        ajax: '{{ route("pegawai.show")}}',
         serverSide: false,
         processing: true,
         deferRender: true,
@@ -169,12 +150,12 @@
                 data: 'DT_RowIndex'
             },
             {
-                data: "namamhs",
-                name: "namamhs"
+                data: "nama",
+                name: "nama"
             },
             {
-                data: "emailmhs",
-                name: "emailmhs"
+                data: "email",
+                name: "email"
             },
             {
                 data: "status",
@@ -190,8 +171,8 @@
 
     function edit(e) {
         let id = e.attr('data-id');
-        let action = `{{ url('super-admin/master-mahasiswa/update') }}/${id}`;
-        var url = `{{ url('super-admin/master-mahasiswa/edit') }}/${id}`;
+        let action = `{{ url('super-admin/data-pegawai/update') }}/${id}`;
+        var url = `{{ url('super-admin/data-pegawai/edit') }}/${id}`;
 
         $.ajax({
             type: 'GET',
@@ -199,7 +180,7 @@
             success: function(response) {
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
-                $('#modal-master-mahasiswa form').attr('action', action);
+                $('#modal-master-pegawai form').attr('action', action);
                 $('#nama').val(response.nama);
                 $('#deskripsi').val(response.deskripsi);
                 $('#modal-loogbook').modal('show');

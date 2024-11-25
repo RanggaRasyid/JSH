@@ -173,8 +173,8 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="{{url('super-admin/master-mahasiswa')}}"  class="menu-link">
-                        <div data-i18n="Mahasiswa">Mahasiswa</div>
+                        <a href="{{url('super-admin/master-universitas')}}" class="menu-link">
+                        <div data-i18n="Universitas">Universitas</div>
                         </a>
                     </li>
                 </ul>
@@ -189,13 +189,6 @@
                     <li class="menu-item">
                         <a href="{{url('super-admin/master-mahasiswa')}}" class="menu-link">
                         <div data-i18n="Mahasiswa">Mahasiswa</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="{{url('super-admin/master-universitas')}}" class="menu-link">
-                        <div data-i18n="Universitas">Universitas</div>
                         </a>
                     </li>
                 </ul>

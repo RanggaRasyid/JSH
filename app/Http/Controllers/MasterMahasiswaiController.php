@@ -45,6 +45,7 @@ class MasterMahasiswaiController extends Controller
 
     public function store(AddMahasiswaRequest $request){
         try{
+            
             $mahasiswa = Mahasiswa::create([
                 'nim' => $request->nim,
                 'namamhs' => $request->nama,
