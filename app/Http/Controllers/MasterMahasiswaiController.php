@@ -15,7 +15,7 @@ use Yajra\DataTables\Facades\DataTables;
 class MasterMahasiswaiController extends Controller
 {
     public function index(){
-        return view('admin.master_mahasiswa');
+        return view('admin.master.master_mahasiswa');
     }
 
     public function show(){
@@ -72,7 +72,7 @@ class MasterMahasiswaiController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
-        
+
     }
 
     public function status(String $id)
@@ -91,7 +91,7 @@ class MasterMahasiswaiController extends Controller
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessage(),
-                
+
             ]);
         }
     }
