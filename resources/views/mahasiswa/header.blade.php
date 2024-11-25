@@ -26,7 +26,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('background/logo-jsh.png')}}" />
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,7 +85,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-        
+
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="" class="app-brand-link">
@@ -120,13 +120,13 @@
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Loogbook">Loogbook</div>
               </a>
-            </li>   
+            </li>
             <li class="menu-item">
               <a href="{{url('mahasiswa/presensi')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-clock"></i>
                 <div data-i18n="Presensi">Presensi</div>
               </a>
-            </li>   
+            </li>
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
@@ -140,7 +140,7 @@
                     </li>
                     </ul>
                     <ul class="menu-sub">
-                  
+
                     <li class="menu-item">
                         <a href="#" class="menu-link">
                         <div data-i18n="Security">Security</div>
@@ -165,13 +165,47 @@
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
-            </li>   
+            </li>
             <li class="menu-item">
-              <a href="{{url('super-admin/master-mahasiswa')}}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-database"></i>
-                <div data-i18n="Master Mahasiswa">Master Mahasiswa</div>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-database"></i>
+                    <div data-i18n="Master Data">Master Data</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{url('super-admin/master-mahasiswa')}}"  class="menu-link">
+                        <div data-i18n="Mahasiswa">Mahasiswa</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{url('super-admin/master-jurusan')}}" class="menu-link">
+                        <div data-i18n="Jurusan">Jurusan</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{url('super-admin/master-mahasiswa')}}" class="menu-link">
+                        <div data-i18n="Mahasiswa">Mahasiswa</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{url('super-admin/master-universitas')}}" class="menu-link">
+                        <div data-i18n="Universitas">Universitas</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+              <a href="{{url('super-admin/data-pegawai')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div data-i18n="Data Pegawai">Data Pegawai</div>
               </a>
-            </li>   
+            </li>
             @endcan
           </ul>
         </aside>
@@ -191,9 +225,9 @@
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-             
+
               <ul class="navbar-nav flex-row align-items-center ms-auto">
-                
+
                 @php
                 $user = Auth::user();
                 @endphp
@@ -286,4 +320,4 @@
           </div>
 
           <div class="container-xxl flex-grow-1 container-p-y">
-       
+

@@ -39,8 +39,8 @@
                                 <th>NOMOR</th>
                                 <th style="min-width: 125px;">Nama Mahasiswa</th>
                                 <th>Email</th>
-                                <th>Universitas</th>
-                                <th>Jurusan</th>
+                                {{-- <th>Universitas</th> --}}
+                                {{-- <th>Jurusan</th> --}}
                                 <th>Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
@@ -106,13 +106,13 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="password" class="form-label">Password</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-control" 
-                                placeholder="Masukkan password" 
-                                minlength="8" 
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Masukkan password"
+                                minlength="8"
                                 onkeyup="validatePassword()"
                             />
                             <div class="invalid-feedback">
@@ -177,14 +177,6 @@
                 name: "emailmhs"
             },
             {
-                data: "namauniv",
-                name: "namauniv"
-            },
-            {
-                data: "jurusan",
-                name: "jurusan"
-            },
-            {
                 data: "status",
                 name: "status"
             },
@@ -192,7 +184,7 @@
                 data: 'action',
                 name: 'action'
             }
-            
+
         ]
     });
 

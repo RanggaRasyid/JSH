@@ -31,6 +31,33 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [App\Http\Controllers\MasterMahasiswaiController::class, 'store'])->name('master.store');
 
         });
+        Route::prefix('data-pegawai')->group(function () {
+            Route::get('/', [App\Http\Controllers\MasterPegawaiController::class, 'index'])->name('pegawai.index');
+            Route::get('/show', [App\Http\Controllers\MasterPegawaiController::class, 'show'])->name('pegawai.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'status'])->name('pegawai.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'edit'])->name('pegawai.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'update'])->name('pegawai.update');
+            Route::post('/store', [App\Http\Controllers\MasterPegawaiController::class, 'store'])->name('pegawai.store');
+
+        });
+        Route::prefix('master-jurusan')->group(function () {
+            Route::get('/', [App\Http\Controllers\MasterJurusanController::class, 'index'])->name('jurusan.index');
+            Route::get('/show', [App\Http\Controllers\MasterJurusanController::class, 'show'])->name('jurusan.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasterJurusanController::class, 'status'])->name('jurusan.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasterJurusanController::class, 'edit'])->name('jurusan.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterJurusanController::class, 'update'])->name('jurusan.update');
+            Route::post('/store', [App\Http\Controllers\MasterJurusanController::class, 'store'])->name('jurusan.store');
+
+        });
+        Route::prefix('master-universitas')->group(function () {
+            Route::get('/', [App\Http\Controllers\MasterUniversitasController::class, 'index'])->name('univ.index');
+            Route::get('/show', [App\Http\Controllers\MasterUniversitasController::class, 'show'])->name('univ.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasterUniversitasController::class, 'status'])->name('univ.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasterUniversitasController::class, 'edit'])->name('univ.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterUniversitasController::class, 'update'])->name('univ.update');
+            Route::post('/store', [App\Http\Controllers\MasterUniversitasController::class, 'store'])->name('univ.store');
+
+        });
         Route::prefix('/presensi')->group(function () {
             Route::get('/', [App\Http\Controllers\MasterPresensiController::class, 'index'])->name('master.presensi.index');
             Route::get('/show/{id}', [App\Http\Controllers\MasterPresensiController::class, 'show'])->name('master.presensi.show');
