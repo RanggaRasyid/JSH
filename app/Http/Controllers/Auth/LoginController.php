@@ -41,11 +41,15 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        $mahasiswa = $user->mahasiswa; 
+        if ($mahasiswa && $mahasiswa->status == 0) {
+            auth()->logout();
+            return view('auth.aktifasi');
+        }
         if ($user->hasRole('superadmin')) {
             return redirect('super-admin/');
         } else {
             return redirect('mahasiswa/');
         }
-        // return view('layouts.dashboard');
     }
 }

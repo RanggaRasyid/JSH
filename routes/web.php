@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 //landing-page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing-page')->middleware('guest');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/super-admin')->middleware('can:read.only.superadmin')->group(function () {
@@ -98,4 +101,3 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';

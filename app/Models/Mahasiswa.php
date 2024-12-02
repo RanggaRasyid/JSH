@@ -30,7 +30,7 @@ class Mahasiswa extends Model
     ];
     protected $keyType = 'string';
     protected $primaryKey = 'nim';
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function presensi(){
         return $this->hasMany(Presensi::class, 'nim', 'nim');
