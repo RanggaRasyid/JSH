@@ -112,23 +112,23 @@ class MasterMahasiswaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( $request, string $id)
+    public function update($request, string $id)
     {
         try {
-            $user = User::where('nim', $id)->first();
-            $mahasiswa = Mahasiswa::where('nim', $id)->first();
+            $user = User::where('nim', $id)->with('mahasiswa')->first();
+            $mahasiswa = Mahasiswa::where('nim', $id)->with('user')->first();
             $user == $mahasiswa ;
             $mahasiswa->namamhs = $request->namamhs;
-            $mahasiswa->jalan = $request->jalan;
-            $mahasiswa->kota = $request->kota;
-            $mahasiswa->telp = $request->telp;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->emailmhs = $request->emailmhs;
+            $user->password = $request->password;
             $mahasiswa->save();
 
             return response()->json([
                 'error' => false,
-                'message' => 'Universitas successfully Updated!',
-                'modal' => '#modal-universitas',
-                'table' => '#table-master-univ'
+                'message' => 'Mahasiswa successfully Updated!',
+                'modal' => '#modal-master-universitas',
+                'table' => '#table-master-mahasiswa'
             ]);
         } catch (Exception $e) {
             return response()->json([

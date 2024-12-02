@@ -167,7 +167,6 @@
 <script>
 
     var table = $('#table-master-mahasiswa').DataTable({
-        // "data": jsonData,
         ajax: '{{ route("master.show")}}',
         serverSide: false,
         processing: true,
@@ -210,12 +209,25 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-mahasiswa form').attr('action', action);
-                $('#nama').val(response.nama);
-                $('#deskripsi').val(response.deskripsi);
-                $('#modal-loogbook').modal('show');
+                $('#nama').val(response.namamhs);
+                $('#nim').val(response.nim);
+                $('#email').val(response.emailmhs);
+                $('#password').val(response.password);
+                // $('#deskripsi').val(response.deskripsi);
+                $('#modal-master-mahasiswa').modal('show');
             }
         });
     }
+
+    $("#modal-master-mahasiswa").on("hide.bs.modal", function() {
+    $("#modal-title").html("Tambah Akifitas");
+    $("#modal-button").html("Simpan")
+    $('#modal-master-mahasiswa form')[0].reset();
+    $('#modal-master-mahasiswa form #role').val('').trigger('change');
+    $('#modal-master-mahasiswa form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
+    $('.invalid-feedback').removeClass('d-block');
+    $('.form-control').removeClass('is-invalid');
+    });
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {
