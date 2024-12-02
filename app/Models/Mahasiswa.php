@@ -22,9 +22,9 @@ class Mahasiswa extends Model
         'tempatlahirmhs',
         'tanggallahirmhs',
         'posisi',
-        'namauniv',
+        'id_univ',
         'fakultas',
-        'jurusan',
+        'id_jurusan',
         'foto',
         'status'
     ];

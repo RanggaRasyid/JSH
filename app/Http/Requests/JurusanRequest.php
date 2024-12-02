@@ -24,7 +24,8 @@ class JurusanRequest extends FormRequest
     public function rules()
     {
         return [
-            'jurusan' => 'required|min:3|unique:jurusan'
+            'jurusan' => 'required|min:3|unique:jurusan',
+            'univ' => 'required'
         ];
     }
 }

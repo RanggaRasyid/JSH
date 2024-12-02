@@ -89,18 +89,28 @@
                     </div>
                     <div class="row">
                         <div class="col mb-2 form-input">
-                            <label for="jurusan" class="form-label">Jurusan</label>
-                            <input type="text" id="jurusan" name="jurusan" class="form-control" placeholder="Masukkan Jurusan" />
+                            <label for="univ" class="form-label">Universitas</label>
+                            <select class="form-select select2" id="pilihuniversitas_add" name="univ"
+                                data-placeholder="Pilih Universitas">
+                                <option disabled selected>Pilih Universitas</option>
+                                @foreach ($univ as $u)
+                                    <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-2 form-input">
-                            <label for="univ" class="form-label">Universitas</label>
-                            <input type="text" id="univ" name="univ" class="form-control" placeholder="Masukkan Universitas" />
+                            <label for="univ" class="form-label">Jurusan</label>
+                            <select class="form-select select2" id="pilihuniversitas_add" name="jurusan"
+                                data-placeholder="Pilih Jurusan">
+                                <option disabled selected>Pilih Jurusan</option>
+                                @foreach ($jurusan as $u)
+                                    <option value="{{ $u->id_jurusan }}">{{ $u->jurusan }}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
                     <div class="row">

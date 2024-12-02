@@ -118,7 +118,7 @@
             <li class="menu-item">
               <a href="{{url('mahasiswa/loogbook')}}"  class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
-                <div data-i18n="Loogbook">Loogbook</div>
+                <div data-i18n="Logbook">Logbook</div>
               </a>
             </li>
             <li class="menu-item">
