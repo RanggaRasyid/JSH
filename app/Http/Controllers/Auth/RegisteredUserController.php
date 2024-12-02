@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -33,30 +32,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'integer', 'min:8'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-
-        $mahasiswa = Mahasiswa::create([
-            'nim' => $request->nim,
-            'namamhs' => $request->name,
-            'emailmhs' => $request->email,
-        ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'nim' => $request->nim,
             'password' => Hash::make($request->password),
         ]);
-
-        $user->assignRole('mahasiswa');
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect('/mahasiswa');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 //landing-page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing-page')->middleware('guest');
-// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Auth::routes();
 
 Route::middleware('auth')->group(function () {
