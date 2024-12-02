@@ -77,4 +77,28 @@ class MasterUniversitasController extends Controller
             ]);
         }
     }
+
+    public function edit(String $id) {
+        $universitas = Universitas::Where('id_univ', $id)->first();
+        return $universitas;
+    }
+
+    public function update(Request $request, $id) {
+        try {
+            $universitas = Universitas::Where('id_univ', $id)->first();
+            $universitas->namauniv = $request->namauniv;
+            $universitas->save();
+            return response()->json([
+                'error' => false,
+                'message' => 'Universitas successfully Updated!',
+                'modal' => '#modal-master-universitas',
+                'table' => '#table-master-universitas'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }

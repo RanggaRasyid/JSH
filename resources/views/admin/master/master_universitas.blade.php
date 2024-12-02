@@ -144,12 +144,21 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-universitas form').attr('action', action);
-                $('#nama').val(response.nama);
+                $('#namauniv').val(response.namauniv);
                 $('#deskripsi').val(response.deskripsi);
-                $('#modal-loogbook').modal('show');
+                $('#modal-master-universitas').modal('show');
             }
         });
     }
+    $("#modal-master-universitas").on("hide.bs.modal", function() {
+    $("#modal-title").html("Tambah Akifitas");
+    $("#modal-button").html("Simpan")
+    $('#modal-master-universitas form')[0].reset();
+    $('#modal-master-universitas form #role').val('').trigger('change');
+    $('#modal-master-universitas form').attr('action', "{{ url('super-admin/master-universitas/store') }}");
+    $('.invalid-feedback').removeClass('d-block');
+    $('.form-control').removeClass('is-invalid');
+    });
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {
