@@ -22,9 +22,9 @@ class Mahasiswa extends Model
         'tempatlahirmhs',
         'tanggallahirmhs',
         'posisi',
-        'id_univ',
+        'namauniv',
         'fakultas',
-        'id_jurusan',
+        'jurusan',
         'foto',
         'status'
     ];
@@ -37,11 +37,5 @@ class Mahasiswa extends Model
     }
     public function user(){
         return $this->belongsTo(User::class, 'nim');
-    }
-    public function jurusan(){
-        return $this->belongsTo(JurusanModel::class, 'id_jurusan');
-    }
-    public function universitas(){
-        return $this->belongsTo(Universitas::class, 'id_univ');
     }
 }

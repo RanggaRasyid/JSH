@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddMahasiswaRequest;
-use App\Models\JurusanModel;
 use App\Models\Mahasiswa;
-use App\Models\Universitas;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,9 +15,7 @@ use Yajra\DataTables\Facades\DataTables;
 class MasterMahasiswaiController extends Controller
 {
     public function index(){
-        $univ = Universitas::all();
-        $jurusan = JurusanModel::all();
-        return view('admin.master.master_mahasiswa', compact('univ', 'jurusan'));
+        return view('admin.master.master_mahasiswa');
     }
 
     public function show(){
@@ -49,16 +45,15 @@ class MasterMahasiswaiController extends Controller
 
     public function store(AddMahasiswaRequest $request){
         try{
-
+            
             $mahasiswa = Mahasiswa::create([
                 'nim' => $request->nim,
                 'namamhs' => $request->nama,
                 'emailmhs' => $request->email,
-                'id_jurusan' => $request->jurusan,
-                'id_univ' => $request->univ,
+                'jurusan' => $request->jurusan,
+                'namauniv' => $request->univ,
                 'status' => 1
             ]);
-            // dd($mahasiswa);
             $user = User::create([
                 'nim' => $request->nim,
                 'name' => $request->nama,

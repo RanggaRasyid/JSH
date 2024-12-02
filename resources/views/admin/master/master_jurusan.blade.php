@@ -61,21 +61,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-2 form-input">
-                            <label for="univ" class="form-label">Universitas</label>
-                            <select class="form-select select2" id="pilihuniversitas_add" name="univ"
-                                data-placeholder="Pilih Universitas">
-                                <option disabled selected>Pilih Universitas</option>
-                                @foreach ($univ as $u)
-                                    <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
-                                @endforeach
-                            </select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-2 form-input">
                             <label for="jurusan" class="form-label">Jurusan</label>
-                            <input type="text" id="jurusan"  name="jurusan" class="form-control" placeholder="Masukkan Nama" />
+                            <input type="text" id="jurusan" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="jurusan" class="form-control" placeholder="Masukkan Nama" />
                             <div class="invalid-feedback"></div>
 
                         </div>
