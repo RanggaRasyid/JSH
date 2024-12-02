@@ -26,9 +26,9 @@ class AddMahasiswaRequest extends FormRequest
         return [
             'nama' => ['required', 'string', 'max:255'],
             'nim' => ['required', 'string', 'max:255'],
-            // 'jurusan' => ['required', 'string', 'max:255', 'min:2'],
+            'jurusan' => ['required'],
             'password' => 'required|min:8',
-            // 'univ' => ['required', 'string', 'max:255', 'min:2'],
+            'univ' => ['required'],
             'email' => 'required|email:rfc,dns|unique:users',
         ];
     }

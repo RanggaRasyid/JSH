@@ -12,9 +12,15 @@ class JurusanModel extends Model
     use HasFactory, HasUuids, AuthenticableTrait;
     protected $table = 'jurusan';
     protected $fillable = [
-        'jurusan'
+        'jurusan',
+        'id_universitas'
     ];
     protected $keyType = 'string';
     protected $primaryKey = 'id_jurusan';
     public $timestamps = false;
+
+    public function id_univ()
+    {
+        return $this->belongsTo(Universitas::class, 'id_univ');
+    }
 }

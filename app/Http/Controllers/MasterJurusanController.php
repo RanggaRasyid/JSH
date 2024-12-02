@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JurusanRequest;
 use App\Models\JurusanModel;
+use App\Models\Universitas;
 use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -11,7 +12,8 @@ use Yajra\DataTables\Facades\DataTables;
 class MasterJurusanController extends Controller
 {
     public function index(){
-        return view('admin.master.master_jurusan');
+        $univ = Universitas::all();
+        return view('admin.master.master_jurusan', compact('univ'));
     }
 
     public function show(){
@@ -42,6 +44,7 @@ class MasterJurusanController extends Controller
         try {
             $jurusan = JurusanModel::create([
                 'jurusan' => $request->jurusan,
+                'id_universitas' => $request->univ,
                 'status' => 1
             ]);
             return response()->json([
