@@ -156,12 +156,23 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-jurusan form').attr('action', action);
-                $('#nama').val(response.nama);
+                $('#jurusan').val(response.jurusan);
+                $('#univ').val(response.univ);
                 $('#deskripsi').val(response.deskripsi);
-                $('#modal-loogbook').modal('show');
+                $('#modal-master-jurusan').modal('show');
             }
         });
     }
+
+    $("#modal-master-jurusan").on("hide.bs.modal", function() {
+    $("#modal-title").html("Tambah Akifitas");
+    $("#modal-button").html("Simpan")
+    $('#modal-master-jurusan form')[0].reset();
+    $('#modal-master-jurusan form #role').val('').trigger('change');
+    $('#modal-master-jurusan form').attr('action', "{{ url('super-admin/master-jurusan/store') }}");
+    $('.invalid-feedback').removeClass('d-block');
+    $('.form-control').removeClass('is-invalid');
+    });
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {

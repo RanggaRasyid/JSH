@@ -80,4 +80,29 @@ class MasterJurusanController extends Controller
             ]);
         }
     }
+
+    public function edit(String $id) {
+        $jurusan = JurusanModel::Where('id_jurusan', $id)->first();
+        return $jurusan;
+    }
+
+    public function update(JurusanRequest $request, $id) {
+        try {
+            $jurusan = JurusanModel::Where('id_jurusan', $id)->first();
+            $jurusan->jurusan = $request->jurusan;
+            $jurusan->id_univ = $request->univ;
+            $jurusan->save();
+            return response()->json([
+                'error' => false,
+                'message' => 'Jurusan successfully Created!',
+                'modal' => '#modal-master-jurusan',
+                'table' => '#table-master-jurusan'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }

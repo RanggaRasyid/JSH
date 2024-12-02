@@ -150,6 +150,7 @@
             }
         });
     }
+    
     $("#modal-master-universitas").on("hide.bs.modal", function() {
     $("#modal-title").html("Tambah Akifitas");
     $("#modal-button").html("Simpan")

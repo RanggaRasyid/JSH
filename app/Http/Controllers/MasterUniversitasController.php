@@ -83,7 +83,7 @@ class MasterUniversitasController extends Controller
         return $universitas;
     }
 
-    public function update(Request $request, $id) {
+    public function update(UniversitasRequest $request, $id) {
         try {
             $universitas = Universitas::Where('id_univ', $id)->first();
             $universitas->namauniv = $request->namauniv;
