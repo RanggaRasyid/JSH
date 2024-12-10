@@ -26,8 +26,8 @@ class LoogbookRequest extends FormRequest
         return [
             'nama' => ['required', 'string', 'max:255'],
             'deskripsi' => ['required', 'string', 'max:255', 'min:10'],
-            'picture' => 'required|file|max:10000|mimes:png,jpeg,jpg'
-            
+            'picture' => ['required', 'file', 'max:10000', 'mimes:png,jpeg,jpg']
+
         ];
     }
 

@@ -141,11 +141,11 @@
                     </ul>
                     <ul class="menu-sub">
 
-                    <li class="menu-item">
+                    {{-- <li class="menu-item">
                         <a href="#" class="menu-link">
                         <div data-i18n="Security">Security</div>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
             @endcan

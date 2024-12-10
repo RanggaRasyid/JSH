@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class LoogBookController extends Controller
 {
     public function index() {
-        
+
         return view('mahasiswa.loogbook.loogbook');
     }
 
@@ -42,7 +42,8 @@ class LoogBookController extends Controller
                 <a data-id='{$row->id_loogbook}' data-url='loogbook/destroy' class='btn-icon delete-data waves-effect waves-light'><i class='ti ti-trash fa-lg' style='color:red'></i></a>";
                 return $btn;
             })
-            ->rawColumns(['action', 'picture']) 
+            ->rawColumns(['action', 'pic
+            ture'])
             ->make(true);
     }
 
@@ -50,8 +51,8 @@ class LoogBookController extends Controller
         try {
 
             $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
-                     
-            $file = null; 
+
+            $file = null;
             if ($request->file('picture')) {
                 $file = Storage::put('public/loogbook' , $request->file('picture'));
             }
@@ -60,10 +61,10 @@ class LoogBookController extends Controller
                 'nim' => $mahasiswa->nim,
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
-                'picture' => $file
-                
+                'picture' => $file,
+                'status' => 0
+
             ]);
-            // dd($loogbook);
             return response()->json([
                 'error' => false,
                 'message' => 'Loogbook successfully Created!',
@@ -82,12 +83,12 @@ class LoogBookController extends Controller
 
         $loogbook = LoogBoook::Where('id_loogbook', $id)->first();
         return $loogbook;
-        
+
     }
 
     public function update(LoogbookRequest $request, $id){
         try {
-            $file = null; 
+            $file = null;
             if ($request->file('picture')) {
                 $file = Storage::put('public/loogbook' , $request->file('picture'));
             }

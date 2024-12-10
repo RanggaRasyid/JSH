@@ -39,6 +39,7 @@
                                 <th>Created-At</th>
                                 <th>Gambar</th>
                                 <th>AKSI</th>
+                                <th>status</th>
                             </tr>
                         </thead>
                     </table>
@@ -84,9 +85,13 @@
             {
                 data: "action",
                 name: "action"
+            },
+            {
+                data: "status",
+                name: "status"
             }
-        ]       
-        
+        ]
+
     });
 
     function edit(e) {
