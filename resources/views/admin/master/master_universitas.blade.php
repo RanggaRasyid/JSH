@@ -59,14 +59,22 @@
             <form class="default-form" method="POST" enctype="multipart/form-data" action="{{ route('univ.store') }}">
                 @csrf
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="namauniv" class="form-label">Nama Universitas</label>
                             <input type="text" id="namauniv" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="namauniv" class="form-control" placeholder="Masukkan Universitas" />
                             <div class="invalid-feedback"></div>
-
                         </div>
+                    </div>
+                    <div class="col mb-2 form-input">
+                        <label for="univ" class="form-label">Universitas</label>
+                        <select class="form-select select2" id="pilihuniversitas_add" name="univ"
+                            data-placeholder="Pilih Universitas">
+                            <option disabled selected>Pilih Kategori</option>
+                                <option value="SMA/SMK">SMA/SMK</option>
+                                <option value="UNIV">Perguruan Tinggi</option>
+                        </select>
+                        <div class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -150,7 +158,7 @@
             }
         });
     }
-    
+
     $("#modal-master-universitas").on("hide.bs.modal", function() {
     $("#modal-title").html("Tambah Akifitas");
     $("#modal-button").html("Simpan")

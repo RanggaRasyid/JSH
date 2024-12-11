@@ -42,8 +42,7 @@ class LoogBookController extends Controller
                 <a data-id='{$row->id_loogbook}' data-url='loogbook/destroy' class='btn-icon delete-data waves-effect waves-light'><i class='ti ti-trash fa-lg' style='color:red'></i></a>";
                 return $btn;
             })
-            ->rawColumns(['action', 'pic
-            ture'])
+            ->rawColumns(['action', 'picture'])
             ->make(true);
     }
 
