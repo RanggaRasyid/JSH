@@ -38,4 +38,14 @@ class Mahasiswa extends Model
     public function user(){
         return $this->belongsTo(User::class, 'nim');
     }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(JurusanModel::class, 'id_jurusan');
+    }
+    public function univ()
+    {
+        return $this->belongsTo(Universitas::class, 'id_univ');
+    }
+
 }

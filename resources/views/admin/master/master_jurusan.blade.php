@@ -37,8 +37,8 @@
                         <thead>
                             <tr>
                                 <th>NOMOR</th>
-                                <th style="min-width: 125px;">Jurusan</th>
-                                <th>Status</th>
+                                <th >Jurusan</th>
+                                <th class="text-center">Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
                         </thead>
@@ -77,7 +77,6 @@
                             <label for="jurusan" class="form-label">Jurusan</label>
                             <input type="text" id="jurusan"  name="jurusan" class="form-control" placeholder="Masukkan Nama" />
                             <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
                 </div>
@@ -105,7 +104,6 @@
                 <button type="submit" id="modal-button" class="btn btn-success">Ya, Yakin</button>
                 <button type="submit" id="modal-button" class="btn btn-danger">Batal</button>
             </div>
-
         </div>
     </div>
 </div>
@@ -117,7 +115,6 @@
 <script>
 
     var table = $('#table-master-jurusan').DataTable({
-        // "data": jsonData,
         ajax: '{{ route("jurusan.show")}}',
         serverSide: false,
         processing: true,

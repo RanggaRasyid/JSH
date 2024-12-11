@@ -39,8 +39,8 @@
                                 <th>NOMOR</th>
                                 <th style="min-width: 125px;">Nama Mahasiswa</th>
                                 <th>Email</th>
-                                {{-- <th>Universitas</th> --}}
-                                {{-- <th>Jurusan</th> --}}
+                                <th>Kategori</th>
+                                <th>Jurusan</th>
                                 <th>Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
@@ -92,7 +92,7 @@
                             <label for="univ" class="form-label">Universitas</label>
                             <select class="form-select select2" id="pilihuniversitas_add" name="univ"
                                 data-placeholder="Pilih Universitas">
-                                <option disabled selected>Pilih Universitas</option>
+                                <option disabled selected>Pilih Kategori</option>
                                 @foreach ($univ as $u)
                                     <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
                                 @endforeach
@@ -185,6 +185,13 @@
                 data: "emailmhs",
                 name: "emailmhs"
             },
+            {
+                data: 'univ.namauniv',
+                name: 'namauniv' },
+
+            {
+                data: 'jurusan.jurusan',
+                name: 'jurusan' },
             {
                 data: "status",
                 name: "status"

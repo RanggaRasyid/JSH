@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\Universitas;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -55,6 +56,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'nim' => ['required', 'integer', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'univ' => ['required'],
+            'jurusan' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -66,11 +69,13 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {  
+    {
         $mahasiswa = Mahasiswa::create([
             'nim' => $data['nim'],
-            'namamhs' => $data['name'], 
-            'emailmhs' => $data['email'], 
+            'namamhs' => $data['name'],
+            'emailmhs' => $data['email'],
+            'id_univ' => $data['univ'],
+            'id_jurusan' => $data['jurusan'],
             'status' => 0
         ]);
 

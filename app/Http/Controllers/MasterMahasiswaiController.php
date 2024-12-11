@@ -24,7 +24,7 @@ class MasterMahasiswaiController extends Controller
 
     public function show(){
 
-        $mahasiswa = Mahasiswa::orderBy('nim', 'asc')->get();
+        $mahasiswa = Mahasiswa::with('univ', 'jurusan')->orderBy('nim', 'asc')->get();
         return DataTables::of($mahasiswa)
         ->addIndexColumn()
         ->editColumn('status', function ($row) {

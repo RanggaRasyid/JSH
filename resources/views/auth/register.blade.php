@@ -13,7 +13,7 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div style="margin-left: 80px">
-                    <h3 class="mb-1 fw-bold">Welcome to Magang 
+                    <h3 class="mb-1 fw-bold">Welcome to Magang
                         <span>
                             <a href="{{ url('/') }}">
                                 <img src="{{ asset('background/logo-jsh.png') }}" alt="icon" style="margin-bottom: 10px;" width="auto" height="50px">
@@ -51,6 +51,34 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col mb-2 form-input">
+                            <label for="univ" class="form-label">Kategori</label>
+                            <select class="form-select select2" id="pilihuniversitas_add" name="univ"
+                                data-placeholder="Pilih Kategori">
+                                <option disabled selected>Pilih Kategori</option>
+                                @foreach ($univ as $u)
+                                    <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col mb-2 form-input">
+                            <label for="jurusan" class="form-label">Jurusan</label>
+                            <select class="form-select select2" id="pilih-jurusan" name="jurusan"
+                                data-placeholder="Pilih Jurusan">
+                                <option disabled selected>Pilih Jurusan</option>
+                                @foreach ($jurusan as $j)
+                                    <option value="{{ $j->id_jurusan }}">{{ $j->jurusan }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback"></div>
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
