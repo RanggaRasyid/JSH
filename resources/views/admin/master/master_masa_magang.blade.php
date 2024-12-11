@@ -170,9 +170,11 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-masa-magang form').attr('action', action);
-                $('#jurusan').val(response.jurusan);
-                $('#univ').val(response.univ);
-                $('#deskripsi').val(response.deskripsi);
+                $('#startdate').val(response.startdate);
+                $('#enddate').val(response.enddate);
+                $('#nama-mahasiswa').val(response.mahasiswa).trigger('change');
+                $('#nama-mahasiswa').val(response.mahasiswa);
+                $('#nama-mahasiswa').prop('disabled', true); // Nonaktifkan dropdown
                 $('#modal-master-masa-magang').modal('show');
             }
         });

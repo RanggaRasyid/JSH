@@ -63,4 +63,60 @@ class MasaMagangController extends Controller
         }
     }
 
+    public function status(String $id)
+    {
+        try {
+            $masamagang = MasaMagang::where('id_masa_magang', $id)->first();
+            $masamagang->status = ($masamagang->status) ? false : true;
+            $masamagang->save();
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Status Masa Magang successfully Updated!',
+                'table' => '#table-master-masa-magang'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+
+            ]);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(String $id)
+    {
+        $masamagang = MasaMagang::where('id_masa_magang', $id)->first();
+        return $masamagang;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $masamagang = MasaMagang::where('id_masa_magang', $id)->with('mahasiswa')->first();
+            $masamagang->startdate = $request->startdate;
+            $masamagang->enddate = $request->enddate;
+            // $masamagang->nim = $request->mahasiswa;
+            $masamagang->save();
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Mahasiswa successfully Updated!',
+                'modal' => '#modal-master-masa-magang',
+                'table' => '#table-master-masa-magang'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
 }
