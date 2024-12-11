@@ -61,6 +61,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [App\Http\Controllers\MasterUniversitasController::class, 'store'])->name('univ.store');
 
         });
+        Route::prefix('master-masa-magang')->group(function () {
+            Route::get('/', [App\Http\Controllers\MasaMagangController::class, 'index'])->name('masa.index');
+            Route::get('/show', [App\Http\Controllers\MasaMagangController::class, 'show'])->name('masa.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasaMagangController::class, 'status'])->name('masa.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasaMagangController::class, 'edit'])->name('masa.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasaMagangController::class, 'update'])->name('masa.update');
+            Route::post('/store', [App\Http\Controllers\MasaMagangController::class, 'store'])->name('masa.store');
+
+        });
         Route::prefix('/presensi')->group(function () {
             Route::get('/', [App\Http\Controllers\MasterPresensiController::class, 'index'])->name('master.presensi.index');
             Route::get('/show/{id}', [App\Http\Controllers\MasterPresensiController::class, 'show'])->name('master.presensi.show');

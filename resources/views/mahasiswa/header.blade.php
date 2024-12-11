@@ -192,6 +192,13 @@
                         </a>
                     </li>
                 </ul>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{url('super-admin/master-masa-magang')}}" class="menu-link">
+                        <div data-i18n="Masa Magang">Masa Magang</div>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="menu-item">
               <a href="{{url('super-admin/data-pegawai')}}" class="menu-link">

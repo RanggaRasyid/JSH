@@ -29,9 +29,9 @@ class MasterMahasiswaiController extends Controller
         ->addIndexColumn()
         ->editColumn('status', function ($row) {
             if ($row->status == 1) {
-                return "<div class='text-center'><div class='badge rounded-pill bg-label-success'>" . "Active" . "</div></div>";
+                return "<div'><div class='badge rounded-pill bg-label-success'>" . "Active" . "</div></div>";
             } else {
-                return "<div class='text-center'><div class='badge rounded-pill bg-label-danger'>" . "Inactive" . "</div></div>";
+                return "<div'><div class='badge rounded-pill bg-label-danger'>" . "Inactive" . "</div></div>";
             }
         })
         ->addColumn('action', function ($row) {
