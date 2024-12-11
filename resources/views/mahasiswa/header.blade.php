@@ -174,7 +174,7 @@
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <a href="{{url('super-admin/master-universitas')}}" class="menu-link">
-                        <div data-i18n="Universitas">Universitas</div>
+                        <div data-i18n="Universitas/SMA/SMK">Universitas/SMA/SMK</div>
                         </a>
                     </li>
                 </ul>

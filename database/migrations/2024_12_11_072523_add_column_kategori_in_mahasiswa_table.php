@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('mahasiswa', function (Blueprint $table) {
-            $table->string('kategori', 255);
+        Schema::table('universitas', function (Blueprint $table) {
+            $table->boolean('kategori')->default(true);
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('mahasiswa', function (Blueprint $table) {
+        Schema::table('universitas', function (Blueprint $table) {
             $table->dropColumn('kategori');
         });
     }

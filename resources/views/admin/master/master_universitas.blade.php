@@ -37,8 +37,9 @@
                         <thead>
                             <tr>
                                 <th>NOMOR</th>
-                                <th style="min-width: 125px;">Nama universitas</th>
-                                <th>Status</th>
+                                <th >Nama universitas</th>
+                                <th class="text-center">Kategori</th>
+                                <th class="text-center">Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
                         </thead>
@@ -67,12 +68,12 @@
                         </div>
                     </div>
                     <div class="col mb-2 form-input">
-                        <label for="univ" class="form-label">Universitas</label>
-                        <select class="form-select select2" id="pilihuniversitas_add" name="univ"
-                            data-placeholder="Pilih Universitas">
+                        <label for="kategori" class="form-label">Universitas</label>
+                        <select class="form-select select2" id="kategori" name="kategori"
+                            data-placeholder="Pilih Kategori">
                             <option disabled selected>Pilih Kategori</option>
-                                <option value="SMA/SMK">SMA/SMK</option>
-                                <option value="UNIV">Perguruan Tinggi</option>
+                                <option value="1">SMA/SMK</option>
+                                <option value="2">Perguruan Tinggi</option>
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -129,6 +130,10 @@
                 name: "namauniv"
             },
             {
+                data: "kategori",
+                name: "kategori"
+            },
+            {
                 data: "status",
                 name: "status"
             },
@@ -153,7 +158,7 @@
                 $("#modal-button").html("Update Data");
                 $('#modal-master-universitas form').attr('action', action);
                 $('#namauniv').val(response.namauniv);
-                $('#deskripsi').val(response.deskripsi);
+                $('#kategori').val(response.kategori);
                 $('#modal-master-universitas').modal('show');
             }
         });
