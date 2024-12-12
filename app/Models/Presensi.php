@@ -20,10 +20,9 @@ class Presensi extends Model
         'jamkeluar',
         'jamkerja',
         'status',
-
     ];
-    public function nimmhs()
+    public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'nim', 'nim');
+        return $this->belongsTo(Mahasiswa::class, 'nim' , 'nim');
     }
 }

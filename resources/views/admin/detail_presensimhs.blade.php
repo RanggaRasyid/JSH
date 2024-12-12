@@ -18,7 +18,7 @@
             <i class="bi bi-arrow-left text-success" style="font-size: medium;"> Kembali </i>
         </button>
         <h4 class="fw-bold text-sm"><span class="text-muted fw-light text-xs"></span>
-        Daftar Presensi {{ $presensi->nimmhs->namamhs ?? '' }}
+        Detail Presensi {{ $presensi->nimmhs->namamhs ?? '' }}
         </h4>
     </div>
     <div class="col-xl-12">
@@ -31,7 +31,8 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>Date</th>
-                                    <th style="min-width: 125px;">Chekin</th>
+                                    <th>Chekin</th>
+                                    <th>Chekout</th>
                                     <th>nim</th>
                                     <th>Status</th>
                                 </tr>
@@ -50,8 +51,10 @@
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
 <script>
 
+    var nim = '{{ $mahasiswa->nim }}'; // Ambil nim dari view
+
     var table = $('#table-detail-presensimhs').DataTable({
-        ajax: '{{ url("super-admin/presensi/detail/{id}")}}',
+        ajax: `/super-admin/presensi/detail/${nim}`, // Endpoint dengan nim dinamis
         serverSide: false,
         processing: true,
         deferRender: true,
@@ -69,7 +72,11 @@
                 name: "jammasuk"
             },
             {
-                data: "nimmhs.nim",
+                data: "jamkeluar",
+                name: "jamkeluar"
+            },
+            {
+                data: "mahasiswa.nim",
                 name: "nim"
             },
             {

@@ -35,14 +35,14 @@ class PresensiController extends Controller
     public function store(){
         try {
             $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
-        
+
             // Cek apakah sudah check-in dan check-out hari ini
             $today = Carbon::now('Asia/Jakarta')->toDateString();
             $presensiHariIni = Presensi::where('nim', $mahasiswa->nim)
                 ->whereDate('tgl', $today)
                 ->whereNotNull('jamkeluar')
                 ->first();
-        
+
             if ($presensiHariIni) {
                 // Jika sudah check-out hari ini, beri respons error atau keterangan
                 return response()->json([
@@ -50,32 +50,32 @@ class PresensiController extends Controller
                     'message' => 'Anda sudah melakukan check-in dan check-out hari ini.',
                 ]);
             }
-        
+
             // Cek apakah mahasiswa sudah check-in tapi belum check-out
             $presensi = Presensi::where('nim', $mahasiswa->nim)
                 ->whereDate('tgl', $today)
                 ->whereNull('jamkeluar')
                 ->first();
-        
+
             // Cek jika belum check-in dan waktu sudah lewat jam 17.00
             $now = Carbon::now('Asia/Jakarta');
             if (!$presensi && $now->hour >= 17) {
                 // Jika belum check-in dan sudah lewat jam 17:00, set status menjadi 0 (tidak hadir)
                 $presensi = Presensi::create([
                     'nim' => $mahasiswa->nim,
-                    'jammasuk' => null, // Tidak ada jam masuk, karena statusnya tidak hadir
+                    'jammasuk' => Carbon::now('Asia/Jakarta'), // Tidak ada jam masuk, karena statusnya tidak hadir
                     'status' => 0,      // Status tidak hadir
                     'tgl' => $today
                 ]);
-        
+
                 $message = 'Anda tidak hadir karena tidak check-in sebelum jam 17:00.';
             } else if ($presensi) {
                 // Jika sudah check-in, lakukan check-out
                 $presensi->update([
                     'jamkeluar' => Carbon::now('Asia/Jakarta'),
                 ]);
-        
-                $message = 'Check-out berhasil!';
+
+                $message = 'anda tidak hadir!';
             } else {
                 // Jika belum check-in, lakukan check-in
                 $presensi = Presensi::create([
@@ -84,10 +84,10 @@ class PresensiController extends Controller
                     'status' => 1, // Status hadir
                     'tgl' => $today
                 ]);
-        
+
                 $message = 'Check-in berhasil!';
             }
-        
+
             return response()->json([
                 'error' => false,
                 'message' => $message,

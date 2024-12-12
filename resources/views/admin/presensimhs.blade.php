@@ -63,11 +63,11 @@
                 name: "namamhs"
             },
             {
-                data: "namauniv",
+                data: "univ.namauniv",
                 name: "namauniv"
             },
             {
-                data: "jurusan",
+                data: "jurusan.jurusan",
                 name: "jurusan"
             },
             {
