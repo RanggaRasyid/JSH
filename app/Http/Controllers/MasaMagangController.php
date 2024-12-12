@@ -102,7 +102,6 @@ class MasaMagangController extends Controller
             $masamagang = MasaMagang::where('id_masa_magang', $id)->with('mahasiswa')->first();
             $masamagang->startdate = $request->startdate;
             $masamagang->enddate = $request->enddate;
-            // $masamagang->nim = $request->mahasiswa;
             $masamagang->save();
 
             return response()->json([

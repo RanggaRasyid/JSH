@@ -172,9 +172,8 @@
                 $('#modal-master-masa-magang form').attr('action', action);
                 $('#startdate').val(response.startdate);
                 $('#enddate').val(response.enddate);
-                $('#nama-mahasiswa').val(response.mahasiswa).trigger('change');
-                $('#nama-mahasiswa').val(response.mahasiswa);
-                $('#nama-mahasiswa').prop('disabled', true); // Nonaktifkan dropdown
+                $('#nama-mahasiswa').val(response.nim).trigger('change');
+                $('#nama-mahasiswa').prop('disabled', true); 
                 $('#modal-master-masa-magang').modal('show');
             }
         });
@@ -184,7 +183,6 @@
     $("#modal-title").html("Tambah Akifitas");
     $("#modal-button").html("Simpan")
     $('#modal-master-masa-magang form')[0].reset();
-    $('#modal-master-masa-magang form #role').val('').trigger('change');
     $('#modal-master-masa-magang form').attr('action', "{{ url('super-admin/master-masa-magang/store') }}");
     $('.invalid-feedback').removeClass('d-block');
     $('.form-control').removeClass('is-invalid');
