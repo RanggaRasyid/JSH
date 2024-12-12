@@ -30,8 +30,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/show', [App\Http\Controllers\MasterMahasiswaiController::class, 'show'])->name('master.show');
             Route::post('/status/{id}', [App\Http\Controllers\MasterMahasiswaiController::class, 'status'])->name('master.status');
             Route::get('/edit/{id}', [App\Http\Controllers\MasterMahasiswaiController::class, 'edit'])->name('master.edit');
-            Route::post('/update/{id}', [App\Http\Controllers\MasterMahasiswaiController::class, 'update'])->name('master.update');
             Route::post('/store', [App\Http\Controllers\MasterMahasiswaiController::class, 'store'])->name('master.store');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterMahasiswaiController::class, 'update'])->name('master.update');
 
         });
         Route::prefix('data-pegawai')->group(function () {

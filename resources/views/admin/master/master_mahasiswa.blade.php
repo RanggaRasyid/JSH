@@ -218,6 +218,7 @@
                 $('#modal-master-mahasiswa form').attr('action', action);
                 $('#namamhs').val(response.namamhs).trigger('change');
                 $('#nim').val(response.nim);
+                $('#nim').prop('disabled', true);
                 $('#emailmhs').val(response.emailmhs);
                 $('#jurusan').val(response.id_jurusan);
                 $('#instansi').val(response.id_univ);
@@ -231,6 +232,7 @@
     $("#modal-title").html("Tambah Akifitas");
     $("#modal-button").html("Simpan")
     $('#modal-master-mahasiswa form')[0].reset();
+    $('#nim').val('').prop('disabled', false); // Aktifkan saat tambah data
     $('#modal-master-mahasiswa form #role').val('').trigger('change');
     $('#modal-master-mahasiswa form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
     $('.invalid-feedback').removeClass('d-block');

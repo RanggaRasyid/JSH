@@ -19,7 +19,7 @@ class MasterMahasiswaiController extends Controller
     public function index(){
         $univ = Universitas::all();
         $jurusan = JurusanModel::all();
-        return view('admin.master.master_mahasiswa', compact('univ', 'jurusan', 'user'));
+        return view('admin.master.master_mahasiswa', compact('univ', 'jurusan'));
     }
 
     public function show(){
@@ -52,16 +52,16 @@ class MasterMahasiswaiController extends Controller
 
             $mahasiswa = Mahasiswa::create([
                 'nim' => $request->nim,
-                'namamhs' => $request->nama,
-                'emailmhs' => $request->email,
+                'namamhs' => $request->namamhs,
+                'emailmhs' => $request->emailmhs,
                 'id_jurusan' => $request->jurusan,
                 'id_univ' => $request->univ,
                 'status' => 1
             ]);
             $user = User::create([
                 'nim' => $request->nim,
-                'name' => $request->nama,
-                'email' => $request->email,
+                'name' => $request->namamhs,
+                'email' => $request->emailmhs,
                 'password' => Hash::make($request->password),
             ]);
             $user->assignRole('mahasiswa');
@@ -115,13 +115,21 @@ class MasterMahasiswaiController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            $user = User::where('nim', $id)->first();
+            if ($user) {
+                $user->name = $request->namamhs;
+                $user->email = $request->emailmhs;
+                if ($request->filled('password')) {
+                    $user->password = bcrypt($request->password);
+                }
+                $user->save();
+            }
             $mahasiswa = Mahasiswa::where('nim', $id)->with('nim', 'jurusan', 'univ')->first();
             $mahasiswa->namamhs = $request->namamhs;
-            $mahasiswa->nim = $request->nim;
             $mahasiswa->emailmhs = $request->emailmhs;
             $mahasiswa->id_jurusan = $request->jurusan;
             $mahasiswa->id_univ = $request->univ;
-            // dd($mahasiswa);
             $mahasiswa->save();
 
             return response()->json([
