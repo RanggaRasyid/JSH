@@ -39,6 +39,7 @@
                                 <th>NOMOR</th>
                                 <th style="min-width: 125px;">Nama Mahasiswa</th>
                                 <th>Email</th>
+                                <th>NIM/NISN</th>
                                 <th>Instansi</th>
                                 <th>Jurusan</th>
                                 <th>Status</th>
@@ -184,6 +185,10 @@
             {
                 data: "emailmhs",
                 name: "emailmhs"
+            },
+            {
+                data: "nim",
+                name: "nim"
             },
             {
                 data: 'univ.namauniv',
