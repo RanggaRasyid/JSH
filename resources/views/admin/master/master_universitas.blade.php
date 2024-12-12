@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="namauniv" class="form-label">Nama Universitas</label>
-                            <input type="text" id="namauniv" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="namauniv" class="form-control" placeholder="Masukkan Universitas" />
+                            <input type="text" id="namauniv" name="namauniv" class="form-control" placeholder="Masukkan Universitas" />
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>

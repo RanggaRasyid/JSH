@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MasaMagangRequest;
+use App\Http\Requests\MasaUpdateRequest;
 use App\Models\Mahasiswa;
 use App\Models\MasaMagang;
 use Exception;
@@ -96,7 +97,7 @@ class MasaMagangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(MasaUpdateRequest $request, $id)
     {
         try {
             $masamagang = MasaMagang::where('id_masa_magang', $id)->with('mahasiswa')->first();

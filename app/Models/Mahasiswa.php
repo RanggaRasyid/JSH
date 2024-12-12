@@ -35,7 +35,7 @@ class Mahasiswa extends Model
     public function presensi(){
         return $this->hasMany(Presensi::class, 'nim', 'nim');
     }
-    public function user(){
+    public function nim(){
         return $this->belongsTo(User::class, 'nim');
     }
 

@@ -19,7 +19,7 @@ class MasterMahasiswaiController extends Controller
     public function index(){
         $univ = Universitas::all();
         $jurusan = JurusanModel::all();
-        return view('admin.master.master_mahasiswa', compact('univ', 'jurusan'));
+        return view('admin.master.master_mahasiswa', compact('univ', 'jurusan', 'user'));
     }
 
     public function show(){
@@ -103,7 +103,7 @@ class MasterMahasiswaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(String $id)
     {
         $mahasiswa = Mahasiswa::where('nim', $id)->first();
         return $mahasiswa;
@@ -112,22 +112,22 @@ class MasterMahasiswaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($request, string $id)
+    public function update(Request $request, $id)
     {
         try {
-            $user = User::where('nim', $id)->with('mahasiswa')->first();
-            $mahasiswa = Mahasiswa::where('nim', $id)->with('user')->first();
-            $user == $mahasiswa ;
+            $mahasiswa = Mahasiswa::where('nim', $id)->with('nim', 'jurusan', 'univ')->first();
             $mahasiswa->namamhs = $request->namamhs;
             $mahasiswa->nim = $request->nim;
             $mahasiswa->emailmhs = $request->emailmhs;
-            $user->password = $request->password;
+            $mahasiswa->id_jurusan = $request->jurusan;
+            $mahasiswa->id_univ = $request->univ;
+            // dd($mahasiswa);
             $mahasiswa->save();
 
             return response()->json([
                 'error' => false,
                 'message' => 'Mahasiswa successfully Updated!',
-                'modal' => '#modal-master-universitas',
+                'modal' => '#modal-master-mahasiswa',
                 'table' => '#table-master-mahasiswa'
             ]);
         } catch (Exception $e) {

@@ -28,6 +28,7 @@
         <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-master-jurusan">Add jurusan</button>
     </div>
 </div>
+
 <div class="col-xl-12">
     <div class="nav-align-top">
         <div class="tab-content mt-4">
@@ -38,6 +39,8 @@
                             <tr>
                                 <th>NOMOR</th>
                                 <th >Jurusan</th>
+                                <th >Instansi</th>
+                                <th >Kategori</th>
                                 <th class="text-center">Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
                             </tr>
@@ -62,7 +65,7 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="univ" class="form-label">Universitas</label>
-                            <select class="form-select select2" id="pilihuniversitas_add" name="univ"
+                            <select class="form-select select2" id="univ" name="univ"
                                 data-placeholder="Pilih Universitas">
                                 <option disabled selected>Pilih Universitas</option>
                                 @foreach ($univ as $u)
@@ -130,6 +133,14 @@
                 name: "jurusan"
             },
             {
+                data: "univ.namauniv",
+                name: "namauniv"
+            },
+            {
+                data: "univ.kategori",
+                name: "kategori"
+            },
+            {
                 data: "status",
                 name: "status"
             },
@@ -153,9 +164,8 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-jurusan form').attr('action', action);
+                $('#univ').val(response.id_univ);
                 $('#jurusan').val(response.jurusan);
-                $('#univ').val(response.univ);
-                $('#deskripsi').val(response.deskripsi);
                 $('#modal-master-jurusan').modal('show');
             }
         });

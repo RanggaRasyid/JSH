@@ -17,7 +17,7 @@ class MasterJurusanController extends Controller
     }
 
     public function show(){
-        $jurusan = JurusanModel::orderBy('id_jurusan', 'asc')->get();
+        $jurusan = JurusanModel::with('univ')->orderBy('id_jurusan', 'asc')->get();
         return DataTables::of($jurusan)
         ->addIndexColumn()
         ->editColumn('status', function ($row) {
@@ -25,6 +25,13 @@ class MasterJurusanController extends Controller
                 return "<div class='text-center'><div class='badge rounded-pill bg-label-success'>" . "Active" . "</div></div>";
             } else {
                 return "<div class='text-center'><div class='badge rounded-pill bg-label-danger'>" . "Inactive" . "</div></div>";
+            }
+        })
+        ->editColumn('univ.kategori', function ($row) {
+            if ($row->univ->kategori == 1) {
+                return "<div class=''>" . "SMA/SMK" . "</div>";
+            } else {
+                return "<div class=''>" . "Perguruan Tinggi" . "</div>";
             }
         })
         ->addColumn('action', function ($row) {
@@ -35,7 +42,7 @@ class MasterJurusanController extends Controller
             <a data-status='{$row->status}' data-id='{$row->id_jurusan}' data-url='master-jurusan/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
             return $btn;
         })
-        ->rawColumns(['action', 'status'])
+        ->rawColumns(['action', 'status', 'univ.kategori'])
 
         ->make(true);
     }

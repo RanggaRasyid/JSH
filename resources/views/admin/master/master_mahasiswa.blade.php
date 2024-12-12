@@ -39,7 +39,7 @@
                                 <th>NOMOR</th>
                                 <th style="min-width: 125px;">Nama Mahasiswa</th>
                                 <th>Email</th>
-                                <th>Kategori</th>
+                                <th>Instansi</th>
                                 <th>Jurusan</th>
                                 <th>Status</th>
                                 <th style="min-width: 100px;">Aksi</th>
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="nama" class="form-label">Nama</label>
-                            <input type="text" id="nama" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="nama" class="form-control" placeholder="Masukkan Nama" />
+                            <input type="text" id="namamhs" onkeyup="this.value = this.value.replace(/[^a-zA-Z\s]+/gi, '');" name="namamhs" class="form-control" placeholder="Masukkan Nama" />
                             <div class="invalid-feedback"></div>
 
                         </div>
@@ -82,17 +82,17 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Masukkan Email" />
+                            <input type="text" id="emailmhs" name="emailmhs" class="form-control" placeholder="Masukkan Email" />
                             <div class="invalid-feedback"></div>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-2 form-input">
-                            <label for="univ" class="form-label">Universitas</label>
-                            <select class="form-select select2" id="pilihuniversitas_add" name="univ"
+                            <label for="univ" class="form-label">Universitas/Sekolah</label>
+                            <select class="form-select select2" id="instansi" name="univ"
                                 data-placeholder="Pilih Universitas">
-                                <option disabled selected>Pilih Kategori</option>
+                                <option disabled selected>Pilih Universitas/Sekolah</option>
                                 @foreach ($univ as $u)
                                     <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
                                 @endforeach
@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="univ" class="form-label">Jurusan</label>
-                            <select class="form-select select2" id="pilihuniversitas_add" name="jurusan"
+                            <select class="form-select select2" id="jurusan" name="jurusan"
                                 data-placeholder="Pilih Jurusan">
                                 <option disabled selected>Pilih Jurusan</option>
                                 @foreach ($jurusan as $u)
@@ -216,11 +216,12 @@
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-mahasiswa form').attr('action', action);
-                $('#nama').val(response.namamhs);
+                $('#namamhs').val(response.namamhs).trigger('change');
                 $('#nim').val(response.nim);
-                $('#email').val(response.emailmhs);
+                $('#emailmhs').val(response.emailmhs);
+                $('#jurusan').val(response.id_jurusan);
+                $('#instansi').val(response.id_univ);
                 $('#password').val(response.password);
-                // $('#deskripsi').val(response.deskripsi);
                 $('#modal-master-mahasiswa').modal('show');
             }
         });
