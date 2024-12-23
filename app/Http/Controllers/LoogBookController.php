@@ -29,10 +29,22 @@ class LoogBookController extends Controller
             ->editColumn('created_at', function ($row) {
                 return Carbon::parse($row->created_at)->format('d/m/y');
             })
+            ->editColumn('updated_at', function ($row) {
+                return Carbon::parse($row->updated_at)->format('d/m/y');
+            })
             ->editColumn('picture', function ($row) {
-                // Generate URL gambar menggunakan Storage
                 $url = Storage::url('' . $row->picture);
                 return "<img src='$url' alt='Picture' style='width: 50px; height: 50px; object-fit: cover;'>";
+            })
+
+            ->editColumn('status', function ($row){
+                if ($row->status == 0){
+                    return "<div class='badge rounded-pill bg-label-danger'>" . "Ditolak" . "</div>";
+                } elseif ($row->status == 1 ){
+                    return "<div class='badge rounded-pill bg-label-success'>" . "Disetujui" . "</div>";
+                } else {
+                    return "<div class='badge rounded-pill bg-label-warning'>" . "Belum Disetujui" . "</div>";
+                }
             })
             ->addColumn('action', function ($row) {
                 $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
@@ -42,7 +54,7 @@ class LoogBookController extends Controller
                 <a data-id='{$row->id_loogbook}' data-url='loogbook/destroy' class='btn-icon delete-data waves-effect waves-light'><i class='ti ti-trash fa-lg' style='color:red'></i></a>";
                 return $btn;
             })
-            ->rawColumns(['action', 'picture'])
+            ->rawColumns(['action', 'picture', 'status'])
             ->make(true);
     }
 
@@ -61,7 +73,7 @@ class LoogBookController extends Controller
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
                 'picture' => $file,
-                'status' => 0
+                'status' => 2
 
             ]);
             return response()->json([
@@ -95,6 +107,7 @@ class LoogBookController extends Controller
             $loogbook->nama = $request->nama;
             $loogbook->deskripsi = $request->deskripsi;
             $loogbook->picture = $file;
+            $loogbook->status = 2;
             $loogbook->save();
             return response()->json([
                 'error' => false,

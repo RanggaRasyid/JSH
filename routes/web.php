@@ -76,6 +76,12 @@ Route::middleware('auth')->group(function () {
             Route::get('/show-detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'index'])->name('master.presensi.show.detail');
             Route::get('/detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'detail'])->name('master.presensi.detail');
         });
+        Route::prefix('/logbook')->group(function () {
+            Route::get('/', [App\Http\Controllers\KelolaLogbookController::class, 'index'])->name('master.logbook.index');
+            Route::get('/show/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'show'])->name('master.logbook.show');
+            Route::post('/status/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'status'])->name('master.status.approve');
+            // Route::get('/detail/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'detail'])->name('master.presensi.detail');
+        });
     });
 });
 

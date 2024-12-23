@@ -18,7 +18,7 @@
             <i class="bi bi-arrow-left text-success" style="font-size: medium;"> Kembali </i>
         </button>
         <h4 class="fw-bold text-sm"><span class="text-muted fw-light text-xs"></span>
-        Detail Presensi {{ $presensi->nimmhs->namamhs ?? '' }}
+        Detail Presensi {{ $mahasiswa->namamhs ?? '' }}
         </h4>
     </div>
     <div class="col-xl-12">

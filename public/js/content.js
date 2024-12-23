@@ -170,6 +170,7 @@
         let action = url + "/" + id;
         var status = $(e).attr("data-status");
         var text = "";
+
         if (status == 0) {
             text = "Active";
         } else {

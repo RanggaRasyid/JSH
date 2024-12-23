@@ -30,17 +30,16 @@
         <div class="tab-content mt-4">
             <div class="tab-pane fade show active" id="navs-pills-justified-users" role="tabpanel">
                 <div class="card-datatable table-responsive">
-                    <table class="table" id="table-loogbook-mahasiswa">
+                    <table class="table" id="table-loogbook-admin">
                         <thead>
                             <tr>
-                                <th style="max-width:30px">NO</th>
-                                <th style="min-width: 125px;">Title</th>
+                                <th >NO</th>
+                                <th >Title</th>
                                 <th>Deskription</th>
-                                <th>Created</th>
-                                <th>Updated</th>
+                                <th>Created-At</th>
                                 <th>Gambar</th>
                                 <th>AKSI</th>
-                                <th>Status</th>
+                                <th>status</th>
                             </tr>
                         </thead>
                     </table>
@@ -49,7 +48,6 @@
         </div>
     </div>
 </div>
-@include('mahasiswa.loogbook.modal')
 @endsection
 
 @section('page_script')
@@ -57,8 +55,8 @@
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
 <script>
 
-    var table = $('#table-loogbook-mahasiswa').DataTable({
-        ajax: '{{ url("mahasiswa/loogbook/show/{id}")}}',
+    var table = $('#table-loogbook-admin').DataTable({
+        ajax: '{{ url("super-admin/logbook/show/{id}")}}',
         serverSide: false,
         processing: true,
         deferRender: true,
@@ -80,10 +78,6 @@
                 name: "created_at",
             },
             {
-                data: "updated_at",
-                name: "updated_at",
-            },
-            {
                 data: "picture",
                 name: "picture",
             },
@@ -97,36 +91,6 @@
             }
         ]
 
-    });
-
-    function edit(e) {
-        let id = e.attr('data-id');
-        let action = `{{ url('mahasiswa/loogbook/update') }}/${id}`;
-        var url = `{{ url('mahasiswa/loogbook/edit') }}/${id}`;
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(response) {
-                $("#modal-title").html("Edit Aktifitas");
-                $("#modal-button").html("Update Data");
-                $('#modal-loogbook form').attr('action', action);
-                $('#nama').val(response.nama);
-                $('#deskripsi').val(response.deskripsi);
-                $('#modal-loogbook').modal('show');
-            }
-        });
-    }
-
-    $("#modal-loogbook").on("hide.bs.modal", function() {
-
-        $("#modal-title").html("Tambah Akifitas");
-        $("#modal-button").html("Simpan")
-        $('#modal-loogbook form')[0].reset();
-        $('#modal-loogbook form #role').val('').trigger('change');
-        $('#modal-loogbook form').attr('action', "{{ url('mahasiswa/loogbook/store') }}");
-        $('.invalid-feedback').removeClass('d-block');
-        $('.form-control').removeClass('is-invalid');
     });
 
     jQuery(function() {

@@ -109,31 +109,31 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Mahasiswa</span>
             </li>
-            <li class="menu-item">
-              <a href="{{url('mahasiswa')}}" class="menu-link">
+            <li class="menu-item {{ request()->is('mahasiswa*') ? 'inactive' : ''}}">
+              <a href="/mahasiswa" class="menu-link">
                 <i class="menu-icon ti ti-smart-home    "></i>
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="{{url('mahasiswa/loogbook')}}"  class="menu-link">
+            <li class="menu-item {{ request()->is('mahasiswa/loogbook*') ? 'active' : ''}}">
+              <a href="/mahasiswa/loogbook"  class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Logbook">Logbook</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="{{url('mahasiswa/presensi')}}" class="menu-link">
+            <li class="menu-item {{ request()->is('mahasiswa/presensi*') ? 'active' : ''}}">
+              <a href="/mahasiswa/presensi" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-clock"></i>
                 <div data-i18n="Presensi">Presensi</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ request()->is('mahasiswa/profile*') ? 'active open' : ''}}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
                     <div data-i18n="Profile Mahasiswa">Profile Mahasiswa</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('mahasiswa/profile*') ? 'active' : ''}}">
                         <a href="{{url('mahasiswa/profile', Auth::user()->nim)}}"  class="menu-link">
                         <div data-i18n="Profile Settings">Profile Settings</div>
                         </a>
@@ -155,53 +155,59 @@
               <span class="menu-header-text">Administrator JSH</span>
             </li>
             <li class="menu-item">
-              <a href="{{url('super-admin')}}" class="menu-link">
+              <a href="/super-admin" class="menu-link">
                 <i class="menu-icon ti ti-smart-home    "></i>
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="{{url('super-admin/presensi')}}" class="menu-link">
+            <li class="menu-item {{ request()->is('super-admin/presensi*') ? 'active' : ''}}">
+              <a href="/super-admin/presensi" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ request()->is('super-admin/logbook*') ? 'active' : ''}}">
+              <a href="/super-admin/logbook" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-book"></i>
+                <div data-i18n="Logbook Mahasiswa">Logbook Mahasiswa</div>
+              </a>
+            </li>
+            <li class="menu-item {{ request()->is('super-admin/master*') ? 'active open' : ''}}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-database"></i>
                     <div data-i18n="Master Data">Master Data</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="{{url('super-admin/master-universitas')}}" class="menu-link">
+                    <li class="menu-item {{ request()->is('super-admin/master-universitas*') ? 'active' : ''}}">
+                        <a href="/super-admin/master-universitas" class="menu-link">
                         <div data-i18n="Universitas/SMA/SMK">Universitas/SMA/SMK</div>
                         </a>
                     </li>
                 </ul>
                 <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="{{url('super-admin/master-jurusan')}}" class="menu-link">
+                    <li class="menu-item {{ request()->is('super-admin/master-jurusan*') ? 'active' : ''}}">
+                        <a href="/super-admin/master-jurusan" class="menu-link">
                         <div data-i18n="Jurusan">Jurusan</div>
                         </a>
                     </li>
                 </ul>
                 <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="{{url('super-admin/master-mahasiswa')}}" class="menu-link">
+                    <li class="menu-item {{ request()->is('super-admin/master-mahasiswa*') ? 'active' : ''}}">
+                        <a href="/super-admin/master-mahasiswa" class="menu-link">
                         <div data-i18n="Mahasiswa">Mahasiswa</div>
                         </a>
                     </li>
                 </ul>
                 <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="{{url('super-admin/master-masa-magang')}}" class="menu-link">
+                    <li class="menu-item {{ request()->is('super-admin/master-masa-magang*') ? 'active' : ''}}">
+                        <a href="/super-admin/master-masa-magang" class="menu-link">
                         <div data-i18n="Masa Magang">Masa Magang</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-item">
-              <a href="{{url('super-admin/data-pegawai')}}" class="menu-link">
+            <li class="menu-item {{ request()->is('super-admin/data-pegawai*') ? 'active' : ''}}">
+              <a href="/super-admin/data-pegawai" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Data Pegawai">Data Pegawai</div>
               </a>

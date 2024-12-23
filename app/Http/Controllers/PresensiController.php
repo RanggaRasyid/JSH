@@ -19,7 +19,7 @@ class PresensiController extends Controller
     }
 
     public function show() {
-        $presensi = Presensi::with('nimmhs')->where('nim', Auth::user()->nim);
+        $presensi = Presensi::with('mahasiswa')->where('nim', Auth::user()->nim);
         $presensi = $presensi->orderBy('nim', 'asc')->get();
         return DataTables::of($presensi)
         ->addIndexColumn()
