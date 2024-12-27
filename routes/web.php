@@ -23,7 +23,8 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/super-admin')->middleware('can:read.only.superadmin')->group(function () {
-    Route::get('/', [App\Http\Controllers\Auth\SuperAdminController::class, 'index'])->name('admin.dashboard');
+        
+        Route::get('/dashboard', [App\Http\Controllers\Auth\SuperAdminController::class, 'index'])->name('admin.dashboard');
 
         Route::prefix('master-mahasiswa')->group(function () {
             Route::get('/', [App\Http\Controllers\MasterMahasiswaiController::class, 'index'])->name('master.index');
