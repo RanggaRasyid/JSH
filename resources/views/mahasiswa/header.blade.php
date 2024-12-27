@@ -158,8 +158,8 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Mahasiswa</span>
             </li>
-            <li class="menu-item {{ request()->is('mahasiswa*') ? 'inactive' : ''}}">
-              <a href="/mahasiswa" class="menu-link">
+            <li class="menu-item {{ request()->is('mahasiswa/dashboard*') ? 'active' : ''}}">
+              <a href="/mahasiswa/dashboard" class="menu-link">
                 <i class="menu-icon ti ti-smart-home    "></i>
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>

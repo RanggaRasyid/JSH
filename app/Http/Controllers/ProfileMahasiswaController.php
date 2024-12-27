@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfileMahasiswaController extends Controller
 {
     public function index(){
-        return view('mahasiswa.dashboard');
+        return view('admin.admin_dashboard');
     }
     
     public function profile($id){
