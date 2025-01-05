@@ -8,7 +8,7 @@
 @section('main')
 <!-- Content wrapper -->
 <div class="content-wrapper">
-    
+
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -63,7 +63,7 @@
                     <input class="form-control" type="text" id="name" name="name" value="{{$mahasiswa->namamhs}}" disabled autofocus/>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="nim" class="form-label">NIM</label>
+                    <label for="nim" class="form-label">NIM/NISN</label>
                     <input class="form-control" type="text" name="nim" id="nim" value="{{$mahasiswa->nim}}" disabled/>
                 </div>
                 <div class="mb-3 col-md-6">
@@ -127,7 +127,7 @@
         let action = `{{ url('mahasiswa/profile/update/') }}/${id}`;
         var url = `{{ url('mahasiswa/profile/edit') }}/${id}`;
         console.log(url);
-        
+
         $.ajax({
             type: 'GET',
             url: url,
@@ -152,7 +152,7 @@
             jQuery('#div' + $(this).attr('target')).slideToggle();
         });
     });
-    
+
 </script>
 <script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{url('assets/js/extended-ui-sweetalert2.js')}}"></script>

@@ -23,7 +23,7 @@
     @endcan
 
     <meta name="description" content="" />
- 
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('background/logo-jsh.png')}}" />
 
@@ -113,7 +113,7 @@
         }
 
         .nav-pills .nav-link.active,
-        .nav-pills .nav-link.active:hover,      
+        .nav-pills .nav-link.active:hover,
         .nav-pills .nav-link.active:focus {
             background-color: #4EA971;
             color: #fff;

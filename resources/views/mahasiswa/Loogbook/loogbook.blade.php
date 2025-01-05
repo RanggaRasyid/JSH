@@ -34,10 +34,10 @@
                         <thead>
                             <tr>
                                 <th style="max-width:30px">NO</th>
-                                <th style="min-width: 125px;">Title</th>
-                                <th>Deskription</th>
-                                <th>Created</th>
-                                <th>Updated</th>
+                                <th style="min-width: 125px;">Judul Aktivitas</th>
+                                <th>Deskripsi</th>
+                                <th>Dibuat</th>
+                                <th>Diperbarui</th>
                                 <th>Gambar</th>
                                 <th>AKSI</th>
                                 <th>Status</th>
@@ -108,7 +108,7 @@
             type: 'GET',
             url: url,
             success: function(response) {
-                
+
                 $("#modal-title").html("Edit Aktifitas");
                 $("#modal-button").html("Update Data");
                 $('#modal-loogbook form').attr('action', action);

@@ -13,7 +13,7 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div style="margin-left: 80px">
-                    <h3 class="mb-1 fw-bold">Welcome to Magang
+                    <h3 class="mb-1 fw-bold">Selamat Datang di Magang
                         <span>
                             <a href="{{ url('/') }}">
                                 <img src="{{ asset('background/logo-jsh.png') }}" alt="icon" style="margin-bottom: 10px;" width="auto" height="50px">
@@ -21,7 +21,7 @@
                         </span>
                         👋
                     </h3>
-                    <p class="mb-4">Please Register to your account and start the adventure</p>
+                    <p class="mb-4">Silahkan daftarkan akun Anda dan mulai petualangan.</p>
 
                     <div class="form-group mb-3">
                         <label for="email">{{ __('Email') }}</label>
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="nim">{{ __('NIM') }}</label>
+                        <label for="nim">{{ __('NIM/NISN') }}</label>
                         <input id="nim" type="nim" class="form-control @error('nim') is-invalid @enderror" name="nim" value="{{ old('nim') }}" autocomplete="nim" autofocus>
                         @error('nim')
                             <span class="invalid-feedback" role="alert">
@@ -55,10 +55,10 @@
 
                     <div class="row mb-3">
                         <div class="col mb-2 form-input">
-                            <label for="univ" class="form-label">Kategori</label>
+                            <label for="univ" class="form-label">Asal Kampus/Asal Sekolah</label>
                             <select class="form-select select2" id="pilihuniversitas_add" name="univ"
                                 data-placeholder="Pilih Kategori">
-                                <option disabled selected>Pilih Kategori</option>
+                                <option disabled selected>Pilih Kampus/Sekolah</option>
                                 @foreach ($univ as $u)
                                     <option value="{{ $u->id_univ }}">{{ $u->namauniv }}</option>
                                 @endforeach
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="password">{{ __('Password') }}</label>
+                        <label for="password">{{ __('Kata Sandi') }}</label>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -92,16 +92,16 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                        <label for="password-confirm">{{ __('Konfirmasi Kata Sandi') }}</label>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
 
                     <button type="submit" class="btn btn-primary d-grid w-100" style="background: var(--primary-500-base, #4EA971);">
-                        {{ __('Register') }}
+                        {{ __('Daftar') }}
                     </button>
 
                     <p class="text-center mt-3">
-                        <span>Already have an account? <a href="{{ route('login') }}">Login</a></span>
+                        <span>Sudah memiliki akun? <a href="{{ route('login') }}">Masuk</a></span>
                     </p>
                 </div>
             </form>

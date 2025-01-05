@@ -58,7 +58,7 @@
                             ->whereNull('jamkeluar')
                             ->first();
                     @endphp
-            
+
                     @if ($presensiHariIni)
                         <!-- Tombol sudah disable jika check-in dan check-out sudah dilakukan hari ini -->
                         <button type="button" class="btn btn-secondary d-flex align-items-center me-3 waves-effect waves-light" disabled>
@@ -95,8 +95,8 @@
                             <thead>
                                 <tr>
                                     <th>NO</th>
-                                    <th>Date</th>
-                                    <th style="min-width: 125px;">Chekin</th>
+                                    <th>Tanggal</th>
+                                    <th style="min-width: 125px;">Checkin</th>
                                     <th>Checkout</th>
                                     <th>Status</th>
                                 </tr>
@@ -114,7 +114,7 @@
 <script src="{{url('assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
 <script>
-    // 
+    //
     var table = $('#table-presensi-mahasiswa').DataTable({
         ajax: '{{ url("mahasiswa/presensi/show/{id}")}}',
         serverSide: false,
@@ -149,7 +149,7 @@
             jQuery('#div' + $(this).attr('target')).slideToggle();
         });
     });
-    
+
   function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
@@ -158,11 +158,11 @@
       const currentTime = `${hours}:${minutes}:${seconds}`;
       document.getElementById('work-time').textContent = currentTime;
   }
-  
+
   function updateDate() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0'); 
+      const month = String(now.getMonth() + 1).padStart(2, '0');
       const year = now.getFullYear();
       const currentDate = `${day}-${month}-${year}`;
       document.getElementById('current-date').textContent = currentDate;
