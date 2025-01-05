@@ -42,7 +42,7 @@
                                 <i class="ti ti-users ti-sm" style="font-size: 30px !important;"></i>
                             </div>
                             <div class="card-info">
-                                <h5 class="mb-0">{{ $mahasiswa }}</h5>
+                                <h5 class="mb-0">{{ $mahasiswa??'' }}</h5>
                                 <p class="mb-0" style="font-size:18px;">Peserta Magang</p>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <i class="ti ti-smart-home ti-sm" style="font-size: 30px !important;"></i>
                             </div>
                             <div class="card-info">
-                                <h5 class="mb-0">{{ $univ }}</h5>
+                                <h5 class="mb-0">{{ $univ??'' }}</h5>
                                 <p class="mb-0" style="font-size:18px;">Universitas</p>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 <i class="ti ti-home ti-sm" style="font-size: 30px !important;"></i>
                             </div>
                             <div class="card-info">
-                                <h5 class="mb-0">{{ $sekolah }}</h5>
+                                <h5 class="mb-0">{{ $sekolah ??''}}</h5>
                                 <p class="mb-0" style="font-size:18px;">Sekolah</p>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 <i class="ti ti-pencil ti-sm" style="font-size: 30px !important;"></i>
                             </div>
                             <div class="card-info">
-                                <h5 class="mb-0">{{ $jurusan }}</h5>
+                                <h5 class="mb-0">{{ $jurusan??'' }}</h5>
                                 <p class="mb-0" style="font-size:18px;">Jurusan</p>
                             </div>
                         </div>
