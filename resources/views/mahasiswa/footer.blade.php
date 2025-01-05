@@ -56,6 +56,7 @@
 <script src="{{url('assets/js/dashboards-analytics.js')}}"></script>
 <script src="{{ asset('assets/js/form-wizard-numbered.js') }}"></script>
 <script src="{{ asset('assets/js/form-wizard-validation.js') }}"></script>
+<script src="{{asset('assets/js/dashboards-ecommerce.js') }}"></script>
 @yield('page_script')
 </body>
 </html>

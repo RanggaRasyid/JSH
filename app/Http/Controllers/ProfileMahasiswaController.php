@@ -12,33 +12,36 @@ use Illuminate\Support\Facades\Auth;
 class ProfileMahasiswaController extends Controller
 {
     public function index(){
-        return view('mahasiswa.dashboard');
+        return view('admin.admin_dashboard');
     }
     
-    public function profile($id){
-        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->first();
+    public function profile(String $id){
+        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->with('jurusan', 'univ')->first();
         return view('mahasiswa.profile_mahasiswa', compact('mahasiswa'));
     }
+
+    public function edit(String $id){
+        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->with('jurusan', 'univ')->first();
+        return $mahasiswa;
+    }
     
-    public function update(Request $request, $id) 
+    public function update(ProfileMahasiswaRequest $request, $id) 
     {
         try {
             $mahasiswa = Mahasiswa::where('nim', $id)->first();
-            $mahasiswa->posisi = $request->division;
-            $mahasiswa->agama = $request->religion;
-            $mahasiswa->namauniv = $request->univ;
-            $mahasiswa->fakultas = $request->fakultas;
-            $mahasiswa->jurusan = $request->prodi;
-            $mahasiswa->tempatlahirmhs = $request->place;
-            $mahasiswa->tanggallahirmhs = $request->birth;
-            $mahasiswa->nohpmhs = $request->phoneNumber;
-            $mahasiswa->alamatmhs = $request->address;
-            // $mahasiswa->gender1 = $request->jeniskelamin;
+            $mahasiswa->posisi = $request->posisi;
+            $mahasiswa->agama = $request->agama;
+            $mahasiswa->tempatlahirmhs = $request->tempatlahirmhs;
+            $mahasiswa->tanggallahirmhs = $request->tanggallahirmhs;
+            $mahasiswa->nohpmhs = $request->nohpmhs;
+            $mahasiswa->alamatmhs = $request->alamatmhs;
+            $mahasiswa->jeniskelamin = $request->jeniskelamin;
             $mahasiswa->save();
 
             return response()->json([
                 'error' => false,
                 'message' => 'Mahasiswa successfully Updated!',
+                'modal' => '#modal-profile-mhs'
             ]);
         } catch (Exception $e) {
             return response()->json([

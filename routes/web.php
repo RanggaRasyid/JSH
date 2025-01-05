@@ -23,7 +23,8 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/super-admin')->middleware('can:read.only.superadmin')->group(function () {
-    Route::get('/', [App\Http\Controllers\Auth\SuperAdminController::class, 'index'])->name('admin.dashboard');
+        
+        Route::get('/dashboard', [App\Http\Controllers\Auth\SuperAdminController::class, 'index'])->name('admin.dashboard');
 
         Route::prefix('master-mahasiswa')->group(function () {
             Route::get('/', [App\Http\Controllers\MasterMahasiswaiController::class, 'index'])->name('master.index');
@@ -86,11 +87,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {
-    Route::get('/', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('dashboard.mahasiswa.index');
+    Route::get('/dashboard', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('dashboard.mahasiswa.index');
 
     Route::prefix('/profile')->group(function () {
         Route::get('/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'profile'])->name('profile.mahasiswa.index');
-        Route::post('/update/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'update'])->name('update.mahasiswa');
+        Route::post('/edit/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'edit'])->name('edit.mahasiswa.profile');
+        Route::post('/update/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'update'])->name('update.mahasiswa.profile');
     });
 
     Route::prefix('/loogbook')->group(function() {

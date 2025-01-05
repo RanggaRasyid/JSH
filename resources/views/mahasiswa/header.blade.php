@@ -23,7 +23,7 @@
     @endcan
 
     <meta name="description" content="" />
-
+ 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('background/logo-jsh.png')}}" />
 
@@ -77,6 +77,55 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{url('assets/js/config.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .bg-menu-theme.menu-vertical .menu-item.active>.menu-link:not(.menu-toggle) {
+            background: #0e8c4f !important;
+            box-shadow: none !important;
+            color: #fff !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: #4EA971;
+            color: #fff;
+        }
+
+        .nav-pills .nav-link:not(.active):hover,
+        .nav-pills .nav-link:not(.active):focus {
+            color: #4EA971;
+        }
+
+        .btn-success {
+            background-color: #4EA971;
+            border-color: #4EA971;
+        }
+
+        .form-check-input:checked,
+        .form-check-input[type=checkbox]:indeterminate {
+            background-color: #4EA971;
+            border-color: #4EA971;
+        }
+
+        .select2-container--default .select2-results__option--highlighted:not([aria-selected=true]) {
+            background-color: rgba(115, 103, 240, 0.08) !important;
+            color: #4EA971 !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,      
+        .nav-pills .nav-link.active:focus {
+            background-color: #4EA971;
+            color: #fff;
+        }
+
+        .nav-pills .nav-link:not(.active):hover,
+        .nav-pills .nav-link:not(.active):focus {
+            color: #4EA971;
+        }
+
+    </style>
+
     @yield('page_style')
   </head>
 
@@ -109,8 +158,8 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Mahasiswa</span>
             </li>
-            <li class="menu-item {{ request()->is('mahasiswa*') ? 'inactive' : ''}}">
-              <a href="/mahasiswa" class="menu-link">
+            <li class="menu-item {{ request()->is('mahasiswa/dashboard*') ? 'active' : ''}}">
+              <a href="/mahasiswa/dashboard" class="menu-link">
                 <i class="menu-icon ti ti-smart-home    "></i>
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>
@@ -134,18 +183,10 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item {{ request()->is('mahasiswa/profile*') ? 'active' : ''}}">
-                        <a href="{{url('mahasiswa/profile', Auth::user()->nim)}}"  class="menu-link">
+                        <a href="{{url('mahasiswa/profile', Auth::user()->nim)}}" id="profile-setting" class="menu-link">
                         <div data-i18n="Profile Settings">Profile Settings</div>
                         </a>
                     </li>
-                    </ul>
-                    <ul class="menu-sub">
-
-                    {{-- <li class="menu-item">
-                        <a href="#" class="menu-link">
-                        <div data-i18n="Security">Security</div>
-                        </a>
-                    </li> --}}
                 </ul>
             </li>
             @endcan
@@ -154,14 +195,14 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Administrator JSH</span>
             </li>
-            <li class="menu-item">
-              <a href="/super-admin" class="menu-link">
-                <i class="menu-icon ti ti-smart-home    "></i>
+            <li class="menu-item {{ request()->is('super-admin/dashboard*') ? 'active' : ''}}">
+              <a href="{{route('admin.dashboard')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-device-desktop-analytics"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('super-admin/presensi*') ? 'active' : ''}}">
-              <a href="/super-admin/presensi" class="menu-link">
+              <a href="{{ route('master.presensi.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
