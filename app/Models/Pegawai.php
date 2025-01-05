@@ -21,7 +21,7 @@ class Pegawai extends Model
     protected $primaryKey = 'id_pegawai';
 
     public function pegawai(){
-        return $this->belongsTo(Pegawai::class, 'id_pegawai');
+        return $this->belongsTo(User::class, 'id_pegawai');
     }
 }
 

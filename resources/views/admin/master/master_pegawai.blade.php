@@ -178,12 +178,13 @@
             type: 'GET',
             url: url,
             success: function(response) {
-                $("#modal-title").html("Edit Aktifitas");
+                $("#modal-title").html("Edit Data Pegawai");
                 $("#modal-button").html("Update Data");
                 $('#modal-master-pegawai form').attr('action', action);
                 $('#nama').val(response.nama);
-                $('#deskripsi').val(response.deskripsi);
-                $('#modal-loogbook').modal('show');
+                $('#email').val(response.email);
+                $('#pangkat').val(response.pangkat);
+                $('#modal-master-pegawai').modal('show');
             }
         });
     }

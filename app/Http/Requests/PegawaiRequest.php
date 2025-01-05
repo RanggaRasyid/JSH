@@ -25,7 +25,7 @@ class PegawaiRequest extends FormRequest
     {
         return [
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email|unique:pegawai,email',
+            'email' => 'required|',
             'pangkat' => 'required|string|max:255',
             'password' => 'required|string|min:8',
         ];
