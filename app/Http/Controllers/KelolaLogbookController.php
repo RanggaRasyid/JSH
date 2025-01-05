@@ -34,7 +34,12 @@ class KelolaLogbookController extends Controller
                 $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
                 $color = ($row->status) ? "danger" : "success";
 
-                $btn = "<a data-status='{$row->status}' data-id='{$row->id_loogbook}' data-url='logbook/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
+                $btn = "<a class='btn-icon btn-approve' data-id='{$row->id_loogbook}'>
+                            <i class='ti ti-file-check text-success'></i>
+                        </a>
+                        <a class='btn-icon btn-reject' data-id='{$row->id_loogbook}'>
+                            <i class='ti ti-file-x text-danger'></i>
+                        </a>";
                 return $btn;
             })
             ->editColumn('status', function ($row){
@@ -50,23 +55,66 @@ class KelolaLogbookController extends Controller
             ->make(true);
     }
 
-    public function status(String $id)
-    {
-        try {
-            $logbook = LoogBoook::where('id_loogbook', $id)->first();
-            $logbook->status = ($logbook->status) ? false : true;
-            $logbook->save();
+    // public function status(String $id)
+    // {
+    //     try {
+    //         $logbook = LoogBoook::where('id_loogbook', $id)->first();
+    //         $logbook->status = ($logbook->status) ? false : true;
+    //         $logbook->save();
 
+    //         return response()->json([
+    //             'error' => false,
+    //             'message' => 'Approval Loogbook successfully!',
+    //             'table' => '#table-loogbook-admin'
+    //         ]);
+    //     } catch (Exception $e) {
+    //         return response()->json([
+    //             'error' => true,
+    //             'message' => $e->getMessage(),
+
+    //         ]);
+    //     }
+    // }
+
+    public function approve($id) {
+        try {
+            $data = LoogBoook::findOrFail($id);
+            $data->status = 1;
+            $data->save();
+    
             return response()->json([
                 'error' => false,
-                'message' => 'Approval Loogbook successfully!',
-                'table' => '#table-loogbook-admin'
+                'message' => 'Approval Loogbook berhasil!',
+                'table' => '#table-loogbook-admin',
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessage(),
-
+            ]);
+        }
+    }
+    
+    public function rejected($id, Request $request) {
+        $request->validate([
+            'alasan' => 'required|string|max:255',
+        ]);
+    
+        try {
+            $data = LoogBoook::findOrFail($id);
+            $data->status = 0;
+            $data->alasan = $request->input('alasan');
+            $data->save();
+    
+            return response()->json([
+                'error' => false,
+                'message' => 'Penolakan Loogbook berhasil!',
+                'table' => '#table-loogbook-admin',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
             ]);
         }
     }

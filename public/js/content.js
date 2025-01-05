@@ -1,4 +1,83 @@
 (function () {
+
+    function approve(e, args) {
+        const { url, id } = args;
+        let action = url + "/" + id; // URL untuk request approve
+        var text = "approve"; // Teks aksi
+    
+        Swal.fire({
+            title: "Are you sure?",
+            text: "The selected logbook will be " + text,
+            icon: "warning",
+            confirmButtonText: "Yes, " + text + " it!",
+            showConfirmButton: true,
+            showCancelButton: true,
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger",
+            },
+            buttonsStyling: false,
+        }).then(function (result) {
+            if (result.value) {
+                let data = {
+                    id: id, // Kirim ID sebagai data
+                };
+    
+                // Kirim request AJAX
+                $.ajax({
+                    method: "POST",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    url: action,
+                    success: function (data) {
+                        if (data.error) {
+                            // Tampilkan notifikasi error
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: data.message,
+                                customClass: {
+                                    confirmButton: "btn btn-success",
+                                },
+                                buttonsStyling: false,
+                            });
+                        } else {
+                            // Reload DataTable setelah approve
+                            setTimeout(function () {
+                                $(data.table).DataTable().ajax.reload();
+                            }, 1000);
+    
+                            // Tampilkan notifikasi sukses
+                            Swal.fire({
+                                icon: "success",
+                                title: "Succeed!",
+                                text: data.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        // Tampilkan error jika request gagal
+                        console.error("Terjadi kesalahan:", xhr.responseText);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error!",
+                            text: "Failed to approve. Please try again.",
+                            customClass: {
+                                confirmButton: "btn btn-danger",
+                            },
+                            buttonsStyling: false,
+                        });
+                    },
+                });
+            }
+        });
+    }
+    
+
     function store_data(content, button) {
         $("input").blur();
         let form_data = new FormData(content);
@@ -417,6 +496,12 @@
 
     $(document).on("click", ".update-status", function () {
         status(this, {
+            url: $(this).attr("data-url"),
+            id: $(this).attr("data-id"),
+        });
+    });
+    $(document).on("click", ".approve", function () {
+        approve(this, {
             url: $(this).attr("data-url"),
             id: $(this).attr("data-id"),
         });
