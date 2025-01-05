@@ -183,18 +183,10 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item {{ request()->is('mahasiswa/profile*') ? 'active' : ''}}">
-                        <a href="{{url('mahasiswa/profile', Auth::user()->nim)}}"  class="menu-link">
+                        <a href="{{url('mahasiswa/profile', Auth::user()->nim)}}" id="profile-setting" class="menu-link">
                         <div data-i18n="Profile Settings">Profile Settings</div>
                         </a>
                     </li>
-                    </ul>
-                    <ul class="menu-sub">
-
-                    {{-- <li class="menu-item">
-                        <a href="#" class="menu-link">
-                        <div data-i18n="Security">Security</div>
-                        </a>
-                    </li> --}}
                 </ul>
             </li>
             @endcan

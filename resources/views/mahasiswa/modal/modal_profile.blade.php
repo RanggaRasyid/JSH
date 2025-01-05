@@ -1,9 +1,9 @@
 <!-- Modal Edit Informasi Pribadi -->
-<div class="modal fade" id="modalEditProfile" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modal-profile-mhs" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-block">
-          <h5 class="modal-title" id="modal-title">Informasi Pribadi</h5>
+          <h5 class="modal-title" id="modal-title">Edit Profile</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <!-- Account -->
@@ -67,56 +67,49 @@
             </div>
             <div class="border-top">
               <div class="row mt-4">
-                <div class="mb-3 col-md-6">
-                  <label for="division" class="form-label">Division<span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="division" name="division" placeholder="" />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="religion" class="form-label">Religion <span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="religion" name="religion" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="univ" class="form-label">University Origin <span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="univ" name="univ" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="fakultas" class="form-label">Home faculty<span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="fakultas" name="fakultas" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="Prodi" class="form-label">Study Program<span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="prodi" name="prodi" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="place" class="form-label">Place Of Birth<span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="place" name="prodi" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="birth" class="form-label">Date Of Birth<span style="color: red;">*</span></label>
-                  <input class="form-control" type="date" id="birth" name="birth" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label class="form-label" for="phoneNumber">Phone Number</label>
-                  <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="" autofocus />
-                </div>
-                <div class="mb-3 col-md-4 form-input">
-                  <label for="address" class="form-label">Address <span style="color: red;">*</span></label>
-                  <input class="form-control" type="text" id="address" name="address" placeholder="" value="" autofocus />
+                <div class="mb-3 col-md-6 form-input">
+                  <label for="division" class="form-label">Division</label>
+                  <input class="form-control" type="text" id="posisi" name="posisi" />
                   <div class="invalid-feedback"></div>
                 </div>
-                <div class="mb-3 col-md-6">
-                  <label for="gender" id="gender" class="form-label">Gender <span style="color: red;">*</span></label>
+                <div class="mb-3 col-md-6 form-input">
+                  <label for="religion" class="form-label">Religion </label>
+                  <input class="form-control" type="text" id="agama" name="agama" />
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 col-md-6 form-input">
+                  <label for="place" class="form-label">Place Of Birth</label>
+                  <input class="form-control" type="text" id="tempatlahirmhs" name="tempatlahirmhs"   />
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 col-md-6 form-input">
+                  <label for="birth" class="form-label">Date Of Birth</label>
+                  <input class="form-control" type="date" id="tanggallahirmhs" name="tanggallahirmhs" />
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 col-md-6 form-input">
+                  <label class="form-label" for="phoneNumber">Phone Number</label>
+                  <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" type="text" id="nohpmhs" name="nohpmhs" class="form-control" />
+                </div>
+                <div class="mb-3 col-md-4 form-input">
+                  <label for="address" class="form-label">Address </label>
+                  <input class="form-control" type="text" id="alamatmhs" name="alamatmhs" placeholder="Bandung" />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 col-md-6 form-input">
+                  <label for="gender" id="gender" class="form-label">Gender </label>
                   <div class="form-check">
                     <div class="row">
                       <div class="col-3" >
-                        <input name="gender" class="form-check-input" type="radio" value="Laki-Laki" id="gender1" checked="">
+                        <input name="jeniskelamin" class="form-check-input" type="radio" value="Laki-Laki" id="laki-laki" checked="">
                         <label class="form-check-label" for="gender">Laki-Laki </label>
                       </div>
                       <div class="col-3 ms-2">
-                        <input name="gender" class="form-check-input" type="radio" value="Perempuan" id="gender1" checked="">
+                        <input name="jeniskelamin" class="form-check-input" type="radio" value="Perempuan" id="perempuan" checked="">
                         <label class="form-check-label" for="gender">Perempuan </label>
                       </div>
                     </div>
+                    <div class="invalid-feedback"></div>
                   </div>
                 </div>
               </div>
