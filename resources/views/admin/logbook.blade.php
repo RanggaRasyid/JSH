@@ -21,9 +21,6 @@
     </div>
     <div class="col-md-2 col-12 mb-3 ps-5 d-flex justify-content-between">
     </div>
-    <div class="col-md-2 col-12 text-end">
-        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-loogbook">Add Activity</button>
-    </div>
 </div>
 <div class="col-xl-12">
     <div class="nav-align-top">
@@ -48,8 +45,8 @@
         </div>
     </div>
 </div>
+@include('admin.modal.modal-konfirmasi')
 @endsection
-
 @section('page_script')
 <script src="{{url('assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
@@ -92,6 +89,80 @@
         ]
 
     });
+
+    $(document).ready(function () {
+    // Fungsi Approve
+    $(document).on('click', '.btn-approve', function () {
+        const id = $(this).data('id');
+        const approveUrl = '{{ url('super-admin/loogbook/status') }}/' + id;
+
+        $('#modalapprove').modal('show');
+
+        $('#approve-confirm-button')
+            .off('click')
+            .on('click', function () {
+                $.ajax({
+                    url: approveUrl,
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    success: function (response) {
+                        alert(response.error ? response.message : 'Berhasil melakukan approve!');
+                        $('#modalapprove').modal('hide');
+                        if (response.table) {
+                            $(response.table).DataTable().ajax.reload();
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('Gagal melakukan approve. Silakan coba lagi.');
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+    });
+
+    // Fungsi Rejected
+    $(document).on('click', '.btn-reject', function () {
+        const id = $(this).data('id');
+        const rejectedUrl = '{{ url('super-admin/loogbook/tolak') }}/' + id;
+
+        $('#modalreject').modal('show');
+
+        $('#rejected-confirm-button')
+            .off('click')
+            .on('click', function () {
+                const alasan = $('#alasan').val();
+
+                if (!alasan.trim()) {
+                    alert('Alasan penolakan wajib diisi.');
+                    return;
+                }
+
+                $.ajax({
+                    url: rejectedUrl,
+                    type: 'POST',
+                    data: {
+                        alasan: alasan,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (response) {
+                        alert(response.error ? response.message : 'Berhasil melakukan penolakan!');
+                        $('#modalreject').modal('hide');
+                        if (response.table) {
+                            $(response.table).DataTable().ajax.reload();
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('Gagal melakukan penolakan. Silakan coba lagi.');
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+        });
+    });
+
+
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {

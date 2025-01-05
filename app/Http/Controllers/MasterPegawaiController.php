@@ -42,18 +42,19 @@ class MasterPegawaiController extends Controller
 
     public function store(PegawaiRequest $request) {
         try {
-            $univ = Pegawai::create([
+            $pegawai = Pegawai::create([
                 'nama' => $request->nama,
                 'email' => $request->email,
-                'pangkat' => $request->nama,
+                'pangkat' => $request->pangkat,
                 'status' => 1
             ]);
             $users = User::create([
-                'id_pegawai' => $univ->id_pegawai,
+                'id_pegawai' => $pegawai->id_pegawai,
                 'name' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+
             return response()->json([
                 'error' => false,
                 'message' => 'Pegawai successfully Created!',
@@ -78,6 +79,39 @@ class MasterPegawaiController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Status pegawai successfully Updated!',
+                'table' => '#table-master-pegawai'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+    public function edit(String $id) {
+        $pegawai = Pegawai::Where('id_pegawai', $id)->first();
+        return $pegawai;
+    }
+
+    public function update(PegawaiRequest $request, $id) {
+        try {
+            $user = User::where('id_pegawai', $id)->first();
+            if ($user) {
+                $user->name = $request->nama;
+                $user->email = $request->email;
+                if ($request->filled('password')) {
+                    $user->password = bcrypt($request->password);
+                }
+                $user->save();
+            }
+            $pegawai = Pegawai::Where('id_pegawai', $id)->with('pegawai')->first();
+            $pegawai->nama = $request->nama;
+            $pegawai->email = $request->email;
+            $pegawai->pangkat = $request->pangkat;
+            $pegawai->save();
+            return response()->json([
+                'error' => false,
+                'message' => 'Pegawai successfully Updated!',
                 'table' => '#table-master-pegawai'
             ]);
         } catch (Exception $e) {

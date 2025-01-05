@@ -312,6 +312,7 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
+                    @can('read.only.mahasiswa')
                     <li>
                       <a class="dropdown-item" href="{{url('mahasiswa/profile', Auth::user()->nim)}}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
@@ -324,6 +325,7 @@
                         <span class="align-middle">Settings</span>
                       </a>
                     </li>
+                    @endcan
                     <li>
                       <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" href="{{ route('logout') }}">
                         <i class="ti ti-logout me-2 ti-sm"></i>

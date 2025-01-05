@@ -23,6 +23,7 @@ class User extends Authenticatable
         'nim',
         'email',
         'password',
+        'id_pegawai',
     ];
 
     /**
