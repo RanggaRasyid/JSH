@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/logbook')->group(function () {
             Route::get('/', [App\Http\Controllers\KelolaLogbookController::class, 'index'])->name('master.logbook.index');
             Route::get('/show/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'show'])->name('master.logbook.show');
-            Route::post('/status/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('master.status.approve');
+            Route::post('/approve/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('logbook.approve');
             Route::post('/tolak/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'rejected'])->name('logbook.rejected');
         });
     });

@@ -91,76 +91,141 @@
     });
 
     $(document).ready(function () {
-    // Fungsi Approve
-    $(document).on('click', '.btn-approve', function () {
-        const id = $(this).data('id');
-        const approveUrl = '{{ url('super-admin/loogbook/status') }}/' + id;
-
-        $('#modalapprove').modal('show');
-
-        $('#approve-confirm-button')
-            .off('click')
-            .on('click', function () {
-                $.ajax({
-                    url: approveUrl,
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        // Fungsi Approve
+        $(document).ready(function () {
+            $(document).on('click', '.btn-approve', function () {
+                const id = $(this).data('id');
+                const url = $(this).data('url').replace(':id', id);
+                const status = $(this).data('status'); 
+                console.log(id);
+                
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "The selected logbook will be approved",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, approve it!",
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger",
                     },
-                    success: function (response) {
-                        alert(response.error ? response.message : 'Berhasil melakukan approve!');
-                        $('#modalapprove').modal('hide');
-                        if (response.table) {
-                            $(response.table).DataTable().ajax.reload();
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('Gagal melakukan approve. Silakan coba lagi.');
-                        console.error(xhr.responseText);
-                    },
-                });
-            });
-    });
-
-    // Fungsi Rejected
-    $(document).on('click', '.btn-reject', function () {
-        const id = $(this).data('id');
-        const rejectedUrl = '{{ url('super-admin/loogbook/tolak') }}/' + id;
-
-        $('#modalreject').modal('show');
-
-        $('#rejected-confirm-button')
-            .off('click')
-            .on('click', function () {
-                const alasan = $('#alasan').val();
-
-                if (!alasan.trim()) {
-                    alert('Alasan penolakan wajib diisi.');
-                    return;
-                }
-
-                $.ajax({
-                    url: rejectedUrl,
-                    type: 'POST',
-                    data: {
-                        alasan: alasan,
-                        _token: '{{ csrf_token() }}',
-                    },
-                    success: function (response) {
-                        alert(response.error ? response.message : 'Berhasil melakukan penolakan!');
-                        $('#modalreject').modal('hide');
-                        if (response.table) {
-                            $(response.table).DataTable().ajax.reload();
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('Gagal melakukan penolakan. Silakan coba lagi.');
-                        console.error(xhr.responseText);
-                    },
+                    buttonsStyling: false,
+                }).then(function (result) {
+                    if (result.isConfirmed) {
+                        // Kirim request AJAX
+                        $.ajax({
+                            method: "POST",
+                            url: '/super-admin/logbook/approve/' + id,
+                            data: { status: status }, // Kirim status sebagai parameter
+                            headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            },
+                            
+                            success: function (response) {
+                                if (response.error) {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: response.message,
+                                        customClass: { confirmButton: "btn btn-danger" },
+                                        buttonsStyling: false,
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Succeed!",
+                                        text: response.message,
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                    });
+                                    // Reload DataTable setelah berhasil
+                                    $('#table-loogbook-admin').DataTable().ajax.reload();
+                                }
+                            },
+                            error: function (xhr) {
+                                console.error("Error:", xhr.responseText);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error!",
+                                    text: "Failed to approve. Please try again.",
+                                    customClass: { confirmButton: "btn btn-danger" },
+                                    buttonsStyling: false,
+                                });
+                            },
+                        });
+                    }
                 });
             });
         });
+        $(document).ready(function () {
+            $(document).on('click', '.btn-reject', function () {
+                const id = $(this).data('id');
+                const url = $(this).data('url').replace(':id', id);
+                const status = $(this).data('status'); 
+                console.log(id);
+                
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "The selected logbook will be approved",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, approve it!",
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger",
+                    },
+                    buttonsStyling: false,
+                }).then(function (result) {
+                    if (result.isConfirmed) {
+                        // Kirim request AJAX
+                        $.ajax({
+                            method: "POST",
+                            url: '/super-admin/logbook/tolak/' + id,
+                            data: { status: status }, // Kirim status sebagai parameter
+                            headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            },
+                            
+                            success: function (response) {
+                                if (response.error) {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: response.message,
+                                        customClass: { confirmButton: "btn btn-danger" },
+                                        buttonsStyling: false,
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Succeed!",
+                                        text: response.message,
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                    });
+                                    // Reload DataTable setelah berhasil
+                                    $('#table-loogbook-admin').DataTable().ajax.reload();
+                                }
+                            },
+                            error: function (xhr) {
+                                console.error("Error:", xhr.responseText);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error!",
+                                    text: "Failed to approve. Please try again.",
+                                    customClass: { confirmButton: "btn btn-danger" },
+                                    buttonsStyling: false,
+                                });
+                            },
+                        });
+                    }
+                });
+            });
+        });
+        
     });
+
+    // Fungsi Rejected
 
 
 
