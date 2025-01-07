@@ -2,22 +2,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h5>OFFICE</h5>
+                <h5>KANTOR</h5>
                 <p>Jabar Saber Hoaks</p>
                 <p>Jl. Diponegoro 22 Gedung B Lantai 2 Bandung - Jawa Barat 40115</p>
             </div>
             <div class="col-md-4">
-                <h5>Contact Us</h5>
+                <h5>Kontak Kami</h5>
                 <ul class="list-unstyled">
-                    <li><a class="text-white">
+                    <li><a href="mailto:saberhoaks@jabarprov.go.id?subject=Pertanyaan&body=Halo%20saya%20ingin%20bertanya%20tentang%20Anda." class="text-white">
                             <span>Email : saberhoaks@jabarprov.go.id</span>
                         </a>
                     </li>
-                    <li><a href="#" class="text-white">+1 234 567 890</a></li>
+                    <li><a href="https://wa.me/+6282118670700?text=Hallo saya ingin bertanya min" class="text-white">WA : +62821-1867-0700</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5>Follow Us</h5>
+                <h5>Ikuti Kami</h5>
                 <ul class="list-unstyled">
                     <li><a href="https://www.facebook.com/official.jabarsaberhoaks" class="text-white">Facebook</a></li>
                     <li><a href="https://x.com/jabarsaberhoaks" class="text-white">Twitter</a></li>
@@ -28,7 +28,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
-                <p>&copy; 2024 Jabar Saber Hoaks 2024. All rights reserved.</p>
+                <p>&copy; 2024 Jabar Saber Hoaks 2024. Semua Hak Dilindungi.</p>
             </div>
         </div>
     </div>

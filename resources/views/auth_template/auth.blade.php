@@ -56,7 +56,7 @@
                         class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                   
+
                     @yield('content')
                 </div>
             </div>
@@ -65,7 +65,7 @@
             class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 " style="background: var(--primary-500-base, #4EA971);">
             <!-- Copyright -->
             <div class="text-white mb-3 mb-md-0">
-                Copyright © 2024. All rights reserved.
+                Hak Cipta © 2024. Semua hak dilindungi.
             </div>
         </div>
     </section>

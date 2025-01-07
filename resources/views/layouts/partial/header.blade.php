@@ -44,7 +44,6 @@
                 <a href="{{ url('/') }}">
                     <img src="{{ asset('background/logo-jsh.png') }}" style="width: 100px; max-width: 100px;">
                 </a>
-                <a class="navbar-brand m-3" href="{{ url('/') }}">Data Mahasiswa Magang</a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

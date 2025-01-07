@@ -21,7 +21,7 @@
                 <div class="form-group mb-3">
                     <label for="password" class="col-md-4 col-form-label ">{{ __('Kata Sandi') }}</label>
                     <div class="form-group mb-3">
-                        <input id="password" type="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+                        <input id="password" type="password" placeholder="Masukan Kata Sandi" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
