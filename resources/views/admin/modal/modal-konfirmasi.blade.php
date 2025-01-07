@@ -22,7 +22,7 @@
                 <p>Apakah Anda yakin?</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" id="approve-confirm-button" class="btn btn-success">Iya, Yakin</button>
+                <button type="submit" id="approve" class="btn btn-success">Iya, Yakin</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
             </div>
         </div>

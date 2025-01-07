@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/logbook')->group(function () {
             Route::get('/', [App\Http\Controllers\KelolaLogbookController::class, 'index'])->name('master.logbook.index');
             Route::get('/show/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'show'])->name('master.logbook.show');
-            Route::post('/status/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('master.status.approve');
+            Route::post('/approve/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('logbook.approve');
             Route::post('/tolak/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'rejected'])->name('logbook.rejected');
         });
     });
@@ -96,7 +96,7 @@ Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group
     });
 
     Route::prefix('/loogbook')->group(function() {
-        route::get('/', [App\Http\Controllers\LoogBookController::class, 'index'])->name('loogbook');
+        route::get('/', [App\Http\Controllers\LoogBookController::class, 'index'])->name('index.loogbook');
         route::get('/show/{id}', [App\Http\Controllers\LoogBookController::class, 'show'])->name('show.loogbook');
         route::post('/store', [App\Http\Controllers\LoogBookController::class, 'store'])->name('store.loogbook');
         route::get('/edit/{id}', [App\Http\Controllers\LoogBookController::class, 'edit'])->name('edit.loogbook');

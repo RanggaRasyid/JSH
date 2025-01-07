@@ -27,32 +27,13 @@
             <h5 class="card-header">Profile Details</h5>
             <!-- Account -->
             <div class="card-body">
-            <div class="d-flex align-items-start align-items-sm-center gap-4">
+            <div class="d-flex align-items-center align-items-sm-center gap-4">
                 <img
                 src="../../assets/img/avatars/14.png"
                 alt="user-avatar"
                 class="d-block w-px-100 h-px-100 rounded"
                 id="uploadedAvatar"
                 />
-                <div class="button-wrapper">
-                <label for="upload" class="btn btn-primary me-2 mb-3" tabindex="0">
-                    <span class="d-none d-sm-block">Upload new photo</span>
-                    <i class="ti ti-upload d-block d-sm-none"></i>
-                    <input
-                    type="file"
-                    id="upload"
-                    class="account-file-input"
-                    hidden
-                    accept="image/png, image/jpeg"
-                    />
-                </label>
-                <button type="button" class="btn btn-label-secondary account-image-reset mb-3">
-                    <i class="ti ti-refresh-dot d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Reset</span>
-                </button>
-
-                <div class="text-muted">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                </div>
             </div>
             </div>
             <hr class="my-0" />

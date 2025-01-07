@@ -31,11 +31,11 @@
               <h1 class="mb-1 card-title attendance-timer text-primary m-0" id="work-time"></h1>
               <div class="d-flex align-items-center justify-content-around my-3 py-1">
                   <div>
-                      <h4 class="mb-0">09.00</h4>
+                      <h4 class="mb-0">{{$presensi?->jammasuk??'09.00'}}</h4>
                       <span>Check-in</span>
                   </div>
                   <div>
-                      <h4 class="mb-0">18.00</h4>
+                      <h4 class="mb-0">{{$presensi?->jamkeluar??'18.00'}}</h4>
                       <span>Check-out</span>
                   </div>
                   <div>
