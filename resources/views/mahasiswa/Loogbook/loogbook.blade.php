@@ -22,8 +22,20 @@
     <div class="col-md-2 col-12 mb-3 ps-5 d-flex justify-content-between">
     </div>
     <div class="col-md-2 col-12 text-end">
-        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-loogbook">Add Activity</button>
+        <button class="btn btn-success waves-effect waves-light" 
+            data-bs-toggle="modal" 
+            data-bs-target="#modal-loogbook"
+            @if($isDisabled) disabled @endif>
+            Add Activity
+        </button>
     </div>
+    
+    <!-- Pesan jika tombol dinonaktifkan -->
+    @if($isDisabled)
+        <div class="alert alert-warning mt-2">
+            Anda belum memilih supervisor. Silahkan pilih supervisor pada profil Anda.
+        </div>
+    @endif
 </div>
 <div class="col-xl-12">
     <div class="nav-align-top">

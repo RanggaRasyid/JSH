@@ -86,7 +86,7 @@
             url: action,
             type: "POST",
             data: form_data,
-            processData: false, // tell jQuery not to process the data
+            processData: false, 
             contentType: false, // tell jQuery not to set contentType
             cache: false,
             success: function (response) {
@@ -102,7 +102,6 @@
                     });
                 } else {
                     Swal.fire({
-                        // position: "top-end",
                         type: "success",
                         icon: "success",
                         title: "Succeed!",
@@ -116,7 +115,6 @@
                                     $(response.table).DataTable().ajax.reload();
                                 }, 1000);
                             var reset_form = content;
-                            // $(reset_form).removeClasshidevr('was-validated');
                             reset_form.reset();
                             $(response.modal).modal("hide");
                             if (typeof matrix === "function") matrix();
@@ -131,12 +129,6 @@
                 }
             },
             error: (xhr, status, error) => {
-                // Swal.fire({
-                //     icon: "error",
-                //     title: "Oops... Some data are still missing! ",
-                //     text: "Please fill out all required fields.",
-                // });
-
                 const { responseJSON: response } = xhr;
 
                 if (response.errors) {
@@ -310,173 +302,6 @@
                 });
             }
         });
-    }
-
-    function terapkan(content, button, id) {
-        $("input").blur();
-        let action = $(content).attr("action");
-        var select2 = document.querySelector('select[name="status"]');
-        var status = select2.value;
-        console.log(status);
-        if (status == "") {
-            Swal.fire({
-                icon: "warning",
-                title: "INFO",
-                text: "Pilih status kandidat!",
-                customClass: {
-                    confirmButton: "btn btn-success",
-                },
-            });
-        } else {
-            Swal.fire({
-                title: "Apakah anda yakin ingin melakukan perubahan status kandidat?",
-                text: "Data terpilih akan secara otomatis berubah dan melanjutkan ke status berikutnya!",
-                icon: "warning",
-                confirmButtonText: "Ya, yakin",
-                cancelButtonText: "Batal",
-                showConfirmButton: true,
-                showCancelButton: true,
-                width: "45%",
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger",
-                },
-                buttonsStyling: false,
-            }).then(function (result) {
-                if (result.isConfirmed) {
-                    if (id.length > 0) {
-                        let item = {
-                            id: id,
-                            status: status,
-                        };
-                        jQuery
-                            .ajax({
-                                url: action,
-                                type: "POST",
-                                headers: {
-                                    "X-CSRF-TOKEN": $(
-                                        'meta[name="csrf-token"]',
-                                    ).attr("content"),
-                                },
-                                data: item,
-                                success: function (response) {
-                                    if (response.error) {
-                                        Swal.fire({
-                                            icon: "error",
-                                            title: "Oops...",
-                                            text: "Something went wrong!",
-                                            customClass: {
-                                                confirmButton:
-                                                    "btn btn-success",
-                                            },
-                                            buttonsStyling: false,
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            // position: "top-end",
-                                            type: "success",
-                                            icon: "success",
-                                            title: "Succeed!",
-                                            text: response.message,
-                                            showConfirmButton: false,
-                                            timer: 2000,
-                                        }).then(() => {
-                                            if (response.modal) {
-                                                if (response.table)
-                                                    setTimeout(function () {
-                                                        $(response.table)
-                                                            .DataTable()
-                                                            .ajax.reload();
-                                                    }, 1000);
-                                                var reset_form = content;
-                                                // $(reset_form).removeClass('was-validated');
-                                                reset_form.reset();
-                                                $(response.modal).modal("hide");
-                                            } else {
-                                                if (response.url) {
-                                                    location = response.url;
-                                                } else {
-                                                    location.reload();
-                                                }
-                                            }
-                                        });
-                                    }
-                                },
-                                error: (xhr, status, error) => {
-                                    // Swal.fire({
-                                    //     icon: "error",
-                                    //     title: "Oops... Some data are still missing! ",
-                                    //     text: "Please fill out all required fields.",
-                                    // });
-
-                                    const { responseJSON: response } = xhr;
-
-                                    if (response.errors) {
-                                        for (let form_data in response.errors) {
-                                            let form_name = form_data.replace(
-                                                /\.(\d+)\.(\w+)/g,
-                                                "[$1][$2]",
-                                            );
-
-                                            $(
-                                                `[name^="${form_name}"]`,
-                                                content,
-                                            ).addClass("is-invalid");
-                                            $(`[name^="${form_name}"]`, content)
-                                                .parents(".form-input")
-                                                .find(".invalid-feedback")
-                                                .addClass("d-block");
-                                            $(`[name^="${form_name}"]`, content)
-                                                .parents(".form-input")
-                                                .find(".invalid-feedback")
-                                                .html(
-                                                    response.errors[
-                                                        form_data
-                                                    ][0],
-                                                );
-                                            $(`[name^="${form_name}"]`, content)
-                                                .parents(".form-input")
-                                                .find(".invalid-tooltip")
-                                                .html(
-                                                    response.errors[
-                                                        form_data
-                                                    ][0],
-                                                );
-                                        }
-                                    } else {
-                                        Swal.fire({
-                                            title: "Error",
-                                            text: response.message,
-                                            icon: "error",
-                                            heightAuto: false,
-                                            customClass: {
-                                                confirmButton:
-                                                    "btn btn-success",
-                                            },
-                                            buttonsStyling: false,
-                                        });
-                                    }
-                                },
-                            })
-                            .always(function () {
-                                button.prop("disabled", false);
-                                button.html(
-                                    '<i class="tf-icons ti ti-checks"> Terapkan</i>',
-                                );
-                            });
-                    } else {
-                        Swal.fire({
-                            icon: "warning",
-                            title: "INFO",
-                            text: "Pilih minimal 1 kandidat!",
-                            customClass: {
-                                confirmButton: "btn btn-success",
-                            },
-                        });
-                    }
-                }
-            });
-        }
     }
 
     $(document).on("submit", ".default-form", function (event) {

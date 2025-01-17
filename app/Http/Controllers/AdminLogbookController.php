@@ -12,6 +12,7 @@ use Yajra\DataTables\Facades\DataTables;
 class AdminLogbookController extends Controller
 {
     public function index() {
+        
         return view('spv.logbook');
     }
     public function show()  {

@@ -9,14 +9,16 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 
 class LoogBookController extends Controller
 {
     public function index() {
-
-        return view('mahasiswa.loogbook.loogbook');
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
+        $isDisabled = is_null($mahasiswa->id_pegawai);
+        return view('mahasiswa.loogbook.loogbook', compact('isDisabled'));
     }
 
     public function show()  {
@@ -62,7 +64,7 @@ class LoogBookController extends Controller
         try {
 
             $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
-
+            
             $file = null;
             if ($request->file('picture')) {
                 $file = Storage::put('public/loogbook' , $request->file('picture'));
