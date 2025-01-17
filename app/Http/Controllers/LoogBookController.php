@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,13 +17,25 @@ class LoogBookController extends Controller
     public function index() {
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
         $isDisabled = is_null($mahasiswa->id_pegawai);
-        return view('mahasiswa.loogbook.loogbook', compact('isDisabled'));
+
+        $loogbookQuery = LoogBoook::where('nim', $mahasiswa->nim);
+
+        $loogbook = new LoogBoook;
+        $loogbook = [
+            'total' => $loogbookQuery->count(),
+            'pending' => $loogbookQuery->where('status', 2)->count(),
+            'diterima' => $loogbookQuery->where('status', 1)->count(),
+            'ditolak' => $loogbookQuery->where('status', 0)->count(),
+        ]; 
+        return view('mahasiswa.loogbook.loogbook', compact('isDisabled', 'loogbook'));
     }
 
-    public function show()  {
-        $loogbook = LoogBoook::with('nimmhs')->where('nim', Auth::user()->nim)
-            ->orderBy('nim', 'asc')
-            ->get();
+    public function show(Request $request)  {
+        $loogbook = LoogBoook::query();
+        if ($request->type != 'total') {
+            $loogbook->where("status", $request->type);
+        }
+        $loogbook = $loogbook->with('nimmhs')->where('nim', Auth::user()->nim)->orderBy('nim', 'asc')->get();
 
         return DataTables::of($loogbook)
             ->addIndexColumn()
