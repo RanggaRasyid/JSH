@@ -25,6 +25,7 @@ class Mahasiswa extends Model
         'id_univ',
         'fakultas',
         'id_jurusan',
+        'id_masa_magang',
         'foto',
         'status'
     ];
@@ -46,6 +47,10 @@ class Mahasiswa extends Model
     public function univ()
     {
         return $this->belongsTo(Universitas::class, 'id_univ');
+    }
+    public function masamagang()
+    {
+        return $this->belongsTo(MasaMagang::class, 'id_masa_magang');
     }
 
 }

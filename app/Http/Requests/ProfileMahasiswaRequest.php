@@ -30,6 +30,7 @@ class ProfileMahasiswaRequest extends FormRequest
             'tanggallahirmhs' => 'required|max:255',
             'nohpmhs' => 'required|max:255',
             'alamatmhs' => 'required|max:255',
+            'foto' => ['required', 'file', 'max:10000' , 'mimes:png,jpeg,jpg']
         ];
     }
 }

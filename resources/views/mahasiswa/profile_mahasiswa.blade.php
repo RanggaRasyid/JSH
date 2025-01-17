@@ -2,15 +2,13 @@
 
 @section('page_style')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<link rel="stylesheet" href="{{url('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 @endsection
 
 @section('main')
 <!-- Content wrapper -->
 <div class="content-wrapper">
-
     <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
 
@@ -28,12 +26,12 @@
             <!-- Account -->
             <div class="card-body">
             <div class="d-flex align-items-center align-items-sm-center gap-4">
-                <img
-                src="../../assets/img/avatars/14.png"
-                alt="user-avatar"
-                class="d-block w-px-100 h-px-100 rounded"
-                id="uploadedAvatar"
-                />
+                @if ($mahasiswa?->foto?? '')
+                <img src="{{ Storage::url('' .$mahasiswa?->foto?? '') }}" alt="profile" class="img-fluid rounded mb-3 pt-1 mt-4" name="foto" id=""  width="150" height="150">
+                @else
+                    <img src="{{ url("assets/img/avatars/14.png")}}" alt="user-avatar" 
+                    class="img-fluid rounded mb-3 pt-1 mt-4" id="imgPreview" />
+                @endif 
             </div>
             </div>
             <hr class="my-0" />
@@ -91,13 +89,14 @@
                 </div>
                 </div>
                 <div class="mt-2">
-                <button type="button" class="btn btn-success m-0" data-id="{{$mahasiswa->nim}}" data-bs-toggle="modal" onclick="edit($(this))" data-bs-target="#modal-profile-mhs">Edit Profile</button>
-                </div>
+                    <button type="button" class="btn btn-success m-0" onclick="edit($(this))" data-id="{{$mahasiswa?->nim??''}}" data-bs-toggle="modal" data-bs-target="#modal-profile-mhs">Edit Profile</button>
+                </div>                
             </div>
+            @include('mahasiswa.modal.modal_profile')
             <!-- /Account -->
         </div>
     </div>
-    @include('mahasiswa.modal.modal_profile')
+</div>
 @endsection
 @section('page_script')
 <script src="{{url('assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
@@ -106,34 +105,41 @@
     function edit(e) {
         let id = e.attr('data-id');
         let action = `{{ url('mahasiswa/profile/update/') }}/${id}`;
-        var url = `{{ url('mahasiswa/profile/edit') }}/${id}`;
-        console.log(url);
+        let url = `{{ url('mahasiswa/profile/edit') }}/${id}`;
 
         $.ajax({
             type: 'GET',
             url: url,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+            },
             success: function(response) {
                 $("#modal-button").html("Update Data");
                 $('#modal-profile-mhs form').attr('action', action);
                 $('#posisi').val(response.posisi);
+                $('#agama').val(response.agama);
                 $('#tempatlahirmhs').val(response.tempatlahirmhs);
                 $('#tanggallahirmhs').val(response.tanggallahirmhs);
                 $('#nohpmhs').val(response.nohpmhs);
                 $('#alamatmhs').val(response.alamatmhs);
                 $('#jeniskelamin').val(response.jeniskelamin);
-            }
+                if (response.jeniskelamin === "Laki-Laki") {
+                    $('#laki-laki').prop('checked', true);
+                } else if (response.jeniskelamin === "Perempuan") {
+                    $('#perempuan').prop('checked', true);
+                };
+            },
         });
     }
-    jQuery(function() {
-        jQuery('.showSingle').click(function() {
-            jQuery('.targetDiv').hide('.cnt');
-            jQuery('#div' + $(this).attr('target')).slideToggle();
-        });
-    });
-
+    changePicture.onchange = evt => {
+      const [file] = changePicture.files
+      if (file) {
+          imgPreview.src = URL.createObjectURL(file)
+          console.log(imgPreview.src);
+      } else {
+          imgPreview.src = "{{ Url("assets/img/avatars/14.png")}}"
+      }
+    }
 </script>
 <script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{url('assets/js/extended-ui-sweetalert2.js')}}"></script>

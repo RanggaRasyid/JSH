@@ -10,6 +10,7 @@ use App\Models\Universitas;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileMahasiswaController extends Controller
 {
@@ -33,7 +34,7 @@ class ProfileMahasiswaController extends Controller
     }
 
     public function edit(String $id){
-        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->with('jurusan', 'univ')->first();
+        $mahasiswa = Mahasiswa::where('nim', $id)->first();
         return $mahasiswa;
     }
     
@@ -41,6 +42,10 @@ class ProfileMahasiswaController extends Controller
     {
         try {
             $mahasiswa = Mahasiswa::where('nim', $id)->first();
+            $file = null;
+            if ($request->file('foto')) {
+                $file = Storage::put('public/loogbook' , $request->file('foto'));
+            }
             $mahasiswa->posisi = $request->posisi;
             $mahasiswa->agama = $request->agama;
             $mahasiswa->tempatlahirmhs = $request->tempatlahirmhs;
@@ -48,12 +53,18 @@ class ProfileMahasiswaController extends Controller
             $mahasiswa->nohpmhs = $request->nohpmhs;
             $mahasiswa->alamatmhs = $request->alamatmhs;
             $mahasiswa->jeniskelamin = $request->jeniskelamin;
+            $mahasiswa->foto = $file;
+            if($mahasiswa->foto !=null){
+                $mahasiswa->update([
+                    'foto' => $file
+                ]);
+            }
             $mahasiswa->save();
 
             return response()->json([
                 'error' => false,
-                'message' => 'Mahasiswa successfully Updated!',
-                'modal' => '#modal-profile-mhs'
+                'message' => 'Profile successfully Updated!',
+                'modal' => '#modal-profile-mhs',
             ]);
         } catch (Exception $e) {
             return response()->json([

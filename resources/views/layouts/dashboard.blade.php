@@ -1,6 +1,11 @@
 @extends('layouts.partial.template')
 @section('content')
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div>
+            <h3 class="mt-5 m-3">
+                Hallo Selamat Datang di Website Magang JSH
+            </h3>
+        </div>
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner mt-1">
@@ -23,10 +28,5 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </div>
-    <div>
-        <h3 class="mt-5 m-3">
-            Hallo Selamat Datang di Website Magang JSH
-        </h3>
     </div>
 @endsection

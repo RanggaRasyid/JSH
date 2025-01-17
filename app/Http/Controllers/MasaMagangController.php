@@ -23,7 +23,7 @@ class MasaMagangController extends Controller
         return DataTables::of($masamagang)
         ->addIndexColumn()
         ->editColumn('status', function ($row) {
-            if ($row->status == 1) {
+            if ($row->mahasiswa->status == 1) {
                 return "<div'><div class='badge rounded-pill bg-label-success'>" . "Active" . "</div></div>";
             } else {
                 return "<div'><div class='badge rounded-pill bg-label-danger'>" . "Inactive" . "</div></div>";
@@ -33,8 +33,7 @@ class MasaMagangController extends Controller
             $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
             $color = ($row->status) ? "danger" : "success";
 
-            $btn = "<a data-bs-toggle='modal' data-id='{$row->id_masa_magang}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>
-            <a data-status='{$row->status}' data-id='{$row->id_masa_magang}' data-url='master-masa-magang/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
+            $btn = "<a data-bs-toggle='modal' data-id='{$row->id_masa_magang}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>";
             return $btn;
         })
         ->rawColumns(['action', 'status'])
@@ -50,6 +49,14 @@ class MasaMagangController extends Controller
                 'nim' => $request->mahasiswa,
                 'status' => 1
             ]);
+            $mahasiswa = Mahasiswa::where('nim', $request->mahasiswa)->first();
+
+            if ($mahasiswa) {
+                // Update id_masa_magang di tabel Mahasiswa
+                $mahasiswa->id_masa_magang = $masamagang->id_masa_magang; // Gunakan id dari $masamagang
+                $mahasiswa->save();
+            }
+
             return response()->json([
                 'error' => false,
                 'message' => 'Masa Magang successfully Created!',
@@ -67,7 +74,7 @@ class MasaMagangController extends Controller
     public function status(String $id)
     {
         try {
-            $masamagang = MasaMagang::where('id_masa_magang', $id)->first();
+            $masamagang = MasaMagang::where('id_masa_magang', $id)->with('mahasiswa')->first();
             $masamagang->status = ($masamagang->status) ? false : true;
             $masamagang->save();
 

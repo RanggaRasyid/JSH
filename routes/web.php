@@ -91,7 +91,7 @@ Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group
 
     Route::prefix('/profile')->group(function () {
         Route::get('/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'profile'])->name('profile.mahasiswa.index');
-        Route::post('/edit/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'edit'])->name('edit.mahasiswa.profile');
+        Route::get('/edit/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'edit'])->name('edit.mahasiswa.profile');
         Route::post('/update/{id}', [App\Http\Controllers\ProfileMahasiswaController::class, 'update'])->name('update.mahasiswa.profile');
     });
 
