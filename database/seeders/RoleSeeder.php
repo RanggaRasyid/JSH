@@ -21,6 +21,14 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web'
             ]);
         };    
+
+        $spv = Role::where('name', 'supervisor')->first();
+        if (!$spv) {
+            Role::create([
+                'name' => 'supervisor',
+                'guard_name' => 'web'
+            ]);
+        };    
         
         $mahasiswaRole = Role::where('name', 'mahasiswa')->first();
         if (!$mahasiswaRole) {

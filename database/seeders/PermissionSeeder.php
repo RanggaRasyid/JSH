@@ -27,6 +27,14 @@ class PermissionSeeder extends Seeder
             ],
             [
                 //
+                'name' => 'supervisor',
+                'guard_name' => 'web',
+                'permissions' => [
+                    'only.supervisor'
+                ]
+            ],
+            [
+                //
                 'name' => 'mahasiswa',
                 'guard_name' => 'web',
                 'permissions' => [

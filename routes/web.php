@@ -86,6 +86,10 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::prefix('/supervisor')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\SupervisiController::class, 'index'])->name('spv.dashboard');
+});
+
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('dashboard.mahasiswa.index');
 

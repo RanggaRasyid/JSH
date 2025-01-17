@@ -48,8 +48,10 @@ class LoginController extends Controller
         }
         if ($user->hasRole('superadmin')) {
             return redirect('super-admin/dashboard');
-        } else {
+        } elseif ($user->hasRole('mahasiswa')){
             return redirect('mahasiswa/dashboard');
+        }else{
+            return redirect('supervisor/dashboard');
         }
     }
 }
