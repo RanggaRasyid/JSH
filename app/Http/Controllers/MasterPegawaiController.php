@@ -54,6 +54,8 @@ class MasterPegawaiController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+            $users->assignRole('supervisor');
+            return $users;
 
             return response()->json([
                 'error' => false,

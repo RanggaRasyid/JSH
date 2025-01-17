@@ -27,6 +27,7 @@ class Mahasiswa extends Model
         'id_jurusan',
         'id_masa_magang',
         'foto',
+        'id_pegawai',
         'status'
     ];
     protected $keyType = 'string';
@@ -39,7 +40,6 @@ class Mahasiswa extends Model
     public function nim(){
         return $this->belongsTo(User::class, 'nim');
     }
-
     public function jurusan()
     {
         return $this->belongsTo(JurusanModel::class, 'id_jurusan');
@@ -51,6 +51,10 @@ class Mahasiswa extends Model
     public function masamagang()
     {
         return $this->belongsTo(MasaMagang::class, 'id_masa_magang');
+    }
+    public function spv()
+    {
+        return $this->belongsTo(Pegawai::class, 'id_pegawai');
     }
 
 }

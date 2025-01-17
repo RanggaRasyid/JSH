@@ -38,6 +38,16 @@
                   <div class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3 col-md-6 form-input">
+                  <label for="supervisor" class="form-label">Supervisor</label>
+                  <select class="form-select select2" id="id_pegawai" name="id_pegawai"                  data-placeholder="Pilih Supervisor">
+                  <option disabled selected>Pilih Supervisor</option>
+                    @foreach ($pegawai as $p)
+                        <option value="{{ $p->id_pegawai }}">{{ $p->nama }}</option>
+                    @endforeach
+              </select>
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 col-md-6 form-input">
                   <label for="religion" class="form-label">Religion </label>
                   <input class="form-control" type="text" id="agama" name="agama" />
                   <div class="invalid-feedback"></div>

@@ -73,6 +73,7 @@ class LoogBookController extends Controller
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
                 'picture' => $file,
+                'id_pegawai' =>$mahasiswa->id_pegawai,
                 'status' => 2
 
             ]);

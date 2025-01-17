@@ -72,10 +72,10 @@ Route::middleware('auth')->group(function () {
 
         });
         Route::prefix('/presensi')->group(function () {
-            Route::get('/', [App\Http\Controllers\MasterPresensiController::class, 'index'])->name('master.presensi.index');
-            Route::get('/show/{id}', [App\Http\Controllers\MasterPresensiController::class, 'show'])->name('master.presensi.show');
-            Route::get('/show-detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'index'])->name('master.presensi.show.detail');
-            Route::get('/detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'detail'])->name('master.presensi.detail');
+            Route::get('/', [App\Http\Controllers\AdminPresensiController::class, 'index'])->name('admin.presensi.index');
+            Route::get('/show/{id}', [App\Http\Controllers\AdminPresensiController::class, 'show'])->name('admin.presensi.show');
+            Route::get('/show-detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'index'])->name('admin.presensi.show.detail');
+            Route::get('/detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'detail'])->name('admin.presensi.detail');
         });
         Route::prefix('/logbook')->group(function () {
             Route::get('/', [App\Http\Controllers\KelolaLogbookController::class, 'index'])->name('master.logbook.index');
@@ -86,8 +86,21 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::prefix('/supervisor')->middleware('auth')->group(function () {
+Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\SupervisiController::class, 'index'])->name('spv.dashboard');
+    Route::prefix('/logbook')->group(function () {
+        Route::get('/', [App\Http\Controllers\AdminLogbookController::class, 'index'])->name('admin.logbook.index');
+        Route::get('/show/{id}', [App\Http\Controllers\AdminLogbookController::class, 'show'])->name('admin.logbook.show');
+        Route::post('/approve/{id}', [App\Http\Controllers\AdminLogbookController::class, 'approve'])->name('spv.approve');
+        Route::post('/tolak/{id}', [App\Http\Controllers\AdminLogbookController::class, 'rejected'])->name('spv.rejected');
+    });
+
+    Route::prefix('/presensi')->group(function () {
+        Route::get('/', [App\Http\Controllers\MasterPresensiController::class, 'index'])->name('master.presensi.index');
+        Route::get('/show/{id}', [App\Http\Controllers\MasterPresensiController::class, 'show'])->name('master.presensi.show');
+        Route::get('/show-detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'index'])->name('master.presensi.show.detail');
+        Route::get('/detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'detail'])->name('master.presensi.detail');
+    });
 });
 
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {

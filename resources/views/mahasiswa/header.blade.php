@@ -21,6 +21,9 @@
     @can('read.only.mahasiswa')
         <title>Dashboard | Mahasiswa</title>
     @endcan
+    @can('only.supervisor')
+        <title>Dashboard | Supervisor</title>
+    @endcan
 
     <meta name="description" content="" />
 
@@ -266,8 +269,8 @@
                 <div data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
-            {{-- <li class="menu-item {{ request()->is('supervisor/presensi*') ? 'active' : ''}}">
-              <a href="{{ route('master.presensi.index') }}" class="menu-link">
+            <li class="menu-item {{ request()->is('supervisor/presensi*') ? 'active' : ''}}">
+              <a href="" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
@@ -317,7 +320,7 @@
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Data Pegawai">Data Pegawai</div>
               </a>
-            </li> --}}
+            </li>
             @endcan
           </ul>
         </aside>

@@ -33,6 +33,10 @@
                     class="img-fluid rounded mb-3 pt-1 mt-4" id="imgPreview" />
                 @endif 
             </div>
+            <div class="col-md-6">
+                <h3 for="name" class="form-label">Supervisor : {{$mahasiswa->spv?->nama??'Anda Belum Memilih SPV'}}</h3>
+                <h3 for="name" class="form-label">Jabatan : {{$mahasiswa->spv?->pangkat??'Anda Belum Memilih SPV'}}</h3>
+            </div>
             </div>
             <hr class="my-0" />
             <div class="card-body">
@@ -117,6 +121,7 @@
                 $("#modal-button").html("Update Data");
                 $('#modal-profile-mhs form').attr('action', action);
                 $('#posisi').val(response.posisi);
+                $('#id_pegawai').val(response.id_pegawai);
                 $('#agama').val(response.agama);
                 $('#tempatlahirmhs').val(response.tempatlahirmhs);
                 $('#tanggallahirmhs').val(response.tanggallahirmhs);

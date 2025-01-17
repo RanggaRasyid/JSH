@@ -23,5 +23,8 @@ class Pegawai extends Model
     public function pegawai(){
         return $this->belongsTo(User::class, 'id_pegawai');
     }
+    public function spv(){
+        return $this->belongsTo(Mahasiswa::class, 'id_pegawai');
+    }
 }
 

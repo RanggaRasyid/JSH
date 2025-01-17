@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileMahasiswaRequest;
 use App\Models\JurusanModel;
 use Exception;
 use App\Models\Mahasiswa;
+use App\Models\Pegawai;
 use App\Models\Universitas;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -23,14 +24,16 @@ class ProfileMahasiswaController extends Controller
         $mahasiswa = Mahasiswa::where('status', 1)->count();
 
         // Menghitung jumlah jurusan
+     
         $jurusan = JurusanModel::count();
         return view('admin.admin_dashboard', compact('univ', 'mahasiswa', 'jurusan', 'sekolah'));
     
     }
     
     public function profile(String $id){
-        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->with('jurusan', 'univ')->first();
-        return view('mahasiswa.profile_mahasiswa', compact('mahasiswa'));
+        $pegawai = Pegawai::all();
+        $mahasiswa = Mahasiswa::where('nim', Auth::user()->nim)->with('spv', 'jurusan', 'univ')->first();
+        return view('mahasiswa.profile_mahasiswa', compact('mahasiswa', 'pegawai'));
     }
 
     public function edit(String $id){
@@ -41,13 +44,14 @@ class ProfileMahasiswaController extends Controller
     public function update(ProfileMahasiswaRequest $request, $id) 
     {
         try {
-            $mahasiswa = Mahasiswa::where('nim', $id)->first();
+            $mahasiswa = Mahasiswa::where('nim', $id)->with('spv')->first();
             $file = null;
             if ($request->file('foto')) {
                 $file = Storage::put('public/loogbook' , $request->file('foto'));
             }
             $mahasiswa->posisi = $request->posisi;
             $mahasiswa->agama = $request->agama;
+            $mahasiswa->id_pegawai = $request->id_pegawai;
             $mahasiswa->tempatlahirmhs = $request->tempatlahirmhs;
             $mahasiswa->tanggallahirmhs = $request->tanggallahirmhs;
             $mahasiswa->nohpmhs = $request->nohpmhs;
@@ -64,7 +68,7 @@ class ProfileMahasiswaController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Profile successfully Updated!',
-                'modal' => '#modal-profile-mhs',
+                // 'modal' => '#modal-profile-mhs',
             ]);
         } catch (Exception $e) {
             return response()->json([

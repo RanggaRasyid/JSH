@@ -22,11 +22,16 @@ class LoogBoook extends Model
         'nama',
         'deskripsi',
         'picture',
-        'status'
+        'status',
+        'id_pegawai'
     ];
 
     public function nimmhs()
     {
         return $this->belongsTo(Mahasiswa::class, 'nim');
+    }
+    public function spv()
+    {
+        return $this->belongsTo(Pegawai::class, 'id_pegawai');
     }
 }
