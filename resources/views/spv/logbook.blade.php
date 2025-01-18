@@ -24,29 +24,38 @@
     <!-- Tabs -->
     <div class="nav-align-top">
         <ul class="nav nav-pills mb-3" role="tablist">
-            @foreach (['total', 'pending', 'diterima', 'ditolak'] as $key => $type)
-                <li class="nav-item" style="font-size: small;">
-                    <button type="button" 
-                        class="nav-link {{ $loop->first ? 'active' : '' }}" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#navs-pills-justified-{{ $type }}"
-                        role="tab"
-                        aria-controls="navs-pills-justified-{{ $type }}" 
-                        aria-selected="{{ $loop->first ? 'true' : 'false' }}"
-                        style="padding: 8px 9px;">
-                        @if ($type === 'total')
-                            <i class="tf-icons ti ti-briefcase ti-xs me-1"></i>
-                        @elseif ($type === 'pending')
-                            <i class="tf-icons ti ti-clock ti-xs me-1"></i>
-                        @elseif ($type === 'diterima')
-                            <i class="tf-icons ti ti-clipboard-check ti-xs me-1"></i>
-                        @elseif ($type === 'ditolak')
-                            <i class="tf-icons ti ti-clipboard-x ti-xs me-1"></i>
-                        @endif
-                        {{ ucfirst($type) }} ({{ $loogbook[$type] }})
-                    </button>
-                </li>
-            @endforeach
+            <li class="nav-item" style="font-size: small;">
+                <button type="button" class="nav-link active showSingle" target="1" role="tab"
+                    data-bs-toggle="tab" data-bs-target="#navs-pills-justified-total"
+                    aria-controls="navs-pills-justified-total" aria-selected="true" style="padding: 8px 9px;">
+                    <i class="tf-icons ti ti-briefcase ti-xs me-1"></i>
+                    Total ({{ $loogbook['total'] }})
+                </button>
+            </li>
+            <li class="nav-item" style="font-size: small;">
+                <button type="button" class="nav-link showSingle" target="2" role="tab"
+                    data-bs-toggle="tab" data-bs-target="#navs-pills-justified-pending"
+                    aria-controls="navs-pills-justified-pending" aria-selected="false" style="padding: 8px 9px;">
+                    <i class="tf-icons ti ti-clock ti-xs me-1"></i>
+                    Pending ({{ $loogbook['pending'] }})
+                </button>
+            </li>
+            <li class="nav-item" style="font-size: small;">
+                <button type="button" class="nav-link showSingle" target="3" role="tab"
+                    data-bs-toggle="tab" data-bs-target="#navs-pills-justified-diterima"
+                    aria-controls="navs-pills-justified-diterima" aria-selected="false" style="padding: 8px 9px;">
+                    <i class="tf-icons ti ti-clipboard-check ti-xs me-1"></i>
+                    Diterima 
+                </button>
+            </li>
+            <li class="nav-item" style="font-size: small;">
+                <button type="button" class="nav-link showSingle" target="4" role="tab"
+                    data-bs-toggle="tab" data-bs-target="#navs-pills-justified-ditolak"
+                    aria-controls="navs-pills-justified-ditolak" aria-selected="false" style="padding: 8px 9px;">
+                    <i class="tf-icons ti ti-clipboard-x ti-xs me-1"></i>
+                    Ditolak 
+                </button>
+            </li>
         </ul>
     </div> 
 </div>
@@ -65,6 +74,7 @@
                                     <th style="max-width: 30px;">NO</th>
                                     <th style="min-width: 125px;">Judul Aktivitas</th>
                                     <th>Deskripsi</th>
+                                    <th>Pencipta</th>
                                     <th>Dibuat</th>
                                     <th>Diperbarui</th>
                                     <th>Gambar</th>
@@ -108,6 +118,10 @@ $('.table').each(function() {
             {
                 data: "deskripsi",
                 name: "deskripsi"
+            },
+            {
+                data: "nimmhs.namamhs",
+                name: "nimmhs.namamhs"
             },
             {
                 data: "created_at",

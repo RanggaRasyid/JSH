@@ -39,6 +39,9 @@ class AdminLogbookController extends Controller
             ->editColumn('created_at', function ($row) {
                 return Carbon::parse($row->created_at)->format('d/m/y');
             })
+            ->editColumn('updated_at', function ($row) {
+                return Carbon::parse($row->updated_at)->format('d/m/y');
+            })
             ->editColumn('picture', function ($row) {
                 $url = Storage::url('' . $row->picture);
                 return "<img src='$url' alt='Picture' style='width: 50px; height: 50px; object-fit: cover;'>";
