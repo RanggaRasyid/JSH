@@ -24,38 +24,29 @@
             <!-- Tabs -->
             <div class="nav-align-top">
                 <ul class="nav nav-pills mb-3" role="tablist">
-                    <li class="nav-item" style="font-size: small;">
-                        <button type="button" class="nav-link active showSingle" target="1" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-total"
-                            aria-controls="navs-pills-justified-total" aria-selected="true" style="padding: 8px 9px;">
-                            <i class="tf-icons ti ti-briefcase ti-xs me-1"></i>
-                            Total ({{ $loogbook['total'] }})
-                        </button>
-                    </li>
-                    <li class="nav-item" style="font-size: small;">
-                        <button type="button" class="nav-link showSingle" target="2" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-pending"
-                            aria-controls="navs-pills-justified-pending" aria-selected="false" style="padding: 8px 9px;">
-                            <i class="tf-icons ti ti-clock ti-xs me-1"></i>
-                            Pending ({{ $loogbook['pending'] }})
-                        </button>
-                    </li>
-                    <li class="nav-item" style="font-size: small;">
-                        <button type="button" class="nav-link showSingle" target="3" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-diterima"
-                            aria-controls="navs-pills-justified-diterima" aria-selected="false" style="padding: 8px 9px;">
-                            <i class="tf-icons ti ti-clipboard-check ti-xs me-1"></i>
-                            Diterima ({{ $loogbook['diterima'] }})
-                        </button>
-                    </li>
-                    <li class="nav-item" style="font-size: small;">
-                        <button type="button" class="nav-link showSingle" target="4" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-ditolak"
-                            aria-controls="navs-pills-justified-ditolak" aria-selected="false" style="padding: 8px 9px;">
-                            <i class="tf-icons ti ti-clipboard-x ti-xs me-1"></i>
-                            Ditolak ({{ $loogbook['ditolak'] }})
-                        </button>
-                    </li>
+                    @foreach (['total', 'pending', 'diterima', 'ditolak'] as $key => $type)
+                        <li class="nav-item" style="font-size: small;">
+                            <button type="button" 
+                                class="nav-link {{ $loop->first ? 'active' : '' }}" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#navs-pills-justified-{{ $type }}"
+                                role="tab"
+                                aria-controls="navs-pills-justified-{{ $type }}" 
+                                aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+                                style="padding: 8px 9px;">
+                                @if ($type === 'total')
+                                    <i class="tf-icons ti ti-briefcase ti-xs me-1"></i>
+                                @elseif ($type === 'pending')
+                                    <i class="tf-icons ti ti-clock ti-xs me-1"></i>
+                                @elseif ($type === 'diterima')
+                                    <i class="tf-icons ti ti-clipboard-check ti-xs me-1"></i>
+                                @elseif ($type === 'ditolak')
+                                    <i class="tf-icons ti ti-clipboard-x ti-xs me-1"></i>
+                                @endif
+                                {{ ucfirst($type) }} ({{ $loogbook[$type] }})
+                            </button>
+                        </li>
+                    @endforeach
                 </ul>
             </div>            
     
@@ -79,13 +70,13 @@
 <div class="col-xl-12">
     <div class="nav-align-top">
         <div class="tab-content mt-4">
-            @foreach (['total', 'pending', 'diterima', 'ditolak'] as $key => $tableId)
+            @foreach (['total', 'pending', 'diterima', 'ditolak'] as $key => $type)
                 <div 
                     class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" 
-                    id="navs-pills-justified-{{ $tableId }}" 
+                    id="navs-pills-justified-{{ $type }}" 
                     role="tabpanel">
                     <div class="card-datatable table-responsive">
-                        <table class="table tab1c" id="{{ $tableId }}">
+                        <table class="table tab1c" id="{{ $type }}">
                             <thead>
                                 <tr>
                                     <th style="max-width: 30px;">NO</th>
@@ -102,6 +93,7 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
     </div>
 </div>
@@ -116,92 +108,57 @@
 <script>
 
     $('.table').each(function() {
-            let id = $(this).attr('id');
-            let url = "{{ url("mahasiswa/loogbook/show/{id}")}}";
-            // console.log(url);
-            
-            $(this).DataTable({
-                ajax: url,
-                serverSide: false,
-                processing: true,
-                deferRender: true,
-                type: 'GET',
-                destroy: true,
-                columns: [{
-                            data: "DT_RowIndex"
-                        },
-                        {
-                            data: "nama",
-                            name: "nama"
-                        },
-                        {
-                            data: "deskripsi",
-                            name: "deskripsi"
-                        },
-                        {
-                            data: "created_at",
-                            name: "created_at",
-                        },
-                        {
-                            data: "updated_at",
-                            name: "updated_at",
-                        },
-                        {
-                            data: "picture",
-                            name: "picture",
-                        },
-                        {
-                            data: "action",
-                            name: "action"
-                        },
-                        {
-                            data: "status",
-                            name: "status"
-                        }]
+        let idElement = $(this).attr('id'); // Mengambil ID dari tabel
+        let url = "{{ url('mahasiswa/loogbook/show/')}}?type=" + idElement;
+                
+        $(this).DataTable({
+            ajax: url,
+            serverSide: false,
+            processing: true,
+            deferRender: true,
+            type: 'GET',
+            destroy: true,
+            columns: 
+            [{
+                data: "DT_RowIndex"
+        
+            },
+            {
+                data: "nama",
+                name: "nama"
+            },
+            {
+                data: "deskripsi",
+                name: "deskripsi"
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+            },
+            {
+                data: "updated_at",
+                name: "updated_at",
+            },
+            {
+                data: "picture",
+                name: "picture",
+            },
+            {
+                data: "action",
+                name: "action"
+            },
+            {
+                data: "status",
+                name: "status"
+            }],
         });
     });
 
-    // var table = $('#table-loogbook-mahasiswa').DataTable({
-    //     ajax: '{{ url("mahasiswa/loogbook/show/{id}")}}',
-    //     serverSide: false,
-    //     processing: true,
-    //     deferRender: true,
-    //     type: 'GET',
-    //     destroy: true,
-    //     columns: [{
-    //             data: "DT_RowIndex"
-    //         },
-    //         {
-    //             data: "nama",
-    //             name: "nama"
-    //         },
-    //         {
-    //             data: "deskripsi",
-    //             name: "deskripsi"
-    //         },
-    //         {
-    //             data: "created_at",
-    //             name: "created_at",
-    //         },
-    //         {
-    //             data: "updated_at",
-    //             name: "updated_at",
-    //         },
-    //         {
-    //             data: "picture",
-    //             name: "picture",
-    //         },
-    //         {
-    //             data: "action",
-    //             name: "action"
-    //         },
-    //         {
-    //             data: "status",
-    //             name: "status"
-    //         }
-    //     ]
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+        let targetId = $(e.target).data('bs-target').replace('#navs-pills-justified-', '');
+        $(`#${targetId}`).DataTable().ajax.reload(null, false);
+    });
 
-    // });
 
     function edit(e) {
         let id = e.attr('data-id');
@@ -231,13 +188,6 @@
         $('#modal-loogbook form').attr('action', "{{ url('mahasiswa/loogbook/store') }}");
         $('.invalid-feedback').removeClass('d-block');
         $('.form-control').removeClass('is-invalid');
-    });
-
-    jQuery(function() {
-        jQuery('.showSingle').click(function() {
-            jQuery('.targetDiv').hide('.cnt');
-            jQuery('#div' + $(this).attr('target')).slideToggle();
-        });
     });
 </script>
 

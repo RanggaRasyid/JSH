@@ -31,12 +31,17 @@ class LoogBookController extends Controller
     }
 
     public function show(Request $request)  {
-        $loogbook = LoogBoook::query();
-        if ($request->type != 'total') {
-            $loogbook->where("status", $request->type);
-        }
-        $loogbook = $loogbook->with('nimmhs')->where('nim', Auth::user()->nim)->orderBy('nim', 'asc')->get();
+        $loogbookQuery = LoogBoook::with('nimmhs')->where('nim', Auth::user()->nim);
 
+        if ($request->type == "pending") {
+            $loogbookQuery->where('status', 2);
+        } elseif ($request->type == 'diterima') {
+            $loogbookQuery->where('status', 1);
+        } elseif ($request->type == 'ditolak') {
+            $loogbookQuery->where('status', 0);
+        }
+
+        $loogbook = $loogbookQuery->orderBy('created_at', 'desc')->get();
         return DataTables::of($loogbook)
             ->addIndexColumn()
             ->editColumn('created_at', function ($row) {
@@ -63,9 +68,11 @@ class LoogBookController extends Controller
                 $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
                 $color = ($row->status) ? "danger" : "success";
 
-                $btn = "<a data-bs-toggle='modal' data-id='{$row->id_loogbook}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i></a>
-                <a data-id='{$row->id_loogbook}' data-url='loogbook/destroy' class='btn-icon delete-data waves-effect waves-light'><i class='ti ti-trash fa-lg' style='color:red'></i></a>";
-                return $btn;
+                if ($row->status !== 1) {
+                    $btn = "<a data-bs-toggle='modal' data-id='{$row->id_loogbook}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i></a>
+                    <a data-id='{$row->id_loogbook}' data-url='loogbook/destroy' class='btn-icon delete-data waves-effect waves-light'><i class='ti ti-trash fa-lg' style='color:red'></i></a>";
+                    return $btn;
+                }
             })
             ->rawColumns(['action', 'picture', 'status'])
             ->make(true);
@@ -94,7 +101,7 @@ class LoogBookController extends Controller
                 'error' => false,
                 'message' => 'Loogbook successfully Created!',
                 'modal' => '#modal-loogbook',
-                'table' => '#table-loogbook-mahasiswa'
+                'table' => '#total',
             ]);
         } catch (Exception $e) {
             return response()->json([
