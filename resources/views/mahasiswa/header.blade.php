@@ -205,7 +205,7 @@
               </a>
             </li>
             <li class="menu-item {{ request()->is('super-admin/presensi*') ? 'active' : ''}}">
-              <a href="{{ route('master.presensi.index') }}" class="menu-link">
+              <a href="{{ route('admin.presensi.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>

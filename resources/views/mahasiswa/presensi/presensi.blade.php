@@ -23,32 +23,40 @@
         <h4 class="fw-bold text-sm"><span class="text-muted fw-light text-xs"></span>
             Presensi
         </h4>
+        
     </div>
     <div class="row">
         <div class="col-md-6">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                Lakukan Chek-in pada jam 09.00 WIB 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
           <div class="card">
             <div class="card-body text-center">
               <h1 class="mb-1 card-title attendance-timer text-primary m-0" id="work-time"></h1>
               <div class="d-flex align-items-center justify-content-around my-3 py-1">
                   <div>
-                      <h4 class="mb-0">{{$presensi?->jammasuk??'09.00'}}</h4>
+                      <h4 class="mb-0">09.00</h4>
                       <span>Check-in</span>
                   </div>
                   <div>
-                      <h4 class="mb-0">{{$presensi?->jamkeluar??'18.00'}}</h4>
+                      <h4 class="mb-0">18.00</h4>
                       <span>Check-out</span>
                   </div>
                   <div>
                       <!-- Tanggal saat ini -->
                       <h4 class="mb-0" id="current-date"></h4>
-                      <span>date</span>
+                      <span>Tanggal</span>
                   </div>
               </div>
               <form class="default-form" method="POST" action="{{ route('presensi.store') }}">
                 @csrf
                 <div class="d-flex align-items-center justify-content-center">
                     @php
-                        $today = \Carbon\Carbon::now('Asia/Jakarta')->toDateString();
+                         use Carbon\Carbon;
+                        $today = Carbon::now('Asia/Jakarta')->toDateString();
+                        $now = Carbon::now('Asia/Jakarta');
+                        $batasCheckIn = Carbon::createFromTime(12, 0, 0, 'Asia/Jakarta'); // Batas jam check-in
                         $presensiHariIni = \App\Models\Presensi::where('nim', auth()->user()->nim)
                             ->whereDate('tgl', $today)
                             ->whereNotNull('jamkeluar')
@@ -57,7 +65,9 @@
                             ->whereDate('tgl', $today)
                             ->whereNull('jamkeluar')
                             ->first();
+                        $disableCheckIn = $now->greaterThan($batasCheckIn) && !$presensi; // Jika waktu sekarang lebih dari batas dan belum check-in
                     @endphp
+
 
                     @if ($presensiHariIni)
                         <!-- Tombol sudah disable jika check-in dan check-out sudah dilakukan hari ini -->
@@ -71,10 +81,13 @@
                         </button>
                     @else
                         <!-- Tombol Check-in -->
-                        <button type="submit" id="modal-button" class="btn btn-primary d-flex align-items-center me-3 waves-effect waves-light">
-                            <span class="ti-xs me-1 ti ti-user-check me-1"></span>Check-in
+                        <button type="submit" id="modal-button" class="btn btn-primary d-flex align-items-center me-3 waves-effect waves-light" 
+                            @if($disableCheckIn) disabled @endif>
+                            <span class="ti-xs me-1 ti ti-user-check me-1"></span>
+                            @if($disableCheckIn) Check-in Ditutup @else Check-in @endif
                         </button>
                     @endif
+
                 </div>
               </form>
             </div>

@@ -60,7 +60,7 @@ class PresensiController extends Controller
     
             // Cek jika belum check-in dan waktu sudah lewat jam 17.00
             $now = Carbon::now('Asia/Jakarta');
-            if (!$presensi && $now->hour >= 17) {
+            if (!$presensi && $now->hour >= 12) {
                 // Jika belum check-in dan sudah lewat jam 17:00, set status menjadi 0 (tidak hadir)
                 $presensi = Presensi::create([
                     'nim' => $mahasiswa->nim,

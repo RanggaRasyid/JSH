@@ -134,7 +134,7 @@ class LoogBookController extends Controller
                 'error' => false,
                 'message' => 'Loogbook successfully Updated!',
                 'modal' => '#modal-loogbook',
-                'table' => '#table-loogbook-mahasiswa'
+                'table' => '#total'
             ]);
         } catch (Exception $e) {
             return response()->json([
