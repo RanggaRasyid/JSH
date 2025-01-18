@@ -78,7 +78,6 @@ class AdminLogbookController extends Controller
             $data = LoogBoook::where('id_loogbook', $id)->with('nimmhs')->first();
             $data->status = 1; 
             $data->save();
-            // dd($data);
     
             return response()->json([
                 'error' => false,

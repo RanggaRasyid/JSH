@@ -29,7 +29,7 @@
                     data-bs-toggle="tab" data-bs-target="#navs-pills-justified-total"
                     aria-controls="navs-pills-justified-total" aria-selected="true" style="padding: 8px 9px;">
                     <i class="tf-icons ti ti-briefcase ti-xs me-1"></i>
-                    Total ({{ $loogbook['total'] }})
+                    Total 
                 </button>
             </li>
             <li class="nav-item" style="font-size: small;">
@@ -37,7 +37,7 @@
                     data-bs-toggle="tab" data-bs-target="#navs-pills-justified-pending"
                     aria-controls="navs-pills-justified-pending" aria-selected="false" style="padding: 8px 9px;">
                     <i class="tf-icons ti ti-clock ti-xs me-1"></i>
-                    Pending ({{ $loogbook['pending'] }})
+                    Pending 
                 </button>
             </li>
             <li class="nav-item" style="font-size: small;">
@@ -96,7 +96,7 @@
 <script src="{{url('assets/js/forms-extras.js')}}"></script>
 <script>
 $('.table').each(function() {
-        let idElement = $(this).attr('id'); // Mengambil ID dari tabel
+        let idElement = $(this).attr('id'); 
         let url = "{{ url('supervisor/logbook/show/')}}?type=" + idElement;
                 
         $(this).DataTable({
@@ -151,44 +151,6 @@ $('.table').each(function() {
         $(`#${targetId}`).DataTable().ajax.reload(null, false);
     });
 
-    // var table = $('#table-loogbook-admin').DataTable({
-    //     ajax: '{{ url("supervisor/logbook/show/{id}")}}',
-    //     serverSide: false,
-    //     processing: true,
-    //     deferRender: true,
-    //     type: 'GET',
-    //     destroy: true,
-    //     columns: [{
-    //             data: "DT_RowIndex"
-    //         },
-    //         {
-    //             data: "nama",
-    //             name: "nama"
-    //         },
-    //         {
-    //             data: "deskripsi",
-    //             name: "deskripsi"
-    //         },
-    //         {
-    //             data: "updated_at",
-    //             name: "updated_at",
-    //         },
-    //         {
-    //             data: "picture",
-    //             name: "picture",
-    //         },
-    //         {
-    //             data: "action",
-    //             name: "action"
-    //         },
-    //         {
-    //             data: "status",
-    //             name: "status"
-    //         }
-    //     ]
-
-    // });
-
     $(document).ready(function () {
         // Fungsi Approve
         $(document).ready(function () {
@@ -237,8 +199,14 @@ $('.table').each(function() {
                                         showConfirmButton: false,
                                         timer: 2000,
                                     });
+                                    const types = ['total', 'pending', 'diterima', 'ditolak'];
                                     // Reload DataTable setelah berhasil
-                                    $('#table-loogbook-admin').DataTable().ajax.reload();
+                                    types.forEach(type => {
+                                        const tableId = `#${type}`; // Buat ID tabel dinamis
+                                        if ($.fn.DataTable.isDataTable(tableId)) {
+                                            $(tableId).DataTable().ajax.reload(null, false); // Reload tanpa mengubah posisi paging
+                                        }
+                                    });
                                 }
                             },
                             error: function (xhr) {
@@ -302,8 +270,14 @@ $('.table').each(function() {
                                         showConfirmButton: false,
                                         timer: 2000,
                                     });
+                                    const types = ['total', 'pending', 'diterima', 'ditolak'];
                                     // Reload DataTable setelah berhasil
-                                    $('#table-loogbook-admin').DataTable().ajax.reload();
+                                    types.forEach(type => {
+                                        const tableId = `#${type}`; // Buat ID tabel dinamis
+                                        if ($.fn.DataTable.isDataTable(tableId)) {
+                                            $(tableId).DataTable().ajax.reload(null, false); // Reload tanpa mengubah posisi paging
+                                        }
+                                    });
                                 }
                             },
                             error: function (xhr) {
