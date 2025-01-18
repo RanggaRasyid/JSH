@@ -90,7 +90,7 @@ Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(f
     Route::get('/dashboard', [App\Http\Controllers\SupervisiController::class, 'index'])->name('spv.dashboard');
     Route::prefix('/logbook')->group(function () {
         Route::get('/', [App\Http\Controllers\AdminLogbookController::class, 'index'])->name('admin.logbook.index');
-        Route::get('/show/{id}', [App\Http\Controllers\AdminLogbookController::class, 'show'])->name('admin.logbook.show');
+        Route::get('/show', [App\Http\Controllers\AdminLogbookController::class, 'show'])->name('admin.logbook.show');
         Route::post('/approve/{id}', [App\Http\Controllers\AdminLogbookController::class, 'approve'])->name('spv.approve');
         Route::post('/tolak/{id}', [App\Http\Controllers\AdminLogbookController::class, 'rejected'])->name('spv.rejected');
     });
