@@ -270,7 +270,7 @@
               </a>
             </li>
             <li class="menu-item {{ request()->is('supervisor/presensi*') ? 'active' : ''}}">
-              <a href="" class="menu-link">
+              <a href="/supervisor/presensi" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
@@ -287,39 +287,18 @@
                     <div data-i18n="Master Data">Master Data</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item {{ request()->is('supervisor/master-universitas*') ? 'active' : ''}}">
-                        <a href="/supervisor/master-universitas" class="menu-link">
-                        <div data-i18n="Universitas/SMA/SMK">Universitas/SMA/SMK</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ request()->is('supervisor/master-jurusan*') ? 'active' : ''}}">
-                        <a href="/supervisor/master-jurusan" class="menu-link">
-                        <div data-i18n="Jurusan">Jurusan</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="menu-sub">
                     <li class="menu-item {{ request()->is('supervisor/master-mahasiswa*') ? 'active' : ''}}">
-                        <a href="/supervisor/master-mahasiswa" class="menu-link">
+                        <a href="/supervisor/mahasiswa" class="menu-link">
                         <div data-i18n="Mahasiswa">Mahasiswa</div>
                         </a>
                     </li>
-                </ul>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ request()->is('supervisor/master-masa-magang*') ? 'active' : ''}}">
-                        <a href="/supervisor/master-masa-magang" class="menu-link">
-                        <div data-i18n="Masa Magang">Masa Magang</div>
-                        </a>
+                    <li class="menu-item {{ request()->is('supervisor/data-pegawai*') ? 'active' : ''}}">
+                      <a href="/supervisor/data-pegawai" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-users"></i>
+                        <div data-i18n="Data Pegawai">Data Pegawai</div>
+                      </a>
                     </li>
                 </ul>
-            </li>
-            <li class="menu-item {{ request()->is('supervisor/data-pegawai*') ? 'active' : ''}}">
-              <a href="/supervisor/data-pegawai" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                <div data-i18n="Data Pegawai">Data Pegawai</div>
-              </a>
             </li>
             @endcan
           </ul>

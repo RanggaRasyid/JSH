@@ -31,6 +31,11 @@
                 Lakukan Chek-in pada jam 09.00 WIB 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            @if($isDisabled)
+            <div class="alert alert-warning mt-2">
+                Anda belum memilih supervisor. Silahkan pilih supervisor pada menu profil Anda.
+            </div>
+            @endif
           <div class="card">
             <div class="card-body text-center">
               <h1 class="mb-1 card-title attendance-timer text-primary m-0" id="work-time"></h1>
@@ -82,12 +87,12 @@
                     @else
                         <!-- Tombol Check-in -->
                         <button type="submit" id="modal-button" class="btn btn-primary d-flex align-items-center me-3 waves-effect waves-light" 
-                            @if($disableCheckIn) disabled @endif>
+                            @if($disableCheckIn || $isDisabled) disabled @endif>
                             <span class="ti-xs me-1 ti ti-user-check me-1"></span>
                             @if($disableCheckIn) Check-in Ditutup @else Check-in @endif
                         </button>
                     @endif
-
+                    
                 </div>
               </form>
             </div>

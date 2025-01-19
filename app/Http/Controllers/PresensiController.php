@@ -15,8 +15,10 @@ use Yajra\DataTables\Facades\DataTables;
 class PresensiController extends Controller
 {
     public function index() {
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
+        $isDisabled = is_null($mahasiswa->id_pegawai);
         $presensi = Presensi::first();
-        return view('mahasiswa.presensi.presensi', compact('presensi'));
+        return view('mahasiswa.presensi.presensi', compact('presensi', 'isDisabled'));
     }
 
     public function show() {

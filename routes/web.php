@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\SupervisiController::class, 'index'])->name('spv.dashboard');
+
     Route::prefix('/logbook')->group(function () {
         Route::get('/', [App\Http\Controllers\AdminLogbookController::class, 'index'])->name('spv.logbook.index');
         Route::get('/show', [App\Http\Controllers\AdminLogbookController::class, 'show'])->name('spv.logbook.show');
@@ -97,10 +98,23 @@ Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(f
 
     Route::prefix('/presensi')->group(function () {
         Route::get('/', [App\Http\Controllers\AdminPresensiController::class, 'index'])->name('spv.presensi.index');
-        Route::get('/show/{id}', [App\Http\Controllers\AdminPresensiController::class, 'show'])->name('spv.presensi.show');
-        Route::get('/show-detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'index'])->name('spv.presensi.show.detail');
-        Route::get('/detail/{id}', [App\Http\Controllers\DetailPresensiController::class, 'detail'])->name('spv.presensi.detail');
+        Route::get('/show', [App\Http\Controllers\AdminPresensiController::class, 'show'])->name('spv.presensi.show');
+        Route::get('/show-detail/{id}', [App\Http\Controllers\AdminPresensiController::class, 'view'])->name('spv.presensi.show');
+        Route::get('/detail/{id}', [App\Http\Controllers\AdminPresensiController::class, 'detail'])->name('spv.presensi.detail');
     });
+
+    Route::prefix('/mahasiswa')->group(function () {
+        Route::get('/', [App\Http\Controllers\AdminMahasiswaController::class, 'index'])->name('spv.mahasiswa.index');
+        Route::get('/show', [App\Http\Controllers\AdminMahasiswaController::class, 'show'])->name('spv.mahasiswa.show');
+        Route::get('/show-detail/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'view'])->name('spv.mahasiswa.show');
+        Route::get('/detail/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'detail'])->name('spv.mahasiswa.detail');
+    });
+
+    Route::prefix('/profile-mahasiswa')->group(function () {
+        Route::get('/', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('spv.show.profile');
+        Route::get('detail/', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('spv.detail.profile');
+    });
+
 });
 
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {
