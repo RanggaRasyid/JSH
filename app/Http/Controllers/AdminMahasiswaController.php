@@ -41,7 +41,7 @@ class AdminMahasiswaController extends Controller
             $color = ($row->status) ? "danger" : "success";
             $btn = "<a data-bs-toggle='modal' data-id='{$row->nim}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>
             <a data-bs-toggle='modal' data-id='{$row->nim}' onclick=detail($(this)) class='btn-icon text-success waves-effect waves-light'><i class='tf-icons ti ti-file-invoice' ></i>
-            <a data-status='{$row->status}' data-id='{$row->nim}' data-url='master-mahasiswa/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
+            <a data-status='{$row->status}' data-id='{$row->nim}' data-url='mahasiswa/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
             return $btn;
         })
         ->rawColumns(['action', 'status'])
@@ -70,7 +70,7 @@ class AdminMahasiswaController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Mahasiswa successfully Created!',
-                'modal' => '#modal-master-mahasiswa',
+                'modal' => '#spv-mahasiswa',
                 'table' => '#table-master-mahasiswa'
             ]);
         } catch (Exception $e) {
@@ -107,7 +107,7 @@ class AdminMahasiswaController extends Controller
      */
     public function view(String $id)
     {
-        $mahasiswa = Mahasiswa::where('nim', $id)->first();
+        $mahasiswa = Mahasiswa::where('nim', $id)->with('spv')->first();
         return $mahasiswa;
     }
 
@@ -137,7 +137,7 @@ class AdminMahasiswaController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Mahasiswa successfully Updated!',
-                'modal' => '#modal-master-mahasiswa',
+                'modal' => '#spv-mahasiswa',
                 'table' => '#table-master-mahasiswa'
             ]);
         } catch (Exception $e) {

@@ -107,7 +107,17 @@ Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(f
         Route::get('/', [App\Http\Controllers\AdminMahasiswaController::class, 'index'])->name('spv.mahasiswa.index');
         Route::get('/show', [App\Http\Controllers\AdminMahasiswaController::class, 'show'])->name('spv.mahasiswa.show');
         Route::get('/show-detail/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'view'])->name('spv.mahasiswa.show');
-        Route::get('/detail/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'detail'])->name('spv.mahasiswa.detail');
+        Route::post('/update/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'update'])->name('spv.mahasiswa.update');
+        Route::post('/status/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'status'])->name('spv.mahasiswa.status');
+    });
+
+    Route::prefix('/pegawai')->group(function () {
+        Route::get('/', [App\Http\Controllers\MasterPegawaiController::class, 'index'])->name('pegawai.index');
+            Route::get('/show', [App\Http\Controllers\MasterPegawaiController::class, 'show'])->name('pegawai.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'status'])->name('pegawai.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'edit'])->name('pegawai.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'update'])->name('pegawai.update');
+            Route::post('/store', [App\Http\Controllers\MasterPegawaiController::class, 'store'])->name('pegawai.store');
     });
 
     Route::prefix('/profile-mahasiswa')->group(function () {

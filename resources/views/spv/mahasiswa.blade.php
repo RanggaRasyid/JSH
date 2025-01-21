@@ -25,7 +25,7 @@
     <div class="col-md-2 col-12 mb-3 ps-5 d-flex justify-content-between">
     </div>
     <div class="col-md-2 col-12 text-end">
-        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#modal-master-mahasiswa">Add Mahasiswa</button>
+        <button class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#spv-mahasiswa">Add Mahasiswa</button>
     </div>
 </div>
 <div class="col-xl-12">
@@ -53,7 +53,7 @@
     </div>
 </div>
 {{-- modal edit --}}
-<div class="modal fade" id="modal-master-mahasiswa" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="spv-mahasiswa" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header text-center d-block">
@@ -148,7 +148,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img src="../../app-assets/img/alert.png" alt="">
+                <img src="../../assets/img/alert.png" alt="">
                 <h5 class="modal-title" id="modal-title">Apakah anda yakin ingin menonaktifkan Mahasiswa</h5>
                 <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
                     Data yang dipilih akan non-aktif</div>
@@ -212,48 +212,68 @@
 
     function detail(e) {
         let id = e.attr('data-id');
-        var url = `{{ url('supervisor/master-mahasiswa/show-detail') }}/${id}`;
-        console.log(id);
+        var url = `{{ url('supervisor/mahasiswa/show-detail') }}/${id}`;
         
-            $.ajax({
+        $.ajax({
             type: 'GET',
             url: url,
             success: function(response) {
-                // Isi data ke dalam modal
-                $('#imgPreview').attr('src', response.foto ? `{{ Storage::url('') }}` + response.foto : `{{ url('assets/img/avatars/14.png') }}`);
-                $('#posisi').val(response.posisi ?? '');
-                $('#id_pegawai').val(response.id_pegawai).trigger('change');
-                $('#agama').val(response.agama ?? '');
-                $('#tempatlahirmhs').val(response.tempat_lahir ?? '');
-                $('#tanggallahirmhs').val(response.tanggal_lahir ?? '');
-                $('#nohpmhs').val(response.no_hp ?? '');
-                $('#alamatmhs').val(response.alamat ?? '');
+            // $('#imgPreview').attr('src', response.foto ? `{{ Storage::url('') }}` + response.foto : `{{ url('assets/img/avatars/14.png') }}`);
 
-                if (response.jenis_kelamin === 'Laki-Laki') {
-                    $('#laki-laki').prop('checked', true);
-                } else if (response.jenis_kelamin === 'Perempuan') {
-                    $('#perempuan').prop('checked', true);
-                }
-
-                // Tampilkan modal
+            $('#email').val(response.emailmhs);
+            $('#posisi').val(response.posisi);
+            $('#namamahasiswa').val(response.namamhs);
+            $('#supervisor').val(response.spv.nama);
+            $('#agama').val(response.agama);
+            $('#tempatlahirmhs').val(response.tempatlahirmhs);
+            $('#nimmhs').val(response.nim);
+            $('#tanggallahirmhs').val(response.tanggallahirmhs);
+            $('#nohpmhs').val(response.nohpmhs);
+            $('#alamatmhs').val(response.alamatmhs);
+            $('#jeniskelamin').val(response.jeniskelamin);
+            if (response.jeniskelamin === "Laki-Laki") {
+                $('#laki-laki').prop('checked', true);
+            } else if (response.jeniskelamin === "Perempuan") {
+                $('#perempuan').prop('checked', true);
+            };
                 $('#detail-profile-mhs').modal('show');
             },
-            error: function(xhr) {
-                console.error('Error:', xhr.responseText);
+        });
+    }
+    function edit(e) {
+        let id = e.attr('data-id');
+        let action = `{{ url('supervisor/mahasiswa/update') }}/${id}`;
+        var url = `{{ url('supervisor/mahasiswa/show-detail') }}/${id}`;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                $("#modal-title").html("Edit Aktifitas");
+                $("#modal-button").html("Update Data");
+                $('#spv-mahasiswa form').attr('action', action);
+                $('#namamhs').val(response.namamhs).trigger('change');
+                $('#nim').val(response.nim);
+                $('#nim').prop('disabled', true);
+                $('#emailmhs').val(response.emailmhs);
+                $('#jurusan').val(response.id_jurusan);
+                $('#instansi').val(response.id_univ);
+                $('#password').val(response.password);
+                $('#spv-mahasiswa').modal('show');
             }
         });
     }
 
-    // $("#detail-profile-mhs").on("show.bs.modal", function() {
-    // $("#modal-title").html("Tambah Akifitas");
-    // $("#modal-button").html("Simpan")
-    // $('#detail-profile-mhs form')[0].reset();
-    // $('#nim').val('').prop('disabled', false); // Aktifkan saat tambah data
-    // $('#detail-profile-mhs form #role').val('').trigger('change');
-    // $('#detail-profile-mhs form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
-    // $('.invalid-feedback').removeClass('d-block');
-    // $('.form-control').removeClass('is-invalid');
-    // });
+    $("#spv-mahasiswa").on("hide.bs.modal", function() {
+    $("#modal-title").html("Tambah Akifitas");
+    $("#modal-button").html("Simpan")
+    $('#spv-mahasiswa form')[0].reset();
+    $('#nim').val('').prop('disabled', false); // Aktifkan saat tambah data
+    $('#spv-mahasiswa form #role').val('').trigger('change');
+    $('#spv-mahasiswa form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
+    $('.invalid-feedback').removeClass('d-block');
+    $('.form-control').removeClass('is-invalid');
+    });
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {

@@ -281,19 +281,19 @@
                 <div data-i18n="Logbook Mahasiswa">Logbook Mahasiswa</div>
               </a>
             </li>
-            <li class="menu-item {{ request()->is('supervisor/master*') ? 'active open' : ''}}">
+            <li class="menu-item {{ request()->is('supervisor/*') ? 'active open' : ''}}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-database"></i>
                     <div data-i18n="Master Data">Master Data</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item {{ request()->is('supervisor/master-mahasiswa*') ? 'active' : ''}}">
+                    <li class="menu-item {{ request()->is('supervisor/mahasiswa*') ? 'active' : ''}}">
                         <a href="/supervisor/mahasiswa" class="menu-link">
                         <div data-i18n="Mahasiswa">Mahasiswa</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ request()->is('supervisor/data-pegawai*') ? 'active' : ''}}">
-                      <a href="/supervisor/data-pegawai" class="menu-link">
+                    <li class="menu-item {{ request()->is('supervisor/pegawai*') ? 'active' : ''}}">
+                      <a href="/supervisor/pegawai" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-users"></i>
                         <div data-i18n="Data Pegawai">Data Pegawai</div>
                       </a>
