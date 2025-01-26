@@ -13,18 +13,36 @@ use Yajra\DataTables\Facades\DataTables;
 class KelolaLogbookController extends Controller
 {
     public function index() {
-        return view('admin.logbook');
+        $loogbook = new LoogBoook;
+        $loogbook = [
+            'total' => $loogbook->count(),
+            'pending' => $loogbook->where('status', 2)->count(),
+            'diterima' => $loogbook->where('status', 1)->count(),
+            'ditolak' => $loogbook->where('status', 0)->count(),
+        ]; 
+        return view('admin.logbook', compact('loogbook'));
     }
 
-    public function show()  {
-        $loogbook = LoogBoook::with('nimmhs')
-            ->orderBy('nim', 'asc')
-            ->get();
+    public function show(Request $request)  {
+        
+        $loogbook = LoogBoook::with('nimmhs');
+        if ($request->type == "pending") {
+            $loogbook->where('status', 2);
+        } elseif ($request->type == 'diterima') {
+            $loogbook->where('status', 1);
+        } elseif ($request->type == 'ditolak') {
+            $loogbook->where('status', 0);
+        }
+
+        $loogbook->orderBy('created_at', 'asc')->get();
 
         return DataTables::of($loogbook)
             ->addIndexColumn()
             ->editColumn('created_at', function ($row) {
                 return Carbon::parse($row->created_at)->format('d/m/y');
+            })
+            ->editColumn('updated_at', function ($row) {
+                return Carbon::parse($row->updated_at)->format('d/m/y');
             })
             ->editColumn('picture', function ($row) {
                 $url = Storage::url('' . $row->picture);

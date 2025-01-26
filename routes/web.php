@@ -42,12 +42,12 @@ Route::middleware('auth')->group(function () {
 
         });
         Route::prefix('data-pegawai')->group(function () {
-            Route::get('/', [App\Http\Controllers\MasterPegawaiController::class, 'index'])->name('pegawai.index');
-            Route::get('/show', [App\Http\Controllers\MasterPegawaiController::class, 'show'])->name('pegawai.show');
-            Route::post('/status/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'status'])->name('pegawai.status');
-            Route::get('/edit/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'edit'])->name('pegawai.edit');
-            Route::post('/update/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'update'])->name('pegawai.update');
-            Route::post('/store', [App\Http\Controllers\MasterPegawaiController::class, 'store'])->name('pegawai.store');
+            Route::get('/', [App\Http\Controllers\MasterPegawaiController::class, 'index'])->name('super.pegawai.index');
+            Route::get('/show', [App\Http\Controllers\MasterPegawaiController::class, 'show'])->name('super.pegawai.show');
+            Route::post('/status/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'status'])->name('super.pegawai.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'edit'])->name('super.pegawai.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'update'])->name('super.pegawai.update');
+            Route::post('/store', [App\Http\Controllers\MasterPegawaiController::class, 'store'])->name('super.pegawai.store');
 
         });
         Route::prefix('master-jurusan')->group(function () {
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('/logbook')->group(function () {
             Route::get('/', [App\Http\Controllers\KelolaLogbookController::class, 'index'])->name('master.logbook.index');
-            Route::get('/show/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'show'])->name('master.logbook.show');
+            Route::get('/show', [App\Http\Controllers\KelolaLogbookController::class, 'show'])->name('master.logbook.show');
             Route::post('/approve/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('logbook.approve');
             Route::post('/tolak/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'rejected'])->name('logbook.rejected');
         });
@@ -115,15 +115,6 @@ Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(f
         Route::get('/show-detail/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'view'])->name('spv.mahasiswa.show');
         Route::post('/update/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'update'])->name('spv.mahasiswa.update');
         Route::post('/status/{id}', [App\Http\Controllers\AdminMahasiswaController::class, 'status'])->name('spv.mahasiswa.status');
-    });
-
-    Route::prefix('/pegawai')->group(function () {
-        Route::get('/', [App\Http\Controllers\MasterPegawaiController::class, 'index'])->name('pegawai.index');
-            Route::get('/show', [App\Http\Controllers\MasterPegawaiController::class, 'show'])->name('pegawai.show');
-            Route::post('/status/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'status'])->name('pegawai.status');
-            Route::get('/edit/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'edit'])->name('pegawai.edit');
-            Route::post('/update/{id}', [App\Http\Controllers\MasterPegawaiController::class, 'update'])->name('pegawai.update');
-            Route::post('/store', [App\Http\Controllers\MasterPegawaiController::class, 'store'])->name('pegawai.store');
     });
 
     Route::prefix('/profile-mahasiswa')->group(function () {

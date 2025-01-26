@@ -58,11 +58,15 @@ class MasterMahasiswaiController extends Controller
                 'id_univ' => $request->univ,
                 'status' => 1
             ]);
+            
             $user = User::create([
                 'nim' => $request->nim,
                 'name' => $request->namamhs,
                 'email' => $request->emailmhs,
                 'password' => Hash::make($request->password),
+                'google_id' => 1,
+                'google_token' => 1,
+                'google_refresh_token' => 1,
             ]);
             $user->assignRole('mahasiswa');
             return response()->json([

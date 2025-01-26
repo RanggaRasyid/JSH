@@ -19,7 +19,7 @@
           </div>
           <!-- /Logo -->
           <h4 class="mb-1 pt-2">Lengkapi Data</h4>
-          <p class="mb-4">Make your app management easy and fun!</p>
+          <p class="mb-4">Isi Sesuai Data Pribadi Anda</p>
 
           <form enctype="multipart/form-data" class="default-form mb-3" action="{{ url('mahasiswa/register') }}" method="POST">
             @csrf

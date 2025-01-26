@@ -292,12 +292,6 @@
                         <div data-i18n="Mahasiswa">Mahasiswa</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ request()->is('supervisor/pegawai*') ? 'active' : ''}}">
-                      <a href="/supervisor/pegawai" class="menu-link">
-                        <i class="menu-icon tf-icons ti ti-users"></i>
-                        <div data-i18n="Data Pegawai">Data Pegawai</div>
-                      </a>
-                    </li>
                 </ul>
             </li>
             @endcan

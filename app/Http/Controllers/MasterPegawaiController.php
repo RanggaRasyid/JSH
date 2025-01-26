@@ -53,6 +53,9 @@ class MasterPegawaiController extends Controller
                 'name' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'google_id' => 0,
+                'google_token' => 0,
+                'google_refresh_token' => 0,
             ]);
             $users->assignRole('supervisor');
             return $users;
