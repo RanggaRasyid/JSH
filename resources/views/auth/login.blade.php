@@ -29,7 +29,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="mb-3 form-password-toggle">
+                {{-- <div class="mb-3 form-password-toggle">
                     <div class="form-group mb-3 d-flex form-check justify-content-between">
                         <input class="form-check-input" type="checkbox" id="remember-me" />
                         <label class="form-check-label" for="remember-me"> Ingat Saya </label>
@@ -39,20 +39,25 @@
                             </a>
                         @endif
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group mb-3">
                     <div class="form-group mb-3">
-                        <button type="submit" class="btn btn-primary d-grid w-100" style="background: var(--primary-500-base, #4EA971);">
+                        <button type="submit" class="btn btn-success d-grid w-100" >
                             {{ __('Masuk') }}
                         </button>
                     </div>
                 </div>
-                <p class="text-center">
+                <div class="form-group mb-3">
+                    <a href="/auth/redirect" class="btn btn-outline-success d-grid w-100">
+                        Masuk dengan Google
+                    </a>
+                </div>
+                {{-- <p class="text-center">
                     <span>Belum memiliki akun?</span>
                     <a href="{{ route('register') }}">
                       <span>Buat Akun</span>
                     </a>
-                </p>
+                </p> --}}
                 </div>
             </form>
         </div>

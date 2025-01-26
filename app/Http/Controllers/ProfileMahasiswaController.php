@@ -68,7 +68,6 @@ class ProfileMahasiswaController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Profile successfully Updated!',
-                // 'modal' => '#modal-profile-mhs',
             ]);
         } catch (Exception $e) {
             return response()->json([

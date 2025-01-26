@@ -60,11 +60,11 @@
                             <button type="button" class="btn btn-success m-2">Masuk</button>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('register') }}">
                             <button type="button" class="btn btn-success m-2">Daftar</button>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             @endif

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Laravel\Socialite\Facades\Socialite;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class RegisterController extends Controller
 {
@@ -53,9 +55,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'nim' => ['required', 'integer', 'min:8'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'univ' => ['required'],
             'jurusan' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -72,22 +72,17 @@ class RegisterController extends Controller
     {
         $mahasiswa = Mahasiswa::create([
             'nim' => $data['nim'],
-            'namamhs' => $data['name'],
-            'emailmhs' => $data['email'],
+            'namamhs' =>  $data['name'],
+            'emailmhs' =>  $data['email'],
             'id_univ' => $data['univ'],
             'id_jurusan' => $data['jurusan'],
             'status' => 0
         ]);
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'nim' => $data['nim'],
+        $user = User::updateOrCreate([
             'password' => Hash::make($data['password']),
         ]);
-
-        $user->assignRole('mahasiswa');
-        return $user;
+        return redirect('/mahasiswa/dashboard');
     }
     public function register(Request $request)
     {

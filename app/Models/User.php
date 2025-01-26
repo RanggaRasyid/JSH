@@ -24,6 +24,9 @@ class User extends Authenticatable
         'email',
         'password',
         'id_pegawai',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
     ];
 
     /**
@@ -49,5 +52,9 @@ class User extends Authenticatable
     }
     public function pegawai(){
         return $this->hasOne(Pegawai::class);
+    }
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
     }
 }

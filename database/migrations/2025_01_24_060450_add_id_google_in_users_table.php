@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pegawai', function (Blueprint $table) {
-            $table->uuid('id_pegawai')->primary();
-            $table->string('nama', 255);
-            $table->string('pangkat', 100);
-            $table->string('email', 255);
-            $table->boolean('status')->default(true);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('google_id');
+            $table->string('google_token');
+            $table->string('google_refresh_token')->nullable();
         });
     }
 
@@ -30,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('pegawai');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

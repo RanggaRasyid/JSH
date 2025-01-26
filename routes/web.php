@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 //landing-page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing-page')->middleware('guest');
+/**
+ * socialite auth
+ */
+Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Auth::routes();
@@ -128,6 +134,8 @@ Route::prefix('/supervisor')->middleware('auth', 'can:only.supervisor')->group(f
 });
 
 Route::prefix('mahasiswa')->middleware('auth', 'can:read.only.mahasiswa')->group(function () {
+    Route::get('/data', [App\Http\Controllers\Auth\SocialiteController::class, 'data'])->name('data.index');
+    Route::post('/register', [App\Http\Controllers\Auth\SocialiteController::class, 'created'])->name('created.index');
     Route::get('/dashboard', [App\Http\Controllers\ProfileMahasiswaController::class, 'index'])->name('dashboard.mahasiswa.index');
 
     Route::prefix('/profile')->group(function () {
