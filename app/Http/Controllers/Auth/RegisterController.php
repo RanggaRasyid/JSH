@@ -72,17 +72,22 @@ class RegisterController extends Controller
     {
         $mahasiswa = Mahasiswa::create([
             'nim' => $data['nim'],
-            'namamhs' =>  $data['name'],
-            'emailmhs' =>  $data['email'],
+            'namamhs' => $data['name'],
+            'emailmhs' => $data['email'],
             'id_univ' => $data['univ'],
             'id_jurusan' => $data['jurusan'],
             'status' => 0
         ]);
 
-        $user = User::updateOrCreate([
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'nim' => $data['nim'],
             'password' => Hash::make($data['password']),
         ]);
-        return redirect('/mahasiswa/dashboard');
+
+        $user->assignRole('mahasiswa');
+        return $user;
     }
     public function register(Request $request)
     {

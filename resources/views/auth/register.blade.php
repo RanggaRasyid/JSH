@@ -51,7 +51,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
 <section class="vh-100">
-    <div class="container-fluid h-custom">
+    {{-- <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -166,8 +166,16 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="form-group mb-3">
+                <a href="/auth/redirect" class="btn btn-outline-success d-grid w-100">
+                    Masuk dengan Google
+                </a>
+            </div>
+        </div>
     </div>
-
 </section>
 </body>
 </html>

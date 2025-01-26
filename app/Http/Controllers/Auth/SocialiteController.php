@@ -10,6 +10,7 @@ use App\Models\SocialAccount;
 use App\Models\Universitas;
 use App\Models\User;
 use Exception;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,8 +79,11 @@ class SocialiteController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            auth()->logout();
-            return view('auth.aktifasi');
+            return response()->json([
+                'error' => false,
+                'message' => 'Data Mahasiswa Berhasil Dibuat, hubungi admin jsh untuk aktivasi akun',
+                'url' => Auth::logout()
+            ]);
 
         } catch (Exception $e) {
             return response()->json([
@@ -87,5 +91,9 @@ class SocialiteController extends Controller
                 'message' => $e->getMessage(),
             ]);
          }
+    }
+
+    public function aktivasi(Request $request) {
+        return view('auth.konfirmasi');
     }
  }
