@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Background;
 use App\Models\JurusanModel;
 use App\Models\Mahasiswa;
 use App\Models\Universitas;
@@ -33,10 +34,10 @@ class SuperAdminController extends Controller
 
         // Menghitung jumlah mahasiswa
         $mahasiswa = Mahasiswa::where('status', 1)->count();
-
+        $background= Background::all();
         // Menghitung jumlah jurusan
         $jurusan = JurusanModel::count();
-        return view('admin.admin_dashboard', compact('univ', 'mahasiswa', 'jurusan', 'sekolah'));
+        return view('admin.admin_dashboard', compact(b'background', 'univ', 'mahasiswa', 'jurusan', 'sekolah'));
     }
     
 }

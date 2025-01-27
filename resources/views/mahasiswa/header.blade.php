@@ -210,6 +210,12 @@
                 <div data-i18n="Presensi Mahasiswa">Presensi Mahasiswa</div>
               </a>
             </li>
+            <li class="menu-item {{ request()->is('super-admin/background*') ? 'active' : ''}}">
+              <a href="/super-admin/background" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div data-i18n="Image Dashbord">Image Dashboard</div>
+              </a>
+            </li>
             <li class="menu-item {{ request()->is('super-admin/logbook*') ? 'active' : ''}}">
               <a href="/super-admin/logbook" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-book"></i>

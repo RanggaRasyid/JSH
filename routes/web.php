@@ -89,6 +89,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/approve/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'approve'])->name('logbook.approve');
             Route::post('/tolak/{id}', [App\Http\Controllers\KelolaLogbookController::class, 'rejected'])->name('logbook.rejected');
         });
+        Route::prefix('/background')->group(function () {
+            Route::get('/', [App\Http\Controllers\BackgroundController::class, 'index'])->name('background.index');
+            Route::get('/show', [App\Http\Controllers\BackgroundController::class, 'show'])->name('background.show');
+            Route::post('/store', [App\Http\Controllers\BackgroundController::class, 'store'])->name('background.store');
+            Route::post('/status/{id}', [App\Http\Controllers\BackgroundController::class, 'status'])->name('background.status');
+            Route::get('/edit/{id}', [App\Http\Controllers\BackgroundController::class, 'edit'])->name('background.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\BackgroundController::class, 'rejected'])->name('background.rejected');
+            Route::delete('/destroy/{id}', [App\Http\Controllers\BackgroundController::class, 'destroy'])->name('background.destroy');
+        });
     });
 });
 
