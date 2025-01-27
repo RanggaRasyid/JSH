@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Background;
 use App\Models\JurusanModel;
 use App\Models\Mahasiswa;
 use App\Models\Universitas;
@@ -21,10 +22,11 @@ class SupervisiController extends Controller
         $sekolah = Universitas::where('kategori', 2)->count();
 
         // Menghitung jumlah mahasiswa
-        $mahasiswa = Mahasiswa::where('status', 1)->count();
+        $mahasiswas = Mahasiswa::where('status', 1)->count();
 
+        $background = Background::all();
         // Menghitung jumlah jurusan
         $jurusan = JurusanModel::count();
-        return view('admin.admin_dashboard', compact('univ', 'mahasiswa', 'jurusan', 'sekolah'));
+        return view('admin.admin_dashboard', compact('background', 'univ', 'mahasiswas', 'jurusan', 'sekolah'));
     }
 }

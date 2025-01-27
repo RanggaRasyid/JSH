@@ -14,9 +14,6 @@
 @section('main')
 <div class="row">
     <div class="col-md-8 col-12 g-4">
-        <button class="btn btn-outline-success my-2 waves-effect p-3 mb-4" type="button" id="back" style="width: 15%; height:12%;">
-            <i class="bi bi-arrow-left text-success" style="font-size: medium;"> Kembali </i>
-        </button>
         <h4 class="fw-bold text-sm"><span class="text-muted fw-light text-xs"></span>
         Detail Presensi {{ $mahasiswa->namamhs ?? '' }}
         </h4>

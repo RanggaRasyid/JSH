@@ -18,7 +18,7 @@ class PresensiController extends Controller
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
         $isDisabled = is_null($mahasiswa->id_pegawai);
         $presensi = Presensi::first();
-        return view('mahasiswa.presensi.presensi', compact('presensi', 'isDisabled'));
+        return view('mahasiswa.presensi.presensi', compact('mahasiswa','presensi', 'isDisabled'));
     }
 
     public function show() {

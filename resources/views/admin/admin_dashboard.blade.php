@@ -51,7 +51,7 @@
                                 <i class="ti ti-users ti-sm" style="font-size: 30px !important;"></i>
                             </div>
                             <div class="card-info">
-                                <h5 class="mb-0">{{ $mahasiswa??'' }}</h5>
+                                <h5 class="mb-0">{{ $mahasiswas??'' }}</h5>
                                 <p class="mb-0" style="font-size:18px;">Peserta Magang</p>
                             </div>
                         </div>

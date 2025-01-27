@@ -27,7 +27,7 @@ class LoogBookController extends Controller
             'diterima' => $loogbookQuery->where('status', 1)->count(),
             'ditolak' => $loogbookQuery->where('status', 0)->count(),
         ]; 
-        return view('mahasiswa.loogbook.loogbook', compact('isDisabled', 'loogbook'));
+        return view('mahasiswa.loogbook.loogbook', compact('isDisabled', 'loogbook', 'mahasiswa'));
     }
 
     public function show(Request $request)  {

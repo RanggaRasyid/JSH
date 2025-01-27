@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="alert alert-warning alert-dismissible" role="alert">
-                Lakukan Chek-in pada jam 09.00 WIB 
+                Lakukan Chek-in dan Chek-out pada jam 09.00 dan 17.00 WIB 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @if($isDisabled)

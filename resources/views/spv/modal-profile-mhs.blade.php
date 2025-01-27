@@ -11,10 +11,10 @@
             <div class="d-flex justify-content-center align-items-start align-items-sm-center gap-4">
               @if ($mahasiswa?->foto)
                   <img src="{{ Storage::url($mahasiswa->foto) }}" alt="user-avatar"
-                      class="img-fluid rounded-circle mb-3 pt-1 mt-4" name="foto" id="imgPreview" width="150" height="150">
+                      class="mb-3 pt-1 mt-4" name="foto" id="imgPreview" >
               @else
                   <img src="{{ url('assets/img/avatars/14.png') }}" alt="user-avatar"
-                      class="img-fluid rounded-circle mb-3 pt-1 mt-4" id="imgPreview" width="150" height="150">
+                      class="mb-3 pt-1 mt-4" id="imgPreview" >
               @endif
             </div>
             {{-- @dd($mahasiswa?->foto) --}}

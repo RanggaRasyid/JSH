@@ -1,8 +1,23 @@
 @extends('mahasiswa.template')
 
 @section('page_style')
+<style>
+    #preview {
+    object-fit: cover; /* Menjaga proporsi gambar tetap utuh dalam lingkaran */
+    width: 150px; /* Lebar gambar */
+    height: 150px; /* Tinggi gambar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+    }
+    #imgPreview {
+    object-fit: cover; /* Menjaga proporsi gambar tetap utuh dalam lingkaran */
+    width: 150px; /* Lebar gambar */
+    height: 150px; /* Tinggi gambar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+    }
+</style>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{url('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+
 @endsection
 
 @section('main')
@@ -27,10 +42,10 @@
             <div class="card-body">
             <div class="d-flex align-items-center align-items-sm-center gap-4">
                 @if ($mahasiswa?->foto?? '')
-                <img src="{{ Storage::url('' .$mahasiswa?->foto?? '') }}" alt="profile" class="img-fluid rounded mb-3 pt-1 mt-4" name="foto" id=""  width="150" height="150">
+                <img src="{{ Storage::url('' .$mahasiswa?->foto?? '') }}" alt="profile" class="mb-3 pt-1 mt-4" name="foto" id="imgPreview">
                 @else
                     <img src="{{ url("assets/img/avatars/14.png")}}" alt="user-avatar" 
-                    class="img-fluid rounded mb-3 pt-1 mt-4" id="imgPreview" />
+                    class="mb-3 pt-1 mt-4" id="imgPreview" />
                 @endif 
             </div>
             <div class="col-md-6">
@@ -145,7 +160,27 @@
           imgPreview.src = "{{ Url("assets/img/avatars/14.png")}}"
       }
     }
+    
 </script>
+<script>
+    // Ambil elemen input dan img
+    const imgInput = document.getElementById('foto');
+    const preview = document.getElementById('preview');
+
+    // Event listener untuk perubahan input file
+    imgInput.addEventListener('change', function (event) {
+        const file = event.target.files[0]; // Ambil file yang dipilih
+
+        if (file) {
+            // Preview gambar baru
+            preview.src = URL.createObjectURL(file);
+        } else {
+            // Jika tidak ada file, gunakan gambar default
+            preview.src = "{{ url('assets/img/avatars/14.png') }}";
+        }
+    });
+</script>
+
 <script src="{{url('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{url('assets/js/extended-ui-sweetalert2.js')}}"></script>
 @endsection

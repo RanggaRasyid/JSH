@@ -39,7 +39,7 @@ class AdminMahasiswaController extends Controller
         ->addColumn('action', function ($row) {
             $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
             $color = ($row->status) ? "danger" : "success";
-            $btn = "<a data-bs-toggle='modal' data-id='{$row->nim}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>
+            $btn = "
             <a data-bs-toggle='modal' data-id='{$row->nim}' onclick=detail($(this)) class='btn-icon text-success waves-effect waves-light'><i class='tf-icons ti ti-file-invoice' ></i>
             <a data-status='{$row->status}' data-id='{$row->nim}' data-url='mahasiswa/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>";
             return $btn;

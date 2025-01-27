@@ -11,25 +11,25 @@
         <form class="default-form" action="{{ url('mahasiswa/profile/update/'. Auth::user()->nim)}}" method="POST">
           @csrf
         <div class="modal-body">
-            <div class="d-flex align-items-start align-items-sm-center gap-4">
-              @if ($mahasiswa?->foto)
-                  <img src="{{ Storage::url($mahasiswa->foto) }}" alt="user-avatar"
-                      class="img-fluid rounded-circle mb-3 pt-1 mt-4" name="foto" id="imgPreview" width="150" height="150">
-              @else
-                  <img src="{{ url('assets/img/avatars/14.png') }}" alt="user-avatar"
-                      class="img-fluid rounded-circle mb-3 pt-1 mt-4" id="imgPreview" width="150" height="150">
-              @endif
-
-              <div class="button-wrapper form-input">
-                  <label for="changePicture" class="btn btn-primary me-2 mb-3" tabindex="0">
-                      <span class="d-none d-sm-block">Upload new photo</span>
-                      <i class="ti ti-upload d-block d-sm-none"></i>
-                      <input type="file" id="changePicture" name="foto" class="account-file-input" hidden accept="image/png, image/jpeg" />
-                  </label>
-                  <div class="invalid-feedback"></div>
-                  <div class="text-muted">Allowed JPG, GIF, or PNG. Max size of 800K</div>
-              </div>
+          <div class="d-flex align-items-start align-items-sm-center gap-4">
+            @if ($mahasiswa?->foto?? '')
+                <img src="{{ Storage::url('' .$mahasiswa?->foto?? '') }}" alt="profile" class=" mb-3 pt-1 mt-4" name="foto" id="preview">
+            @else
+                <img src="{{ url("assets/img/avatars/14.png")}}" alt="user-avatar" 
+                class=" mb-3 pt-1 mt-4" id="preview" />
+            @endif 
+        
+            <div class="button-wrapper form-input">
+                <label for="foto" class="btn btn-primary me-2 mb-3" tabindex="0">
+                    <span class="d-none d-sm-block">Upload new photo</span>
+                    <i class="ti ti-upload d-block d-sm-none"></i>
+                    <input type="file" id="foto" name="foto" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                </label>
+                <div class="invalid-feedback"></div>
+                <div class="text-muted">Allowed JPG, GIF, or PNG. Max size of 800K</div>
             </div>
+        </div>
+        
             <div class="border-top">
               <div class="row mt-4">
                 <div class="mb-3 col-md-6 form-input">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="mb-3 col-md-6 form-input">
                   <label for="supervisor" class="form-label">Supervisor</label>
-                  <select class="form-select select2" id="id_pegawai" name="id_pegawai"                  data-placeholder="Pilih Supervisor">
+                  <select class="form-select select2" id="id_pegawai" name="id_pegawai" data-placeholder="Pilih Supervisor">
                   <option disabled selected>Pilih Supervisor</option>
                     @foreach ($pegawai as $p)
                         <option value="{{ $p->id_pegawai }}">{{ $p->nama }}</option>

@@ -126,6 +126,12 @@
         .nav-pills .nav-link:not(.active):focus {
             color: #4EA971;
         }
+        #img {
+        object-fit: cover; /* Menjaga proporsi gambar tetap utuh dalam lingkaran */
+        width: 40px; /* Lebar gambar */
+        height: 40px; /* Tinggi gambar */
+        border-radius: 50%; /* Membuat gambar menjadi bulat */
+        }
 
     </style>
 
@@ -336,9 +342,25 @@
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    @can('read.only.mahasiswa')
+                    <div class="avatar avatar-online">
+                      @if ($mahasiswa?->foto??'')
+                        <img src="{{ Storage::url('' .$mahasiswa?->foto?? '') }}" id="img" class="" />
+                      @else
+                        <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                      @endif
+                    </div>
+                    @endcan
+                    @can('read.only.superadmin')
                     <div class="avatar avatar-online">
                       <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
                     </div>
+                    @endcan
+                    @can('only.supervisor')
+                    <div class="avatar avatar-online">
+                      <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                    </div>
+                    @endcan
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>

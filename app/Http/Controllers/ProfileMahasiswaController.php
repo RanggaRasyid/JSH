@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileMahasiswaRequest;
+use App\Models\Background;
 use App\Models\JurusanModel;
 use Exception;
 use App\Models\Mahasiswa;
@@ -21,12 +22,12 @@ class ProfileMahasiswaController extends Controller
         $sekolah = Universitas::where('kategori', 2)->count();
 
         // Menghitung jumlah mahasiswa
-        $mahasiswa = Mahasiswa::where('status', 1)->count();
-
+        $mahasiswas = Mahasiswa::where('status', 1)->count();
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->nim)->first();
         // Menghitung jumlah jurusan
-     
+        $background = Background::all();
         $jurusan = JurusanModel::count();
-        return view('admin.admin_dashboard', compact('univ', 'mahasiswa', 'jurusan', 'sekolah'));
+        return view('admin.admin_dashboard', compact('mahasiswa','background','univ', 'mahasiswas', 'jurusan', 'sekolah'));
     
     }
     
@@ -47,7 +48,7 @@ class ProfileMahasiswaController extends Controller
             $mahasiswa = Mahasiswa::where('nim', $id)->with('spv')->first();
             $file = null;
             if ($request->file('foto')) {
-                $file = Storage::put('public/loogbook' , $request->file('foto'));
+                $file = $request->file('foto')->store('profile', 'public');
             }
             $mahasiswa->posisi = $request->posisi;
             $mahasiswa->agama = $request->agama;

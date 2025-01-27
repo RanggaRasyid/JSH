@@ -12,6 +12,12 @@
         /* If max-width does not work, try using width instead */
         width: 900px;
     }
+    #imgPreview {
+    object-fit: cover; /* Menjaga proporsi gambar tetap utuh dalam lingkaran */
+    width: 150px; /* Lebar gambar */
+    height: 150px; /* Tinggi gambar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+    }
 </style>
 @endsection
 
@@ -114,7 +120,7 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col mb-2 form-input">
                             <label for="password" class="form-label">Password</label>
                             <input
@@ -130,7 +136,7 @@
                                 Password harus minimal 8 karakter.
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="modal-button" class="btn btn-success">Simpan</button>
@@ -218,7 +224,7 @@
             type: 'GET',
             url: url,
             success: function(response) {
-            // $('#imgPreview').attr('src', response.foto ? `{{ Storage::url('') }}` + response.foto : `{{ url('assets/img/avatars/14.png') }}`);
+            $('#imgPreview').attr('src', response.foto ? `{{ Storage::url('') }}` + response.foto : `{{ url('assets/img/avatars/14.png') }}`);
 
             $('#email').val(response.emailmhs);
             $('#posisi').val(response.posisi);
@@ -258,22 +264,22 @@
                 $('#emailmhs').val(response.emailmhs);
                 $('#jurusan').val(response.id_jurusan);
                 $('#instansi').val(response.id_univ);
-                $('#password').val(response.password);
+                // $('#password').val(response.password);
                 $('#spv-mahasiswa').modal('show');
             }
         });
     }
 
-    $("#spv-mahasiswa").on("hide.bs.modal", function() {
-    $("#modal-title").html("Tambah Akifitas");
-    $("#modal-button").html("Simpan")
-    $('#spv-mahasiswa form')[0].reset();
-    $('#nim').val('').prop('disabled', false); // Aktifkan saat tambah data
-    $('#spv-mahasiswa form #role').val('').trigger('change');
-    $('#spv-mahasiswa form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
-    $('.invalid-feedback').removeClass('d-block');
-    $('.form-control').removeClass('is-invalid');
-    });
+    // $("#spv-mahasiswa").on("hide.bs.modal", function() {
+    // $("#modal-title").html("Tambah Akifitas");
+    // $("#modal-button").html("Simpan")
+    // $('#spv-mahasiswa form')[0].reset();
+    // $('#nim').val('').prop('disabled', false); // Aktifkan saat tambah data
+    // $('#spv-mahasiswa form #role').val('').trigger('change');
+    // $('#spv-mahasiswa form').attr('action', "{{ url('super-admin/master-mahasiswa/store') }}");
+    // $('.invalid-feedback').removeClass('d-block');
+    // $('.form-control').removeClass('is-invalid');
+    // });
 
     jQuery(function() {
         jQuery('.showSingle').click(function() {
