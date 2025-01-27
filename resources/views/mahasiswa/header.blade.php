@@ -219,7 +219,7 @@
             <li class="menu-item {{ request()->is('super-admin/background*') ? 'active' : ''}}">
               <a href="/super-admin/background" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Image Dashbord">Image Dashboard</div>
+                <div data-i18n="Image Dashboard">Image Dashboard</div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('super-admin/logbook*') ? 'active' : ''}}">
