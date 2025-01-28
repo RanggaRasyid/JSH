@@ -33,7 +33,9 @@ class MasaMagangController extends Controller
             $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
             $color = ($row->status) ? "danger" : "success";
 
-            $btn = "<a data-bs-toggle='modal' data-id='{$row->id_masa_magang}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>";
+            $btn = "
+            <a data-status='{$row->status}' data-id='{$row->nim}' data-url='master-masa-magang/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>
+            <a data-bs-toggle='modal' data-id='{$row->id_masa_magang}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>";
             return $btn;
         })
         ->rawColumns(['action', 'status'])
@@ -74,7 +76,7 @@ class MasaMagangController extends Controller
     public function status(String $id)
     {
         try {
-            $masamagang = MasaMagang::where('id_masa_magang', $id)->with('mahasiswa')->first();
+            $masamagang = Mahasiswa::where('nim', $id)->first();
             $masamagang->status = ($masamagang->status) ? false : true;
             $masamagang->save();
 
