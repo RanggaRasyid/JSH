@@ -30,11 +30,11 @@ class MasaMagangController extends Controller
             }
         })
         ->addColumn('action', function ($row) {
-            $icon = ($row->status) ? "ti-circle-x" : "ti-circle-check";
-            $color = ($row->status) ? "danger" : "success";
+            $icon = ($row->mahasiswa->status) ? "ti-circle-x" : "ti-circle-check";
+            $color = ($row->mahasiswa->status) ? "danger" : "success";
 
             $btn = "
-            <a data-status='{$row->status}' data-id='{$row->nim}' data-url='master-masa-magang/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>
+            <a data-status='{$row->mahasiswa->status}' data-id='{$row->mahasiswa->nim}' data-url='master-masa-magang/status' class='btn-icon update-status text-{$color} waves-effect waves-light'><i class='tf-icons ti {$icon}'></i></a>
             <a data-bs-toggle='modal' data-id='{$row->id_masa_magang}' onclick=edit($(this)) class='btn-icon text-warning waves-effect waves-light'><i class='tf-icons ti ti-edit'></i>";
             return $btn;
         })
@@ -76,9 +76,9 @@ class MasaMagangController extends Controller
     public function status(String $id)
     {
         try {
-            $masamagang = Mahasiswa::where('nim', $id)->first();
-            $masamagang->status = ($masamagang->status) ? false : true;
-            $masamagang->save();
+            $mahasiswa = Mahasiswa::where('nim', $id)->first();
+            $mahasiswa->status = ($mahasiswa->status) ? false : true;
+            $mahasiswa->save();
 
             return response()->json([
                 'error' => false,
